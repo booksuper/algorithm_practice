@@ -42,6 +42,8 @@ public:
 	void post_traverse(BtreeNode<T> * p);
 	//树的最大深度
 	int maxdepth(BtreeNode<T> * p);
+	//learn分支
+
 };
 
 template<class T>
