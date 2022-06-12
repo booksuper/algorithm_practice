@@ -68,7 +68,7 @@ public:
 	LinkList();
 	LinkList(int data);
 	int getSize();
-	//增
+	//头插法
 	void insertByHead(int data);
 	//尾插法
 	void insertByTail(int data);
@@ -80,6 +80,8 @@ public:
 	void getData(int pos,int & data);
 	//打印
 	void printList();
+	//递归前序遍历
+	void recursion_print_pre();
 
 	//清空
 	void clearList();
@@ -90,6 +92,7 @@ public:
 
 private:
 	Node * head;
+	Node * tempPointer;
 	
 };
 

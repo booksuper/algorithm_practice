@@ -3,6 +3,7 @@
 #include "ListUtil.h"
 #include "MyStack.hpp"
 #include "MyQueue.hpp"
+#include "Btree.hpp"
 
 
 int main()
@@ -41,29 +42,55 @@ int main()
 	l2.printList();*/
 	
 	//MyStack<int> mysta;
-	MyQueue<int> mysta;
-	mysta.push(2);
-	mysta.push(3);
-	mysta.push(5);
-	mysta.push(4);
-	int s = mysta.size();
-	int f = mysta.front();
-	int b = mysta.back();
-	//int c = mysta.capaticy();
-	int t = mysta.pop();
-	t = mysta.pop();
-	 f = mysta.front();
-	 b = mysta.back();
-	s = mysta.size();
-	//c = mysta.capaticy();
-	mysta.push(4);
-	mysta.push(4);
-	mysta.push(4);
-	s = mysta.size();
-	//c = mysta.capaticy();
+	//MyQueue<int> mysta;
+	//mysta.push(2);
+	//mysta.push(3);
+	//mysta.push(5);
+	//mysta.push(4);
+	//int s = mysta.size();
+	//int f = mysta.front();
+	//int b = mysta.back();
+	////int c = mysta.capaticy();
+	//int t = mysta.pop();
+	//t = mysta.pop();
+	// f = mysta.front();
+	// b = mysta.back();
+	//s = mysta.size();
+	////c = mysta.capaticy();
+	//mysta.push(4);
+	//mysta.push(4);
+	//mysta.push(4);
+	//s = mysta.size();
+	
+	/*vector<int> arr{ 2,5,1,10,8};
+	recursion_array_pre(arr, 0);*/
 
+	/*LinkList l;
+	l.insertByHead(2);
+	l.insertByHead(3);
+	l.insertByHead(4);
+	l.printList();
+	cout << "后续遍历" << endl;
+	l.recursion_print_pre();*/
 
-
+	Btree<int> tree(5);
+	int flag;
+	int arr[8]{1,6,0,2,3,4,7};
+	for(flag=0;flag<8;flag++)
+	{
+		BtreeNode<int> * p = new BtreeNode<int>;
+		p->data = arr[flag];
+		p->left = nullptr;
+		p->right = nullptr;
+		tree.createTree(p, tree.root);
+	}//51602347
+	//tree.pre_traverse(tree.root);//51023467
+	//tree.in_traverse(tree.root);//01234567
+	//tree.post_traverse(tree.root);//04321765
+	vector<int> r;
+	r = tree.pre_traverse_itera(tree.root);
+	int d = tree.maxdepth(tree.root);
+	
 	
 
 	

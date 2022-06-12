@@ -1,5 +1,5 @@
 #include "ListUtil.h"
-
+//合并两个升序链表，不一定适合于本文设计的链表结构
 Node * mergeList(Node * list1, Node * list2)
 {
 	//控制两个链表的移动指针

@@ -158,6 +158,7 @@
     <ClCompile Include="algorithm_practice.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Btree.hpp" />
     <ClInclude Include="dataStructrue_algorithm.h" />
     <ClInclude Include="ListNode.h" />
     <ClInclude Include="ListUtil.h" />

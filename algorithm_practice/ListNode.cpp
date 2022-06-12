@@ -8,6 +8,7 @@ LinkList::LinkList()
 	head = new Node;
 	head->data = 0;
 	head->next = nullptr;
+	tempPointer = head;
 }
 
 LinkList::LinkList(int data)
@@ -15,6 +16,7 @@ LinkList::LinkList(int data)
 	head = new Node;
 	head->data = data;
 	head->next = nullptr;
+	tempPointer = head;
 }
 
 int LinkList::getSize()
@@ -137,6 +139,20 @@ void LinkList::printList()
 		node = node->next;
 	}
 
+}
+
+void LinkList::recursion_print_pre()
+{
+	
+	if (tempPointer == nullptr)
+	{
+		return;
+	}
+	cout << tempPointer->data << endl;
+	tempPointer = tempPointer->next;
+	LinkList::recursion_print_pre();
+	
+	
 }
 
 void LinkList::clearList()

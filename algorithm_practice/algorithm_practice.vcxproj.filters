@@ -50,5 +50,8 @@
     <ClInclude Include="MyQueue.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Btree.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
