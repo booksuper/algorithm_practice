@@ -2,6 +2,7 @@
 #include <iostream>
 #include <math.h>
 #include <vector>
+#include <queue>
 using namespace std;
 
 template <class T>
@@ -30,6 +31,10 @@ public:
 		root->left = nullptr;
 		root->right = nullptr;
 	}
+	Btree()
+	{
+		root = nullptr;
+	}
 	//创建二叉树
 	void createTree(BtreeNode<T> * &p, BtreeNode<T> *& temp);
 	//先序遍历
@@ -40,6 +45,8 @@ public:
 	void in_traverse(BtreeNode<T> * p);
 	//后序遍历
 	void post_traverse(BtreeNode<T> * p);
+	//层序遍历
+	void level_traverse(BtreeNode<T> * p);
 	//树的最大深度
 	int maxdepth(BtreeNode<T> * p);
 	//learn分支
@@ -125,6 +132,34 @@ inline void Btree<T>::post_traverse(BtreeNode<T>* p)
 	post_traverse(p->left);
 	post_traverse(p->right);
 	cout << p->data << endl;
+}
+template<class T>
+void Btree<T>::level_traverse(BtreeNode<T>* p)
+{
+	if (p == nullptr)
+	{
+		cout << "树为空" << endl;
+		return;
+	}
+	queue<BtreeNode<T> *> q;
+	q.push(p);//将根节点压入队列
+	while (!q.empty())//队列不为空就一直循环
+	{
+		BtreeNode<T> * temp = q.front();//弹出队列的第一个元素，需要打印这个元素值
+		cout << temp->data << endl;
+		if (temp->left != nullptr)
+		{
+			q.push(temp->left);//左节点不为空就入队，必须先左后右
+		}
+		if (temp->right != nullptr)
+		{
+			q.push(temp->right);//右节点不为空就入队，必须先左后右
+		}
+		q.pop();//第一个元素已经打印了，所以将其出队
+
+	}
+
+
 }
 //递归的方式解决
 template<class T>

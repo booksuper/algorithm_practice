@@ -73,23 +73,22 @@ int main()
 	cout << "后续遍历" << endl;
 	l.recursion_print_pre();*/
 
-	Btree<int> tree(5);
+	Btree<int> tree;
 	int flag;
-	int arr[8]{1,6,0,2,3,4,7};
-	for(flag=0;flag<8;flag++)
+	int arr[7]{1,6,0,2,3,4,7};
+	//创建树
+	for(flag=0;flag<7;flag++)
 	{
 		BtreeNode<int> * p = new BtreeNode<int>;
 		p->data = arr[flag];
 		p->left = nullptr;
 		p->right = nullptr;
 		tree.createTree(p, tree.root);
-	}//51602347
-	//tree.pre_traverse(tree.root);//51023467
-	//tree.in_traverse(tree.root);//01234567
-	//tree.post_traverse(tree.root);//04321765
-	vector<int> r;
-	r = tree.pre_traverse_itera(tree.root);
-	int d = tree.maxdepth(tree.root);
+	}//1062734
+	//tree.pre_traverse(tree.root);//1062347
+	//tree.in_traverse(tree.root);//0123467
+	tree.post_traverse(tree.root);//0432761
+	//tree.level_traverse(tree.root);
 	
 	
 
