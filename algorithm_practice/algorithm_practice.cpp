@@ -74,6 +74,7 @@ int main()
 	l.recursion_print_pre();*/
 
 	Btree<int> tree;
+	Btree<int> tree1;
 	int flag;
 	int arr[7]{1,6,0,2,3,4,7};
 	//创建树
@@ -87,8 +88,10 @@ int main()
 	}//1062734
 	//tree.pre_traverse(tree.root);//1062347
 	//tree.in_traverse(tree.root);//0123467
-	tree.post_traverse(tree.root);//0432761
+	//tree.post_traverse(tree.root);//0432761
 	//tree.level_traverse(tree.root);
+	int d = tree.maxdepthBaseLevel(tree1.root);
+	int d1 = tree.maxdepth(tree1.root);
 	
 	
 
