@@ -90,8 +90,10 @@ int main()
 	//tree.in_traverse(tree.root);//0123467
 	//tree.post_traverse(tree.root);//0432761
 	//tree.level_traverse(tree.root);
-	int d = tree.maxdepthBaseLevel(tree1.root);
-	int d1 = tree.maxdepth(tree1.root);
+	//int d = tree.maxdepthBaseLevel(tree.root);
+	//int d1 = tree.maxdepth(tree.root);
+	int dia = tree1.maxDiameter(tree1.root);
+
 	
 	
 

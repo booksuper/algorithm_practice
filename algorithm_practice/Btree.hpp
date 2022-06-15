@@ -18,7 +18,8 @@ template <class T>
 class Btree
 {
 private:
-	
+	//树的直径
+	int max_diameter;
 	
 
 
@@ -26,6 +27,7 @@ public:
 	BtreeNode<T> * root;
 	Btree(T val)
 	{
+		max_diameter = 0;
 		root = new BtreeNode<T>;
 		root->data = val;
 		root->left = nullptr;
@@ -33,6 +35,7 @@ public:
 	}
 	Btree()
 	{
+		max_diameter = 0;
 		root = nullptr;
 	}
 	//创建二叉树
@@ -49,8 +52,12 @@ public:
 	void level_traverse(BtreeNode<T> * p);
 	//树的最大深度
 	int maxdepth(BtreeNode<T> * p);
-	//尝试使用遍历的方式求解树的最大深度，还没想好6.14
+	//使用遍历的方式求解树的最大深度
 	int maxdepthBaseLevel(BtreeNode<T> * p);
+	/*给定一棵二叉树，你需要计算它的直径长度。一棵二叉树的直径长度是任意两个结点路径长度中的最大值。
+    这条路径可能穿过根结点。注意：两结点之间的路径长度是以它们之间边的数目表示。
+    节点a到b的直径实际上就是求他们两的父节点的两个子树的深度之和*/
+	int maxDiameter(BtreeNode<T> * p);
 
 };
 //递归方式创建节点
@@ -163,9 +170,10 @@ void Btree<T>::level_traverse(BtreeNode<T>* p)
 
 
 }
-//递归的方式解决
+
+//递归的方式求解树的最大深度
 template<class T>
-inline int Btree<T>::maxdepth(BtreeNode<T>* p)
+int Btree<T>::maxdepth(BtreeNode<T>* p)
 {
 	if (p == nullptr)
 	{
@@ -173,14 +181,21 @@ inline int Btree<T>::maxdepth(BtreeNode<T>* p)
 	}
 	int leftdepth = maxdepth(p->left);
 	int rightdepth = maxdepth(p->right);
-	int res = leftdepth >= rightdepth ? leftdepth : rightdepth;
-	res += 1;
-	return res;
+	//下面是求直径的代码
+	//在后序位置更新直径的最大值
+	//节点a到b的直径实际上就是求他们两的父节点的两个子树的深度之和
+	int diameter = leftdepth + rightdepth;
+	//更新直径
+	
+	max_diameter = max_diameter > diameter ? max_diameter : diameter;
+	//返回树的最大深度
+	return (leftdepth >= rightdepth ? leftdepth : rightdepth) + 1;
 }
+
 //利用层序遍历求解树的最大深度
 //我可以利用层序遍历求解其他使用递归的问题
 template<class T>
-inline int Btree<T>::maxdepthBaseLevel(BtreeNode<T>* p)
+int Btree<T>::maxdepthBaseLevel(BtreeNode<T>* p)
 {
 	if (p == nullptr)
 	{
@@ -213,4 +228,13 @@ inline int Btree<T>::maxdepthBaseLevel(BtreeNode<T>* p)
 
 	}
 	return count;
+}
+/*给定一棵二叉树，你需要计算它的直径长度。一棵二叉树的直径长度是任意两个结点路径长度中的最大值。
+这条路径可能穿过根结点。注意：两结点之间的路径长度是以它们之间边的数目表示。
+节点a到b的直径实际上就是求他们两的父节点的两个子树的深度之和*/
+template<class T>
+int Btree<T>::maxDiameter(BtreeNode<T>* p)
+{
+	maxdepth(p);
+	return max_diameter;
 }
