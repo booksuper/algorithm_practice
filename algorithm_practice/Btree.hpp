@@ -58,6 +58,11 @@ public:
     这条路径可能穿过根结点。注意：两结点之间的路径长度是以它们之间边的数目表示。
     节点a到b的直径实际上就是求他们两的父节点的两个子树的深度之和*/
 	int maxDiameter(BtreeNode<T> * p);
+	//递归的形式翻转二叉树
+	BtreeNode<T> * inverseBtree(BtreeNode<T> * p);
+	//以遍历的形式翻转二叉树
+	BtreeNode<T> * inverseBtreeBaseItera(BtreeNode<T> * p);
+
 
 };
 //递归方式创建节点
@@ -237,4 +242,37 @@ int Btree<T>::maxDiameter(BtreeNode<T>* p)
 {
 	maxdepth(p);
 	return max_diameter;
+}
+//递归形式翻转二叉树
+template<class T>
+BtreeNode<T>* Btree<T>::inverseBtree(BtreeNode<T>* p)
+{
+	if (p == nullptr)
+	{
+		return nullptr;
+	}
+	BtreeNode<T> * left = inverseBtree(p->left);
+	BtreeNode<T> * right = inverseBtree(p->right);
+	p->left = right;
+	p->right = left;
+
+	return p;
+}
+//遍历形式翻转二叉树
+template<class T>
+BtreeNode<T>* Btree<T>::inverseBtreeBaseItera(BtreeNode<T>* p)
+{
+	if (p == nullptr)
+	{
+		return nullptr;
+	}
+	//在遍历的前序位置做节点的交换，也可以在后序位置执行，但不能在中序位置
+	BtreeNode<T> * temp = p->left;
+	p->left = p->right;
+	p->right = temp;
+	//上一个节点已经交换完成了，开始遍历下一个节点
+	//这里会一直遍历左节点，直到节点为空，就开始遍历右节点
+	inverseBtreeBaseItera(p->left);
+	inverseBtreeBaseItera(p->right);
+	return p;
 }

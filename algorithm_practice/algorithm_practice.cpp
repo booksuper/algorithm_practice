@@ -8,38 +8,6 @@
 
 int main()
 {
-	/*vector<int> arr{2,5,1,10,8,9,5,4,11,3};
-	vector<int> reslut;
-	vector<vector<int>> opera_num{ {1,3,2},{2,4,3},{0,2,-2} };
-	vector<int> in_arr{ 0,0,0,0,0 };
-	vector<vector<int>> res_arr;
-	Solution s(in_arr);
-	res_arr = s.getModifiedArray(in_arr, opera_num);*/
-	//bubbleSort(arr);
-	//selectSort(arr);
-	/*reslut = quickSort(arr);
-	for (int i = 0; i < reslut.size(); i++)
-	{
-		cout << reslut[i] << endl;
-	}*/
-	//listNode * head = createList();
-	//insert_node_by_head(head, 1);
-	//insert_node_by_head(head, 2);
-	//insert_node_by_head(head, 3);
-	//deleteNode(head, 2);
-	//printList(head);
-	/*LinkList l;
-	l.insertByHead(2);
-	l.insertByHead(3);
-	l.insertByHead(4);
-	LinkList l2;
-	l2.insertByTail(1);
-	l2.insertByTail(2);
-	l2.insertByTail(3);
-	l2.insertByTail(4);
-	l2.reverse();
-	int a = 0;
-	l2.printList();*/
 	
 	//MyStack<int> mysta;
 	//MyQueue<int> mysta;
@@ -76,7 +44,7 @@ int main()
 	Btree<int> tree;
 	Btree<int> tree1;
 	int flag;
-	int arr[7]{1,6,0,2,3,4,7};
+	int arr[7]{9,4,7,3,5,6,8};
 	//创建树
 	for(flag=0;flag<7;flag++)
 	{
@@ -86,20 +54,17 @@ int main()
 		p->right = nullptr;
 		tree.createTree(p, tree.root);
 	}//1062734
-	//tree.pre_traverse(tree.root);//1062347
+	tree.pre_traverse(tree.root);//1062347
 	//tree.in_traverse(tree.root);//0123467
 	//tree.post_traverse(tree.root);//0432761
 	//tree.level_traverse(tree.root);
 	//int d = tree.maxdepthBaseLevel(tree.root);
 	//int d1 = tree.maxdepth(tree.root);
+	BtreeNode<int> * inversetree = tree.inverseBtree(tree.root);
+	BtreeNode<int> * inversetree2 = tree.inverseBtreeBaseItera(tree.root);
 	int dia = tree1.maxDiameter(tree1.root);
 
-	
-	
 
-	
-
-	
 
 
 }
