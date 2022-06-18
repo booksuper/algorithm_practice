@@ -20,6 +20,8 @@ class Btree
 private:
 	//树的直径
 	int max_diameter;
+	BtreeNode<T> * dumpy;
+	BtreeNode<T> * temp_flat;
 	
 
 
@@ -28,6 +30,11 @@ public:
 	Btree(T val)
 	{
 		max_diameter = 0;
+		dumpy = new BtreeNode<T>;
+		dumpy->data = -1;
+		dumpy->left = nullptr;
+		dumpy->right = nullptr;
+		temp_flat = dumpy;
 		root = new BtreeNode<T>;
 		root->data = val;
 		root->left = nullptr;
@@ -36,6 +43,11 @@ public:
 	Btree()
 	{
 		max_diameter = 0;
+		dumpy = new BtreeNode<T>;
+		dumpy->data = -1;
+		dumpy->left = nullptr;
+		dumpy->right = nullptr;
+		temp_flat = dumpy;
 		root = nullptr;
 	}
 	//创建二叉树
@@ -62,6 +74,14 @@ public:
 	BtreeNode<T> * inverseBtree(BtreeNode<T> * p);
 	//以遍历的形式翻转二叉树
 	BtreeNode<T> * inverseBtreeBaseItera(BtreeNode<T> * p);
+	//给faltten函数使用的遍历
+	void traverse_flat(BtreeNode<T> * p);
+
+	/*遍历方式解决：给你二叉树的根结点 root ，请你将它展开为一个单链表：
+	展开后的单链表应该同样使用 TreeNode ，其中 right 子指针指向链表中下一个结点，而左子指针始终为 null 。
+	展开后的单链表应该与二叉树 先序遍历 顺序相同*/
+	BtreeNode<T> * flatten(BtreeNode<T> * p);
+
 
 
 };
@@ -275,4 +295,35 @@ BtreeNode<T>* Btree<T>::inverseBtreeBaseItera(BtreeNode<T>* p)
 	inverseBtreeBaseItera(p->left);
 	inverseBtreeBaseItera(p->right);
 	return p;
+}
+
+template<class T>
+void Btree<T>::traverse_flat(BtreeNode<T>* p)
+{
+	if (p == nullptr)
+	{
+		return;
+	}
+	//栈溢出
+	/*temp_flat->left = nullptr;
+	temp_flat->right = p;
+	temp_flat = temp_flat->right;*/
+	//新建节点，可以
+	BtreeNode<T>* newnode = new BtreeNode<T>;
+	newnode->data = p->data;
+	newnode->left = nullptr;
+	newnode->right = nullptr;
+	temp_flat->right = newnode;
+	temp_flat = temp_flat->right;
+	traverse_flat(p->left);
+	traverse_flat(p->right);
+}
+
+
+//遍历方式将二叉树展开为单链表
+template<class T>
+BtreeNode<T>* Btree<T>::flatten(BtreeNode<T>* p)
+{
+	traverse_flat(p);
+	return dumpy->right;
 }

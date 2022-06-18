@@ -44,7 +44,7 @@ int main()
 	Btree<int> tree;
 	Btree<int> tree1;
 	int flag;
-	int arr[7]{9,4,7,3,5,6,8};
+	int arr[7]{6,4,8,1,5,7,9};
 	//创建树
 	for(flag=0;flag<7;flag++)
 	{
@@ -54,15 +54,17 @@ int main()
 		p->right = nullptr;
 		tree.createTree(p, tree.root);
 	}//1062734
-	tree.pre_traverse(tree.root);//1062347
+	//tree.pre_traverse(tree.root);//1062347
 	//tree.in_traverse(tree.root);//0123467
 	//tree.post_traverse(tree.root);//0432761
 	//tree.level_traverse(tree.root);
 	//int d = tree.maxdepthBaseLevel(tree.root);
 	//int d1 = tree.maxdepth(tree.root);
-	BtreeNode<int> * inversetree = tree.inverseBtree(tree.root);
-	BtreeNode<int> * inversetree2 = tree.inverseBtreeBaseItera(tree.root);
-	int dia = tree1.maxDiameter(tree1.root);
+	//BtreeNode<int> * inversetree = tree.inverseBtree(tree.root);
+	//BtreeNode<int> * inversetree2 = tree.inverseBtreeBaseItera(tree.root);
+	int dia = tree.maxDiameter(tree.root);
+	BtreeNode<int> * flat = tree.flatten(tree.root);
+	int i = 1;
 
 
 
