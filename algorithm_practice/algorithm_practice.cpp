@@ -1,14 +1,14 @@
-﻿
-#include "dataStructrue_algorithm.h"
+﻿#include "dataStructrue_algorithm.h"
 #include "ListUtil.h"
 #include "MyStack.hpp"
 #include "MyQueue.hpp"
 #include "Btree.hpp"
+#include <iostream>
 
 
-int main()
+int main(int argc,char * argv[])
 {
-	
+#if 1
 	//MyStack<int> mysta;
 	//MyQueue<int> mysta;
 	//mysta.push(2);
@@ -45,6 +45,8 @@ int main()
 	Btree<int> tree1;
 	int flag;
 	int arr[7]{6,4,8,1,5,7,9};
+	vector<int> treenums{6,4,8,1,5,7,9};
+	BtreeNode<int> * newtree = tree.createTreeBaseLevel(treenums, 0);
 	//创建树
 	for(flag=0;flag<7;flag++)
 	{
@@ -62,9 +64,15 @@ int main()
 	//int d1 = tree.maxdepth(tree.root);
 	//BtreeNode<int> * inversetree = tree.inverseBtree(tree.root);
 	//BtreeNode<int> * inversetree2 = tree.inverseBtreeBaseItera(tree.root);
-	int dia = tree.maxDiameter(tree.root);
-	BtreeNode<int> * flat = tree.flatten(tree.root);
+	//int dia = tree.maxDiameter(tree.root);
+	//BtreeNode<int> * flat = tree.flatten(tree.root);
+	string res = tree.serialize(newtree);
+	cout << res << endl;
 	int i = 1;
+#endif
+
+
+
 
 
 

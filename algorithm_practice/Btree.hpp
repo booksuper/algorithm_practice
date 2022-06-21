@@ -1,10 +1,15 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
 #include <math.h>
 #include <vector>
 #include <queue>
+#include <string>
 using namespace std;
 
+#define PRE_ORDER 0;
+#define IN_ORDER 1;
+#define POST_ORDER 1;
+#define LEVEL_ORDER 1;
 template <class T>
 class BtreeNode
 {
@@ -18,10 +23,11 @@ template <class T>
 class Btree
 {
 private:
-	//Ê÷µÄÖ±¾¶
+	//æ ‘çš„ç›´å¾„
 	int max_diameter;
 	BtreeNode<T> * dumpy;
 	BtreeNode<T> * temp_flat;
+	string serialize_str;
 	
 
 
@@ -29,12 +35,15 @@ public:
 	BtreeNode<T> * root;
 	Btree(T val)
 	{
+		
+		//serialize_str = "#";
 		max_diameter = 0;
 		dumpy = new BtreeNode<T>;
 		dumpy->data = -1;
 		dumpy->left = nullptr;
 		dumpy->right = nullptr;
 		temp_flat = dumpy;
+
 		root = new BtreeNode<T>;
 		root->data = val;
 		root->left = nullptr;
@@ -42,6 +51,7 @@ public:
 	}
 	Btree()
 	{
+		//serialize_str = "#";
 		max_diameter = 0;
 		dumpy = new BtreeNode<T>;
 		dumpy->data = -1;
@@ -50,63 +60,76 @@ public:
 		temp_flat = dumpy;
 		root = nullptr;
 	}
-	//´´½¨¶ş²æÊ÷
+	//åˆ›å»ºäºŒå‰æ ‘
 	void createTree(BtreeNode<T> * &p, BtreeNode<T> *& temp);
-	//ÏÈĞò±éÀú
+	//è¾“å…¥å±‚åºæ•°ç»„ï¼Œæ ¹æ®å±‚åºæ•°ç»„æ„å»ºäºŒå‰æ ‘
+	BtreeNode<T> * createTreeBaseLevel(vector<T> nums, int start);
+	//å…ˆåºéå†
 	void pre_traverse(BtreeNode<T> * p);
-	//ÏÈĞò±éÀúµü´ú·½Ê½
+	//å…ˆåºéå†è¿­ä»£æ–¹å¼
 	vector<T> pre_traverse_itera(BtreeNode<T> * p);
-	//ÖĞĞò±éÀú
+	//ä¸­åºéå†
 	void in_traverse(BtreeNode<T> * p);
-	//ºóĞò±éÀú
+	//ååºéå†
 	void post_traverse(BtreeNode<T> * p);
-	//²ãĞò±éÀú
+	//å±‚åºéå†
 	void level_traverse(BtreeNode<T> * p);
-	//Ê÷µÄ×î´óÉî¶È
+	//æ ‘çš„æœ€å¤§æ·±åº¦
 	int maxdepth(BtreeNode<T> * p);
-	//Ê¹ÓÃ±éÀúµÄ·½Ê½Çó½âÊ÷µÄ×î´óÉî¶È
+	//ä½¿ç”¨éå†çš„æ–¹å¼æ±‚è§£æ ‘çš„æœ€å¤§æ·±åº¦
 	int maxdepthBaseLevel(BtreeNode<T> * p);
-	/*¸ø¶¨Ò»¿Ã¶ş²æÊ÷£¬ÄãĞèÒª¼ÆËãËüµÄÖ±¾¶³¤¶È¡£Ò»¿Ã¶ş²æÊ÷µÄÖ±¾¶³¤¶ÈÊÇÈÎÒâÁ½¸ö½áµãÂ·¾¶³¤¶ÈÖĞµÄ×î´óÖµ¡£
-    ÕâÌõÂ·¾¶¿ÉÄÜ´©¹ı¸ù½áµã¡£×¢Òâ£ºÁ½½áµãÖ®¼äµÄÂ·¾¶³¤¶ÈÊÇÒÔËüÃÇÖ®¼ä±ßµÄÊıÄ¿±íÊ¾¡£
-    ½Úµãaµ½bµÄÖ±¾¶Êµ¼ÊÉÏ¾ÍÊÇÇóËûÃÇÁ½µÄ¸¸½ÚµãµÄÁ½¸ö×ÓÊ÷µÄÉî¶ÈÖ®ºÍ*/
+	/*ç»™å®šä¸€æ£µäºŒå‰æ ‘ï¼Œä½ éœ€è¦è®¡ç®—å®ƒçš„ç›´å¾„é•¿åº¦ã€‚ä¸€æ£µäºŒå‰æ ‘çš„ç›´å¾„é•¿åº¦æ˜¯ä»»æ„ä¸¤ä¸ªç»“ç‚¹è·¯å¾„é•¿åº¦ä¸­çš„æœ€å¤§å€¼ã€‚
+    è¿™æ¡è·¯å¾„å¯èƒ½ç©¿è¿‡æ ¹ç»“ç‚¹ã€‚æ³¨æ„ï¼šä¸¤ç»“ç‚¹ä¹‹é—´çš„è·¯å¾„é•¿åº¦æ˜¯ä»¥å®ƒä»¬ä¹‹é—´è¾¹çš„æ•°ç›®è¡¨ç¤ºã€‚
+    èŠ‚ç‚¹aåˆ°bçš„ç›´å¾„å®é™…ä¸Šå°±æ˜¯æ±‚ä»–ä»¬ä¸¤çš„çˆ¶èŠ‚ç‚¹çš„ä¸¤ä¸ªå­æ ‘çš„æ·±åº¦ä¹‹å’Œ*/
 	int maxDiameter(BtreeNode<T> * p);
-	//µİ¹éµÄĞÎÊ½·­×ª¶ş²æÊ÷
+	//é€’å½’çš„å½¢å¼ç¿»è½¬äºŒå‰æ ‘
 	BtreeNode<T> * inverseBtree(BtreeNode<T> * p);
-	//ÒÔ±éÀúµÄĞÎÊ½·­×ª¶ş²æÊ÷
+	//ä»¥éå†çš„å½¢å¼ç¿»è½¬äºŒå‰æ ‘
 	BtreeNode<T> * inverseBtreeBaseItera(BtreeNode<T> * p);
-	//¸øfalttenº¯ÊıÊ¹ÓÃµÄ±éÀú
+	//ç»™falttenå‡½æ•°ä½¿ç”¨çš„éå†
 	void traverse_flat(BtreeNode<T> * p);
 
-	/*±éÀú·½Ê½½â¾ö£º¸øÄã¶ş²æÊ÷µÄ¸ù½áµã root £¬ÇëÄã½«ËüÕ¹¿ªÎªÒ»¸öµ¥Á´±í£º
-	Õ¹¿ªºóµÄµ¥Á´±íÓ¦¸ÃÍ¬ÑùÊ¹ÓÃ TreeNode £¬ÆäÖĞ right ×ÓÖ¸ÕëÖ¸ÏòÁ´±íÖĞÏÂÒ»¸ö½áµã£¬¶ø×ó×ÓÖ¸ÕëÊ¼ÖÕÎª null ¡£
-	Õ¹¿ªºóµÄµ¥Á´±íÓ¦¸ÃÓë¶ş²æÊ÷ ÏÈĞò±éÀú Ë³ĞòÏàÍ¬*/
+	/*éå†æ–¹å¼è§£å†³ï¼šç»™ä½ äºŒå‰æ ‘çš„æ ¹ç»“ç‚¹ root ï¼Œè¯·ä½ å°†å®ƒå±•å¼€ä¸ºä¸€ä¸ªå•é“¾è¡¨ï¼š
+	å±•å¼€åçš„å•é“¾è¡¨åº”è¯¥åŒæ ·ä½¿ç”¨ TreeNode ï¼Œå…¶ä¸­ right å­æŒ‡é’ˆæŒ‡å‘é“¾è¡¨ä¸­ä¸‹ä¸€ä¸ªç»“ç‚¹ï¼Œè€Œå·¦å­æŒ‡é’ˆå§‹ç»ˆä¸º null ã€‚
+	å±•å¼€åçš„å•é“¾è¡¨åº”è¯¥ä¸äºŒå‰æ ‘ å…ˆåºéå† é¡ºåºç›¸åŒ*/
 	BtreeNode<T> * flatten(BtreeNode<T> * p);
+	/*ç»™å®šä¸€ä¸ªä¸é‡å¤çš„æ•´æ•°æ•°ç»„Â nums ã€‚Â æœ€å¤§äºŒå‰æ ‘Â å¯ä»¥ç”¨ä¸‹é¢çš„ç®—æ³•ä»Â nums é€’å½’åœ°æ„å»º:
+	åˆ›å»ºä¸€ä¸ªæ ¹èŠ‚ç‚¹ï¼Œå…¶å€¼ä¸ºÂ nums ä¸­çš„æœ€å¤§å€¼ã€‚
+	é€’å½’åœ°åœ¨æœ€å¤§å€¼Â å·¦è¾¹Â çš„Â å­æ•°ç»„å‰ç¼€ä¸ŠÂ æ„å»ºå·¦å­æ ‘ã€‚
+	é€’å½’åœ°åœ¨æœ€å¤§å€¼ å³è¾¹ çš„Â å­æ•°ç»„åç¼€ä¸ŠÂ æ„å»ºå³å­æ ‘ã€‚
+	è¿”å›Â nums æ„å»ºçš„ æœ€å¤§äºŒå‰æ ‘ ã€‚*/
+	BtreeNode<T> * buildMaxBtree(vector<T> &nums,int lo,int hi);
+	//å°†äºŒå‰æ ‘åºåˆ—åŒ–å­—ç¬¦ä¸²
+	string serialize(BtreeNode<T> * root);
+	//å°†å­—ç¬¦ä¸²ååºåˆ—åŒ–ä¸ºäºŒå‰æ ‘
+	BtreeNode<T> * deserialize(string str);
+
 
 
 
 };
-//µİ¹é·½Ê½´´½¨½Úµã
+//é€’å½’æ–¹å¼åˆ›å»ºèŠ‚ç‚¹
 template<class T>
 inline void Btree<T>::createTree(BtreeNode<T> *& p, BtreeNode<T> *& temp)
 {
-	//±£Ö¤¶ş²æÊ÷Âú×ã ×ó×ÓÊ÷Ğ¡ÓÚ¸ù½Úµã£¬ÓÒ×ÓÊ÷´óÓÚ¸ù½Úµã
-   //pÊÇĞÂµÄ½Úµã£¬tempÊÇ´Óroot¿ªÊ¼±éÀúµÄ½Úµã
+	//ä¿è¯äºŒå‰æ ‘æ»¡è¶³ å·¦å­æ ‘å°äºæ ¹èŠ‚ç‚¹ï¼Œå³å­æ ‘å¤§äºæ ¹èŠ‚ç‚¹
+   //pæ˜¯æ–°çš„èŠ‚ç‚¹ï¼Œtempæ˜¯ä»rootå¼€å§‹éå†çš„èŠ‚ç‚¹
 	if (temp == nullptr)
 	{
 		temp = p;
 	}
 	else
 	{
-		//¸ù½ÚµãÓĞÖµÁË£¬ÅĞ¶Ï´óĞ¡
+		//æ ¹èŠ‚ç‚¹æœ‰å€¼äº†ï¼Œåˆ¤æ–­å¤§å°
 		if (temp->data == p->data)
 		{
 			cout << "the same value is not allowed" << endl;
 		}
-		else if (p->data < temp->data) //ĞÂ½Úµã±È¸ù½ÚµãĞ¡£¬¾ÍÈ¥×ó±ßµİ¹é
+		else if (p->data < temp->data) //æ–°èŠ‚ç‚¹æ¯”æ ¹èŠ‚ç‚¹å°ï¼Œå°±å»å·¦è¾¹é€’å½’
 		{
 			createTree(p, temp->left);
 		}
-		else //p->data > root->data //·´Ö®È¥ÓÒ±ßµİ¹é
+		else //p->data > root->data //åä¹‹å»å³è¾¹é€’å½’
 		{
 			createTree(p, temp->right);
 		}
@@ -114,7 +137,29 @@ inline void Btree<T>::createTree(BtreeNode<T> *& p, BtreeNode<T> *& temp)
 	}
 
 }
-//Ç°Ğò±éÀú
+//æ ¹æ®å±‚åºæ•°ç»„æ„å»ºäºŒå‰æ ‘
+template<class T>
+BtreeNode<T>* Btree<T>::createTreeBaseLevel(vector<T> nums, int start)
+{
+	if (nums[start] == '#')return nullptr;//å½“æ ¹èŠ‚ç‚¹ä¸ºç©ºï¼Œå³ç©ºæ ‘
+	int n = nums.size();
+	BtreeNode<T>* root = new BtreeNode<T>;//æ–°å»ºä¸€ä¸ªæ ¹ç»“ç‚¹
+	root->data = nums[start];//ç»™æ ¹ç»“ç‚¹rootçš„æˆå‘˜å˜é‡data,lchild,rchildèµ‹åˆå€¼
+	root->left = nullptr;
+	root->right = nullptr;
+
+	int lnode = 2 * start + 1;//ç”¨æ ¹èŠ‚ç‚¹ç¡®å®šå·¦èŠ‚ç‚¹çš„ä½ç½®
+	int rnode = 2 * start + 2;//ç”¨æ ¹èŠ‚ç‚¹ç¡®å®šå³èŠ‚ç‚¹çš„ä½ç½®
+
+	if (lnode > n - 1) root->left = nullptr;
+	else root->left = createTreeBaseLevel(nums,lnode);//lnodeæ›¿æ¢startï¼Œä¸ºå·¦å­æ ‘çš„æ ¹èŠ‚ç‚¹
+
+	if (rnode > n - 1) root->right = nullptr;
+	else root->right = createTreeBaseLevel(nums, rnode);//rnodeæ›¿æ¢startï¼Œä¸ºå³å­æ ‘çš„æ ¹èŠ‚ç‚¹
+
+	return root;
+}
+//å‰åºéå†
 template<class T>
 inline void Btree<T>::pre_traverse(BtreeNode<T> * p)
 {
@@ -126,7 +171,7 @@ inline void Btree<T>::pre_traverse(BtreeNode<T> * p)
 	pre_traverse(p->left);
 	pre_traverse(p->right);
 }
-//Ç°Ğò±éÀú£¬µü´ú·½Ê½£¬Ä¿Ç°ÔËĞĞ²»³É¹¦6.14
+//å‰åºéå†ï¼Œè¿­ä»£æ–¹å¼ï¼Œç›®å‰è¿è¡Œä¸æˆåŠŸ6.14
 template<class T>
 inline vector<T> Btree<T>::pre_traverse_itera(BtreeNode<T>* p)
 {
@@ -136,13 +181,13 @@ inline vector<T> Btree<T>::pre_traverse_itera(BtreeNode<T>* p)
 		return res;
 	}
 	res.push_back(p->data);
-	//ÕâÀï±¨´í
+	//è¿™é‡ŒæŠ¥é”™
 	//res.push_back(pre_traverse_itera(p->left));
 	//res.pop_back(pre_traverse_itera(p->right));
 
 	return res;
 }
-//ÖĞĞò±éÀú
+//ä¸­åºéå†
 template<class T>
 inline void Btree<T>::in_traverse(BtreeNode<T>* p)
 {
@@ -154,7 +199,7 @@ inline void Btree<T>::in_traverse(BtreeNode<T>* p)
 	cout << p->data << endl;
 	in_traverse(p->right);
 }
-//ºóĞø±éÀú
+//åç»­éå†
 template<class T>
 inline void Btree<T>::post_traverse(BtreeNode<T>* p)
 {
@@ -166,37 +211,37 @@ inline void Btree<T>::post_traverse(BtreeNode<T>* p)
 	post_traverse(p->right);
 	cout << p->data << endl;
 }
-//²ãĞò±éÀú
+//å±‚åºéå†
 template<class T>
 void Btree<T>::level_traverse(BtreeNode<T>* p)
 {
 	if (p == nullptr)
 	{
-		cout << "Ê÷Îª¿Õ" << endl;
+		cout << "æ ‘ä¸ºç©º" << endl;
 		return;
 	}
 	queue<BtreeNode<T> *> q;
-	q.push(p);//½«¸ù½ÚµãÑ¹Èë¶ÓÁĞ
-	while (!q.empty())//¶ÓÁĞ²»Îª¿Õ¾ÍÒ»Ö±Ñ­»·
+	q.push(p);//å°†æ ¹èŠ‚ç‚¹å‹å…¥é˜Ÿåˆ—
+	while (!q.empty())//é˜Ÿåˆ—ä¸ä¸ºç©ºå°±ä¸€ç›´å¾ªç¯
 	{
-		BtreeNode<T> * temp = q.front();//µ¯³ö¶ÓÁĞµÄµÚÒ»¸öÔªËØ£¬ĞèÒª´òÓ¡Õâ¸öÔªËØÖµ
+		BtreeNode<T> * temp = q.front();//å¼¹å‡ºé˜Ÿåˆ—çš„ç¬¬ä¸€ä¸ªå…ƒç´ ï¼Œéœ€è¦æ‰“å°è¿™ä¸ªå…ƒç´ å€¼
 		cout << temp->data << endl;
 		if (temp->left != nullptr)
 		{
-			q.push(temp->left);//×ó½Úµã²»Îª¿Õ¾ÍÈë¶Ó£¬±ØĞëÏÈ×óºóÓÒ
+			q.push(temp->left);//å·¦èŠ‚ç‚¹ä¸ä¸ºç©ºå°±å…¥é˜Ÿï¼Œå¿…é¡»å…ˆå·¦åå³
 		}
 		if (temp->right != nullptr)
 		{
-			q.push(temp->right);//ÓÒ½Úµã²»Îª¿Õ¾ÍÈë¶Ó£¬±ØĞëÏÈ×óºóÓÒ
+			q.push(temp->right);//å³èŠ‚ç‚¹ä¸ä¸ºç©ºå°±å…¥é˜Ÿï¼Œå¿…é¡»å…ˆå·¦åå³
 		}
-		q.pop();//µÚÒ»¸öÔªËØÒÑ¾­´òÓ¡ÁË£¬ËùÒÔ½«Æä³ö¶Ó
+		q.pop();//ç¬¬ä¸€ä¸ªå…ƒç´ å·²ç»æ‰“å°äº†ï¼Œæ‰€ä»¥å°†å…¶å‡ºé˜Ÿ
 
 	}
 
 
 }
 
-//µİ¹éµÄ·½Ê½Çó½âÊ÷µÄ×î´óÉî¶È
+//é€’å½’çš„æ–¹å¼æ±‚è§£æ ‘çš„æœ€å¤§æ·±åº¦
 template<class T>
 int Btree<T>::maxdepth(BtreeNode<T>* p)
 {
@@ -206,19 +251,19 @@ int Btree<T>::maxdepth(BtreeNode<T>* p)
 	}
 	int leftdepth = maxdepth(p->left);
 	int rightdepth = maxdepth(p->right);
-	//ÏÂÃæÊÇÇóÖ±¾¶µÄ´úÂë
-	//ÔÚºóĞòÎ»ÖÃ¸üĞÂÖ±¾¶µÄ×î´óÖµ
-	//½Úµãaµ½bµÄÖ±¾¶Êµ¼ÊÉÏ¾ÍÊÇÇóËûÃÇÁ½µÄ¸¸½ÚµãµÄÁ½¸ö×ÓÊ÷µÄÉî¶ÈÖ®ºÍ
+	//ä¸‹é¢æ˜¯æ±‚ç›´å¾„çš„ä»£ç 
+	//åœ¨ååºä½ç½®æ›´æ–°ç›´å¾„çš„æœ€å¤§å€¼
+	//èŠ‚ç‚¹aåˆ°bçš„ç›´å¾„å®é™…ä¸Šå°±æ˜¯æ±‚ä»–ä»¬ä¸¤çš„çˆ¶èŠ‚ç‚¹çš„ä¸¤ä¸ªå­æ ‘çš„æ·±åº¦ä¹‹å’Œ
 	int diameter = leftdepth + rightdepth;
-	//¸üĞÂÖ±¾¶
+	//æ›´æ–°ç›´å¾„
 	
 	max_diameter = max_diameter > diameter ? max_diameter : diameter;
-	//·µ»ØÊ÷µÄ×î´óÉî¶È
+	//è¿”å›æ ‘çš„æœ€å¤§æ·±åº¦
 	return (leftdepth >= rightdepth ? leftdepth : rightdepth) + 1;
 }
 
-//ÀûÓÃ²ãĞò±éÀúÇó½âÊ÷µÄ×î´óÉî¶È
-//ÎÒ¿ÉÒÔÀûÓÃ²ãĞò±éÀúÇó½âÆäËûÊ¹ÓÃµİ¹éµÄÎÊÌâ
+//åˆ©ç”¨å±‚åºéå†æ±‚è§£æ ‘çš„æœ€å¤§æ·±åº¦
+//æˆ‘å¯ä»¥åˆ©ç”¨å±‚åºéå†æ±‚è§£å…¶ä»–ä½¿ç”¨é€’å½’çš„é—®é¢˜
 template<class T>
 int Btree<T>::maxdepthBaseLevel(BtreeNode<T>* p)
 {
@@ -232,13 +277,13 @@ int Btree<T>::maxdepthBaseLevel(BtreeNode<T>* p)
 	int count = 0;
 	while (!q.empty())
 	{
-		//sizeÊÇ¹Ø¼ü£¬ÀûÓÃsize¿ØÖÆÃ¿Ò»²ãµÄ½ÚµãÊı
-		int size = q.size();//»ñÈ¡ÕâÒ»²ãÓĞ¼¸¸ö½Úµã
-		//ÄÚ²ãÑ­»·¿ØÖÆÃ¿Ò»²ã±éÀú£¬sizeĞ¡ÓÚ0¾Í´ú±íÕâÒ»²ã±éÀú½áÊø£¬²ãÊı¾Í¼ÓÒ»
+		//sizeæ˜¯å…³é”®ï¼Œåˆ©ç”¨sizeæ§åˆ¶æ¯ä¸€å±‚çš„èŠ‚ç‚¹æ•°
+		int size = q.size();//è·å–è¿™ä¸€å±‚æœ‰å‡ ä¸ªèŠ‚ç‚¹
+		//å†…å±‚å¾ªç¯æ§åˆ¶æ¯ä¸€å±‚éå†ï¼Œsizeå°äº0å°±ä»£è¡¨è¿™ä¸€å±‚éå†ç»“æŸï¼Œå±‚æ•°å°±åŠ ä¸€
 		while (size > 0)
 		{
-			BtreeNode<T> * temp = q.front();//»ñÈ¡¶ÓÍ·ÔªËØ
-			if (temp->left != nullptr)//×ó½Úµã²»Îª¿Õ£¬¾ÍÈë¶Ó
+			BtreeNode<T> * temp = q.front();//è·å–é˜Ÿå¤´å…ƒç´ 
+			if (temp->left != nullptr)//å·¦èŠ‚ç‚¹ä¸ä¸ºç©ºï¼Œå°±å…¥é˜Ÿ
 			{
 				q.push(temp->left);
 			}
@@ -246,24 +291,24 @@ int Btree<T>::maxdepthBaseLevel(BtreeNode<T>* p)
 			{
 				q.push(temp->right);
 			}
-			size -= 1;//×öÍêÒ»²ãÑ­»·£¬size¼õÒ»
-			q.pop();//±ğÍüÁË°Ñ¸Õ¸Õ±éÀú¹ıµÄ½Úµã³ö¶Ó
+			size -= 1;//åšå®Œä¸€å±‚å¾ªç¯ï¼Œsizeå‡ä¸€
+			q.pop();//åˆ«å¿˜äº†æŠŠåˆšåˆšéå†è¿‡çš„èŠ‚ç‚¹å‡ºé˜Ÿ
 		}
-		count += 1;//Ò»²ã½áÊøÖ®ºó£¬²ãÊı¾Í¼Ó1
+		count += 1;//ä¸€å±‚ç»“æŸä¹‹åï¼Œå±‚æ•°å°±åŠ 1
 
 	}
 	return count;
 }
-/*¸ø¶¨Ò»¿Ã¶ş²æÊ÷£¬ÄãĞèÒª¼ÆËãËüµÄÖ±¾¶³¤¶È¡£Ò»¿Ã¶ş²æÊ÷µÄÖ±¾¶³¤¶ÈÊÇÈÎÒâÁ½¸ö½áµãÂ·¾¶³¤¶ÈÖĞµÄ×î´óÖµ¡£
-ÕâÌõÂ·¾¶¿ÉÄÜ´©¹ı¸ù½áµã¡£×¢Òâ£ºÁ½½áµãÖ®¼äµÄÂ·¾¶³¤¶ÈÊÇÒÔËüÃÇÖ®¼ä±ßµÄÊıÄ¿±íÊ¾¡£
-½Úµãaµ½bµÄÖ±¾¶Êµ¼ÊÉÏ¾ÍÊÇÇóËûÃÇÁ½µÄ¸¸½ÚµãµÄÁ½¸ö×ÓÊ÷µÄÉî¶ÈÖ®ºÍ*/
+/*ç»™å®šä¸€æ£µäºŒå‰æ ‘ï¼Œä½ éœ€è¦è®¡ç®—å®ƒçš„ç›´å¾„é•¿åº¦ã€‚ä¸€æ£µäºŒå‰æ ‘çš„ç›´å¾„é•¿åº¦æ˜¯ä»»æ„ä¸¤ä¸ªç»“ç‚¹è·¯å¾„é•¿åº¦ä¸­çš„æœ€å¤§å€¼ã€‚
+è¿™æ¡è·¯å¾„å¯èƒ½ç©¿è¿‡æ ¹ç»“ç‚¹ã€‚æ³¨æ„ï¼šä¸¤ç»“ç‚¹ä¹‹é—´çš„è·¯å¾„é•¿åº¦æ˜¯ä»¥å®ƒä»¬ä¹‹é—´è¾¹çš„æ•°ç›®è¡¨ç¤ºã€‚
+èŠ‚ç‚¹aåˆ°bçš„ç›´å¾„å®é™…ä¸Šå°±æ˜¯æ±‚ä»–ä»¬ä¸¤çš„çˆ¶èŠ‚ç‚¹çš„ä¸¤ä¸ªå­æ ‘çš„æ·±åº¦ä¹‹å’Œ*/
 template<class T>
 int Btree<T>::maxDiameter(BtreeNode<T>* p)
 {
 	maxdepth(p);
 	return max_diameter;
 }
-//µİ¹éĞÎÊ½·­×ª¶ş²æÊ÷
+//é€’å½’å½¢å¼ç¿»è½¬äºŒå‰æ ‘
 template<class T>
 BtreeNode<T>* Btree<T>::inverseBtree(BtreeNode<T>* p)
 {
@@ -278,7 +323,7 @@ BtreeNode<T>* Btree<T>::inverseBtree(BtreeNode<T>* p)
 
 	return p;
 }
-//±éÀúĞÎÊ½·­×ª¶ş²æÊ÷
+//éå†å½¢å¼ç¿»è½¬äºŒå‰æ ‘
 template<class T>
 BtreeNode<T>* Btree<T>::inverseBtreeBaseItera(BtreeNode<T>* p)
 {
@@ -286,12 +331,12 @@ BtreeNode<T>* Btree<T>::inverseBtreeBaseItera(BtreeNode<T>* p)
 	{
 		return nullptr;
 	}
-	//ÔÚ±éÀúµÄÇ°ĞòÎ»ÖÃ×ö½ÚµãµÄ½»»»£¬Ò²¿ÉÒÔÔÚºóĞòÎ»ÖÃÖ´ĞĞ£¬µ«²»ÄÜÔÚÖĞĞòÎ»ÖÃ
+	//åœ¨éå†çš„å‰åºä½ç½®åšèŠ‚ç‚¹çš„äº¤æ¢ï¼Œä¹Ÿå¯ä»¥åœ¨ååºä½ç½®æ‰§è¡Œï¼Œä½†ä¸èƒ½åœ¨ä¸­åºä½ç½®
 	BtreeNode<T> * temp = p->left;
 	p->left = p->right;
 	p->right = temp;
-	//ÉÏÒ»¸ö½ÚµãÒÑ¾­½»»»Íê³ÉÁË£¬¿ªÊ¼±éÀúÏÂÒ»¸ö½Úµã
-	//ÕâÀï»áÒ»Ö±±éÀú×ó½Úµã£¬Ö±µ½½ÚµãÎª¿Õ£¬¾Í¿ªÊ¼±éÀúÓÒ½Úµã
+	//ä¸Šä¸€ä¸ªèŠ‚ç‚¹å·²ç»äº¤æ¢å®Œæˆäº†ï¼Œå¼€å§‹éå†ä¸‹ä¸€ä¸ªèŠ‚ç‚¹
+	//è¿™é‡Œä¼šä¸€ç›´éå†å·¦èŠ‚ç‚¹ï¼Œç›´åˆ°èŠ‚ç‚¹ä¸ºç©ºï¼Œå°±å¼€å§‹éå†å³èŠ‚ç‚¹
 	inverseBtreeBaseItera(p->left);
 	inverseBtreeBaseItera(p->right);
 	return p;
@@ -304,11 +349,11 @@ void Btree<T>::traverse_flat(BtreeNode<T>* p)
 	{
 		return;
 	}
-	//Õ»Òç³ö
+	//æ ˆæº¢å‡º
 	/*temp_flat->left = nullptr;
 	temp_flat->right = p;
 	temp_flat = temp_flat->right;*/
-	//ĞÂ½¨½Úµã£¬¿ÉÒÔ
+	//æ–°å»ºèŠ‚ç‚¹ï¼Œå¯ä»¥
 	BtreeNode<T>* newnode = new BtreeNode<T>;
 	newnode->data = p->data;
 	newnode->left = nullptr;
@@ -320,10 +365,84 @@ void Btree<T>::traverse_flat(BtreeNode<T>* p)
 }
 
 
-//±éÀú·½Ê½½«¶ş²æÊ÷Õ¹¿ªÎªµ¥Á´±í
+//éå†æ–¹å¼å°†äºŒå‰æ ‘å±•å¼€ä¸ºå•é“¾è¡¨
 template<class T>
 BtreeNode<T>* Btree<T>::flatten(BtreeNode<T>* p)
 {
 	traverse_flat(p);
 	return dumpy->right;
+}
+//æ„å»ºæœ€å¤§äºŒå‰æ ‘
+template<class T>
+BtreeNode<T>* Btree<T>::buildMaxBtree(vector<T>& nums,int lo,int hi)
+{
+	/*if (lo > hi)
+	{
+		return;
+	}
+	T max_val;
+	*/
+}
+//å±‚åºéå†å½¢å¼åºåˆ—åŒ–
+template<class T>
+string Btree<T>::serialize(BtreeNode<T>* root)
+{
+	//å‰åºéå†
+#if PRE_ORDER
+	if (root == nullptr)
+	{
+		//#ä»£è¡¨ç©ºæŒ‡é’ˆ
+		return serialize_str.append("#").append(",");
+	}
+	string d = to_string(root->data);
+	serialize_str.append(d).append(",");
+	serialize(root->left);
+	serialize(root->right);
+	return serialize_str;
+#endif
+//å±‚åºéå†
+#if LEVEL_ORDER
+	if (root == nullptr)
+	{
+		//#ä»£è¡¨ç©ºæŒ‡é’ˆ
+		return serialize_str.append("#").append(",");
+	}
+	queue<BtreeNode<T> *> q;
+	q.push(root);
+	while (!q.empty())
+	{
+		BtreeNode<T> * p = q.front();
+		string d = to_string(p->data);
+		serialize_str.append(d).append(",");
+		if (p->left != nullptr)
+		{
+			
+			q.push(p->left);
+		}
+		else
+		{
+			serialize_str.append("#").append(",");
+		}
+
+		if(p->right != nullptr)
+		{
+			q.push(p->right);
+		}
+		else
+		{
+			serialize_str.append("#").append(",");
+		}
+		q.pop();
+
+	}
+	return serialize_str;
+#endif
+
+
+}
+
+template<class T>
+BtreeNode<T>* Btree<T>::deserialize(string str)
+{
+	return NULL;
 }
