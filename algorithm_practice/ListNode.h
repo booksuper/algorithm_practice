@@ -1,5 +1,5 @@
 #pragma once
-#include "sort_algorithm.h"
+#include "sort_algorithm.hpp"
 
 typedef struct listNode
 {

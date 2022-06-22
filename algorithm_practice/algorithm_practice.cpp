@@ -4,43 +4,13 @@
 #include "MyQueue.hpp"
 #include "Btree.hpp"
 #include <iostream>
-
+#define BTREE 0;
+#define SORT 1;
 
 int main(int argc,char * argv[])
 {
-#if 1
-	//MyStack<int> mysta;
-	//MyQueue<int> mysta;
-	//mysta.push(2);
-	//mysta.push(3);
-	//mysta.push(5);
-	//mysta.push(4);
-	//int s = mysta.size();
-	//int f = mysta.front();
-	//int b = mysta.back();
-	////int c = mysta.capaticy();
-	//int t = mysta.pop();
-	//t = mysta.pop();
-	// f = mysta.front();
-	// b = mysta.back();
-	//s = mysta.size();
-	////c = mysta.capaticy();
-	//mysta.push(4);
-	//mysta.push(4);
-	//mysta.push(4);
-	//s = mysta.size();
+#if BTREE
 	
-	/*vector<int> arr{ 2,5,1,10,8};
-	recursion_array_pre(arr, 0);*/
-
-	/*LinkList l;
-	l.insertByHead(2);
-	l.insertByHead(3);
-	l.insertByHead(4);
-	l.printList();
-	cout << "后续遍历" << endl;
-	l.recursion_print_pre();*/
-
 	Btree<int> tree;
 	Btree<int> tree1;
 	int flag;
@@ -71,6 +41,14 @@ int main(int argc,char * argv[])
 	int i = 1;
 #endif
 
+#if SORT
+	vector<int> nums{ 3,1,2,8,4,6,7 };
+	vector<int> res = quickSort(nums);
+	int num[5]{ 3,1,2,4,5 };
+	int res_num[5];
+	merge_sort(num, 0, 4, res_num);
+	int d = 0;
+#endif
 
 
 

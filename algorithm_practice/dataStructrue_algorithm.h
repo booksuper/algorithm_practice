@@ -1,5 +1,5 @@
 ﻿#pragma once
-#include "sort_algorithm.h"
+#include "sort_algorithm.hpp"
 
 /// @brief 使用差分数组求解区间和
 /// @details 假设你有一个长度为 n 的数组，初始情况下所有的数字均为 0，你将会被给出 k​​​​​​​ 个更新的操作。

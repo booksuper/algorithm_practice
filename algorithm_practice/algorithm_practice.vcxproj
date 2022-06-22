@@ -141,7 +141,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <ConformanceMode>true</ConformanceMode>
+      <ConformanceMode>false</ConformanceMode>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -154,7 +154,6 @@
     <ClCompile Include="dataStructrue_algorithm.cpp" />
     <ClCompile Include="ListNode.cpp" />
     <ClCompile Include="ListUtil.cpp" />
-    <ClCompile Include="sort_algorithm.cpp" />
     <ClCompile Include="algorithm_practice.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -164,7 +163,7 @@
     <ClInclude Include="ListUtil.h" />
     <ClInclude Include="MyQueue.hpp" />
     <ClInclude Include="MyStack.hpp" />
-    <ClInclude Include="sort_algorithm.h" />
+    <ClInclude Include="sort_algorithm.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
