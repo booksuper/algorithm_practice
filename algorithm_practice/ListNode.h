@@ -7,61 +7,6 @@ typedef struct listNode
 	listNode * next;
 }Node;
 
-//listNode * createList()
-//{
-//	listNode * head;
-//	//head = (struct listNode*)malloc(sizeof(struct listNode));
-//	head = new listNode;
-//	head->next = nullptr;
-//	return head;
-//}
-////根据数据创建一个节点
-//listNode * createNode(int data)
-//{
-//	listNode * node = new listNode;
-//	node->data = data;
-//	node->next = nullptr;
-//	return node;
-//		 
-//}
-////插入一个节点。头插法
-//void insert_node_by_head(listNode * head,int data)
-//{
-//	//给输入的数据创建一个节点
-//	listNode * newnode = createNode(data);
-//	//新节点得先连到头结点的下一个，不能先让头结点连新节点，不然顺序错了
-//	newnode->next = head->next;
-//	head->next = newnode;
-//
-//
-//}
-//打印节点信息
-void printList2(Node * head);
-
-////删除指定数据的节点
-//void deleteNode(listNode * head,int data)
-//{
-//	//当前节点
-//	listNode * frontNode = head;
-//	//当前节点的下一个节点
-//	listNode * postNode = head->next;
-//
-//	while (postNode->data != data)
-//	{
-//		frontNode = postNode;
-//		postNode = postNode->next;
-//
-//		if (postNode == nullptr)
-//		{
-//			cout << "没有指定的数据" << endl;
-//			break;
-//		}
-//	}
-//	frontNode->next = postNode->next;
-//	delete postNode;
-//}
-
-
 class LinkList
 {
 public:
@@ -85,8 +30,12 @@ public:
 
 	//清空
 	void clearList();
-	//反转
+	//迭代形式反转
 	void reverse();
+	//自己写的反转，迭代形式
+	Node * my_reverse();
+	//递归形式反转单链表
+	Node * reverseBaserecursion(Node * node);
 	//析构函数
 	~LinkList();
 

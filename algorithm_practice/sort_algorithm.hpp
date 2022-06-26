@@ -63,45 +63,15 @@ template<class T>
 vector<T> quickSort(vector<T> arr)
 {
 	////这一句是递归的终止条件，没有这一句整个程序会陷入死循环
-	//if (arr.size() <= 1)
-	//	return arr;
-	//T pivot = arr[0];
-	//vector<T> left;
-	//vector<T> right;
-	////比基准值小的在left，大的在right中
-	//for (int i = 1; i < arr.size(); i++)
-	//{
-	//	if (arr[i] <= pivot)
-	//	{
-	//		left.push_back(arr[i]);
-	//	}
-	//	else
-	//	{
-	//		right.push_back(arr[i]);
-	//	}
-	//}
-	//vector<T> res1, res2,res;
-	////对子数组递归
-	//res1 = quickSort(left);
-	//res2 = quickSort(right);
-	////拼接
-	//res.insert(res.end(), res1.begin(), res1.end());
-	//res.insert(res.end(),pivot);
-	//res.insert(res.end(), res2.begin(), res2.end());
-	//return res;
-	 //快速排序
-	int size = arr.size();
-	if (size <= 1)
-	{
+	if (arr.size() <= 1)
 		return arr;
-	}
-	vector<int> left;
-	vector<int> right;
-	vector<int> res;
-	int pivot = arr[0];
-	for (int i = 1; i < size; i++)
+	T pivot = arr[0];
+	vector<T> left;
+	vector<T> right;
+	//比基准值小的在left，大的在right中
+	for (int i = 1; i < arr.size(); i++)
 	{
-		if (arr[i] < pivot)
+		if (arr[i] <= pivot)
 		{
 			left.push_back(arr[i]);
 		}
@@ -110,12 +80,16 @@ vector<T> quickSort(vector<T> arr)
 			right.push_back(arr[i]);
 		}
 	}
-	vector<int> res1 = quickSort(left);
-	vector<int> res2 = quickSort(right);
+	vector<T> res1, res2,res;
+	//对子数组递归
+	res1 = quickSort(left);
+	res2 = quickSort(right);
+	//拼接
 	res.insert(res.end(), res1.begin(), res1.end());
-	res.insert(res.end(), pivot);
+	res.insert(res.end(),pivot);
 	res.insert(res.end(), res2.begin(), res2.end());
 	return res;
+	
 }
 
 /// @brief 归并排序

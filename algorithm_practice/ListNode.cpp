@@ -18,7 +18,7 @@ LinkList::LinkList(int data)
 	head->next = nullptr;
 	tempPointer = head;
 }
-
+//size
 int LinkList::getSize()
 {
 	Node * node = head;
@@ -32,7 +32,7 @@ int LinkList::getSize()
 	}
 	return count;
 }
-
+//头插法
 void LinkList::insertByHead(int data)
 {
 	Node * newNode = new Node;
@@ -42,7 +42,7 @@ void LinkList::insertByHead(int data)
 	newNode->next = head->next;
 	head->next = newNode;
 }
-
+//尾插法
 void LinkList::insertByTail(int data)
 {
 	Node * newNode = new Node;
@@ -61,7 +61,7 @@ void LinkList::insertByTail(int data)
 
 
 }
-
+//删除指定的数
 void LinkList::deleteList(int data)
 {
 	Node * frontNode = head;
@@ -94,7 +94,7 @@ void LinkList::deleteList(int data)
 	
 
 }
-
+//根据索引改变链表值
 void LinkList::changeList(int pos, int data)
 {
 	Node * node = head;
@@ -110,7 +110,7 @@ void LinkList::changeList(int pos, int data)
 		node = node->next;
 	}
 }
-
+//根据索引获取数据
 void LinkList::getData(int pos,int & data)
 {
 	Node * node = head;
@@ -128,7 +128,7 @@ void LinkList::getData(int pos,int & data)
 	}
 	
 }
-
+//正常迭代打印
 void LinkList::printList()
 {
 	//这里指向head的下一个，主要是因为在初始化的时候有一个头指针，头指针的数据是我们不需要的
@@ -140,7 +140,7 @@ void LinkList::printList()
 	}
 
 }
-
+//前序遍历打印
 void LinkList::recursion_print_pre()
 {
 	
@@ -154,7 +154,7 @@ void LinkList::recursion_print_pre()
 	
 	
 }
-
+//清空
 void LinkList::clearList()
 {
 	Node * node = head;
@@ -169,7 +169,7 @@ void LinkList::clearList()
 	}
 	cout << "清空成功" << endl;
 }
-
+//迭代反转链表
 void LinkList::reverse()
 {
 	//临时指针
@@ -193,6 +193,32 @@ void LinkList::reverse()
 	head->next = nullptr;
 	head = p;
 	
+}
+//迭代反转链表，思路和上一个没啥差别，只是自己手写的而已
+Node * LinkList::my_reverse()
+{
+	
+	Node* p = head;
+	Node* q = head->next;
+	if (p == nullptr || q == nullptr)
+	{
+		return nullptr;
+	}
+	while (q != nullptr)
+	{
+			Node * r = q->next;
+			q->next = p;
+			p = q;
+			q = r;
+		
+	}
+	head->next = nullptr;
+	return p;
+}
+//递归形式反转单链表
+Node * LinkList::reverseBaserecursion(Node * node)
+{
+	return nullptr;
 }
 
 LinkList::~LinkList()

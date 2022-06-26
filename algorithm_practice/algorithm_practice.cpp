@@ -4,8 +4,13 @@
 #include "MyQueue.hpp"
 #include "Btree.hpp"
 #include <iostream>
+#include "ListNode.h"
+#include "dynamic_programming.h"
+
+#define DP 1;
 #define BTREE 0;
-#define SORT 1;
+#define SORT 0;
+#define LISTNODE 0;
 
 int main(int argc,char * argv[])
 {
@@ -50,8 +55,24 @@ int main(int argc,char * argv[])
 	int d = 0;
 #endif
 
+#if LISTNODE
+	LinkList l1(0);
+	l1.insertByTail(3);
+	l1.insertByTail(8);
+	l1.insertByTail(1);
+	l1.insertByTail(2);
+	l1.insertByTail(6);
+	Node * res = l1.my_reverse();
+	int d = 0;
 
+#endif
 
+#if DP
+	int f = fib(10);
+	int* m = new int[11]{};
+	int f1 = modified_fib(m,10);
+
+#endif
 
 
 

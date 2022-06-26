@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="dataStructrue_algorithm.cpp" />
+    <ClCompile Include="dynamic_programming.cpp" />
     <ClCompile Include="ListNode.cpp" />
     <ClCompile Include="ListUtil.cpp" />
     <ClCompile Include="algorithm_practice.cpp" />
@@ -159,6 +160,7 @@
   <ItemGroup>
     <ClInclude Include="Btree.hpp" />
     <ClInclude Include="dataStructrue_algorithm.h" />
+    <ClInclude Include="dynamic_programming.h" />
     <ClInclude Include="ListNode.h" />
     <ClInclude Include="ListUtil.h" />
     <ClInclude Include="MyQueue.hpp" />
