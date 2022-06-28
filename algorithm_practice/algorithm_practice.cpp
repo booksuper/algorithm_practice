@@ -71,6 +71,10 @@ int main(int argc,char * argv[])
 	int f = fib(10);
 	int* m = new int[11]{};
 	int f1 = modified_fib(m,10);
+	int f2 = fib_itera(10);
+	//凑零钱
+	vector<int> coins{ 2 };
+	int r = coinChange(coins, 3);
 
 #endif
 
