@@ -61,7 +61,7 @@ int coinChange(vector<int>& coins, int amount)
 		{
 			if (i - coins[j] >= 0)
 			{
-				//递推结果，公式为dp[i] = 1+dp[i-硬币值]
+				//递推结果，公式为dp[i] = 1+dp[i-硬币值]，加的1代表当前硬币，硬币值是coins[j]
 				res = res < dp[i - coins[j]] + 1 ? res : dp[i - coins[j]] + 1;
 			}
 		}
@@ -87,5 +87,10 @@ int coinChange(vector<int>& coins, int amount)
 	{
 		return dp[amount];
 	}
+	
+}
+
+int coinChangeBaseRecursion(vector<int>& coins, int amount)
+{
 	
 }

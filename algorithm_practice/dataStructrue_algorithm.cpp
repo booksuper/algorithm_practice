@@ -40,3 +40,24 @@ vector<vector<int>> Solution::getModifiedArray(vector<int> arr, vector<vector<in
 	}
 	return res;
 }
+//原地删除数组中重复元素
+int removeDuplicates(vector<int>& nums)
+{
+	if (nums.size() == 0)
+	{
+		return 0;
+	}
+	int slow = 0;
+	int fast = 0;
+	while (fast < nums.size())
+	{
+		if (nums[slow] != nums[fast])
+		{
+			slow++;
+			nums[slow] = nums[fast];
+		}
+		fast++;
+
+	}
+	return slow+1;
+}

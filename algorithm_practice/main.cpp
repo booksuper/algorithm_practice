@@ -6,11 +6,13 @@
 #include <iostream>
 #include "ListNode.h"
 #include "dynamic_programming.h"
+#include "callback_practice.h"
 
 #define DP 1;
 #define BTREE 0;
 #define SORT 0;
 #define LISTNODE 0;
+#define CALLBACK 1;
 
 int main(int argc,char * argv[])
 {
@@ -78,7 +80,10 @@ int main(int argc,char * argv[])
 
 #endif
 
-
+#if CALLBACK
+	int call_res = 0;
+	Add(add, 3, 4, call_res);
+#endif
 
 }
 

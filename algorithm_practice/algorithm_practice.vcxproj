@@ -151,14 +151,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="callback_practice.cpp" />
     <ClCompile Include="dataStructrue_algorithm.cpp" />
     <ClCompile Include="dynamic_programming.cpp" />
     <ClCompile Include="ListNode.cpp" />
     <ClCompile Include="ListUtil.cpp" />
-    <ClCompile Include="algorithm_practice.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Btree.hpp" />
+    <ClInclude Include="callback_practice.h" />
     <ClInclude Include="dataStructrue_algorithm.h" />
     <ClInclude Include="dynamic_programming.h" />
     <ClInclude Include="ListNode.h" />

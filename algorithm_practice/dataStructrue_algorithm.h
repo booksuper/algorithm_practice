@@ -18,5 +18,14 @@ private:
 	vector<int> diffe;
 };
 
+//给你一个 升序排列 的数组 nums ，请你 原地 删除重复出现的元素，使每个元素 只出现一次 ，
+//返回删除后数组的新长度。元素的 相对顺序 应该保持 一致
+
+int removeDuplicates(vector<int>& nums);
+
+//给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，
+//如果目标值存在返回下标，否则返回 -1。
+
+int binarySearch(vector<int>& nums, int target);
 
 

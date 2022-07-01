@@ -24,10 +24,13 @@
     <ClCompile Include="ListUtil.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="algorithm_practice.cpp">
+    <ClCompile Include="dynamic_programming.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="dynamic_programming.cpp">
+    <ClCompile Include="main.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="callback_practice.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -54,6 +57,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="dynamic_programming.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="callback_practice.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

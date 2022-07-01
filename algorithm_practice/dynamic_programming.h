@@ -23,3 +23,6 @@ int fib_itera(int n);
 你可以认为每种硬币的数量是无限的。*/
 
 int coinChange(vector<int>& coins, int amount);
+
+//递归解决凑零钱问题
+int coinChangeBaseRecursion(vector<int>& coins, int amount);
