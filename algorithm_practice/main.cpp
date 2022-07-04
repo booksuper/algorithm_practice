@@ -7,12 +7,14 @@
 #include "ListNode.h"
 #include "dynamic_programming.h"
 #include "callback_practice.h"
+#include "backTrack.h"
 
-#define DP 1;
+#define DP 0;
 #define BTREE 0;
 #define SORT 0;
 #define LISTNODE 0;
-#define CALLBACK 1;
+#define CALLBACK 0;
+#define BACKTRACK 1;
 
 int main(int argc,char * argv[])
 {
@@ -83,6 +85,15 @@ int main(int argc,char * argv[])
 #if CALLBACK
 	int call_res = 0;
 	Add(add, 3, 4, call_res);
+#endif
+
+#if BACKTRACK
+	//vector<int> nums{ 1,2};
+	vector<int> nums{ 4,3,2,3,5,2,1 };
+	//vector<vector<int>> res = permute(nums);
+	bool res = canPartitionKSubsets(nums, 4);
+	int a = 0;
+	
 #endif
 
 }

@@ -61,3 +61,9 @@ int removeDuplicates(vector<int>& nums)
 	}
 	return slow+1;
 }
+//二分搜索
+int binarySearch(vector<int>& nums, int target)
+{
+	return 0;
+}
+

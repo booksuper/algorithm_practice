@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="backTrack.cpp" />
     <ClCompile Include="callback_practice.cpp" />
     <ClCompile Include="dataStructrue_algorithm.cpp" />
     <ClCompile Include="dynamic_programming.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="backTrack.h" />
     <ClInclude Include="Btree.hpp" />
     <ClInclude Include="callback_practice.h" />
     <ClInclude Include="dataStructrue_algorithm.h" />
