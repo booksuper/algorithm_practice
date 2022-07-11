@@ -12,9 +12,9 @@
 #define DP 0;
 #define BTREE 0;
 #define SORT 0;
-#define LISTNODE 0;
+#define LISTNODE 1;
 #define CALLBACK 0;
-#define BACKTRACK 1;
+#define BACKTRACK 0;
 
 int main(int argc,char * argv[])
 {
@@ -60,13 +60,14 @@ int main(int argc,char * argv[])
 #endif
 
 #if LISTNODE
-	LinkList l1(0);
-	l1.insertByTail(3);
-	l1.insertByTail(8);
+	LinkList l1(3);
+	l1.insertByTail(5);
+	/*l1.insertByTail(8);
 	l1.insertByTail(1);
 	l1.insertByTail(2);
-	l1.insertByTail(6);
-	Node * res = l1.my_reverse();
+	l1.insertByTail(6);*/
+	Node * res = l1.reverseBetween(1,2);
+	//Node * res = l1.my_reverse();
 	int d = 0;
 
 #endif
@@ -88,11 +89,14 @@ int main(int argc,char * argv[])
 #endif
 
 #if BACKTRACK
-	//vector<int> nums{ 1,2};
-	vector<int> nums{ 4,3,2,3,5,2,1 };
-	//vector<vector<int>> res = permute(nums);
-	bool res = canPartitionKSubsets(nums, 4);
-	int a = 0;
+	//vector<int> nums1{ 1,2,3};
+	//vector<int> nums2{ 4,3,2,3,5,2,1 };
+	////vector<vector<int>> res = permute(nums);
+	////bool res = canPartitionKSubsets(nums2, 4);
+	//vector<vector<int>> r = subsets(nums1);
+	//int a = 0;
+	int res = rfact(3);
+	cout << res;
 	
 #endif
 

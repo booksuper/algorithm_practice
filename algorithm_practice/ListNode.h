@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "sort_algorithm.hpp"
 
 typedef struct listNode
@@ -13,30 +13,34 @@ public:
 	LinkList();
 	LinkList(int data);
 	int getSize();
-	//Í·²å·¨
+	//å¤´æ’æ³•
 	void insertByHead(int data);
-	//Î²²å·¨
+	//å°¾æ’æ³•
 	void insertByTail(int data);
-	//É¾
+	//åˆ 
 	void deleteList(int data);
-	//¸Ä
+	//æ”¹
 	void changeList(int pos, int data);
-	//²é
+	//æŸ¥
 	void getData(int pos,int & data);
-	//´òÓ¡
+	//æ‰“å°
 	void printList();
-	//µİ¹éÇ°Ğò±éÀú
+	//é€’å½’å‰åºéå†
 	void recursion_print_pre();
 
-	//Çå¿Õ
+	//æ¸…ç©º
 	void clearList();
-	//µü´úĞÎÊ½·´×ª
+	//è¿­ä»£å½¢å¼åè½¬
 	void reverse();
-	//×Ô¼ºĞ´µÄ·´×ª£¬µü´úĞÎÊ½
+	//è‡ªå·±å†™çš„åè½¬ï¼Œè¿­ä»£å½¢å¼
 	Node * my_reverse();
-	//µİ¹éĞÎÊ½·´×ªµ¥Á´±í
+	//é€’å½’å½¢å¼åè½¬å•é“¾è¡¨
 	Node * reverseBaserecursion(Node * node);
-	//Îö¹¹º¯Êı
+	//ç»™ä½ å•é“¾è¡¨çš„å¤´æŒ‡é’ˆ head å’Œä¸¤ä¸ªæ•´æ•°Â left å’Œ right ï¼Œå…¶ä¸­Â left <= right ã€‚
+	//è¯·ä½ åè½¬ä»ä½ç½® left åˆ°ä½ç½® right çš„é“¾è¡¨èŠ‚ç‚¹ï¼Œè¿”å› åè½¬åçš„é“¾è¡¨
+	Node* reverseBetween(int left, int right);
+	
+	//ææ„å‡½æ•°
 	~LinkList();
 
 private:

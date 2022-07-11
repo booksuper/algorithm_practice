@@ -10,6 +10,9 @@ using namespace std;
 //时间复杂度是指数级2^n
 int fib(int n);
 
+//计算阶乘
+int rfact(int n);
+
 //使用备忘录技巧去除冗余节点求解斐波那契数列,时间复杂度降低为n
 //备忘录技巧用处挺多，可以避免重复计算
 int modified_fib(int memo[], int n);

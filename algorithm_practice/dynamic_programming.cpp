@@ -12,6 +12,22 @@ int fib(int n)
 
 }
 
+int rfact(int n)
+{
+	int ans;
+	if (n > 1)
+	{
+		//int temp = rfact(n - 1);
+		//ans = n * temp;
+		ans = n * rfact(n - 1);
+	}
+	else
+	{
+		ans = 1;
+	}
+	return ans;
+}
+
 int modified_fib(int memo[], int n)
 {
 	if (n == 0 || n == 1)

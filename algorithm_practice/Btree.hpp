@@ -292,6 +292,7 @@ int Btree<T>::maxdepthBaseLevel(BtreeNode<T>* p)
 				q.push(temp->right);
 			}
 			size -= 1;//做完一层循环，size减一
+			//pop放前面可以减少内存
 			q.pop();//别忘了把刚刚遍历过的节点出队
 		}
 		count += 1;//一层结束之后，层数就加1

@@ -107,3 +107,25 @@ void backtrack_permute(vector<int> nums, vector<int> track, bool * used, vector<
 	}
 
 }
+//所有可能子集
+vector<vector<int>> subsets(vector<int>& nums)
+{
+	vector<vector<int>> res;
+	vector<int> track;
+	backtrack_subsets(nums, 0, res, track);
+
+	return res;
+}
+
+void backtrack_subsets(vector<int>& nums, int start, vector<vector<int>>& res, vector<int> track)
+{
+	// 前序位置，每个节点的值都是一个子集
+	res.push_back(track);
+	for (int i = start; i < nums.size(); i++)
+	{
+		track.push_back(nums[i]);
+		// 通过 start 参数控制树枝的遍历，避免产生重复的子集
+		backtrack_subsets(nums, i + 1, res, track);
+		track.pop_back();
+	}
+}
