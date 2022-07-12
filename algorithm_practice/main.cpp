@@ -60,13 +60,14 @@ int main(int argc,char * argv[])
 #endif
 
 #if LISTNODE
-	LinkList l1(3);
-	l1.insertByTail(5);
-	/*l1.insertByTail(8);
-	l1.insertByTail(1);
+	LinkList l1(1);
 	l1.insertByTail(2);
-	l1.insertByTail(6);*/
-	Node * res = l1.reverseBetween(1,2);
+	l1.insertByTail(3);
+	l1.insertByTail(3);
+	l1.insertByTail(2);
+	l1.insertByTail(1);
+	bool pa = l1.isPalindrome();
+	//Node * res = l1.reverseBetween(1,2);
 	//Node * res = l1.my_reverse();
 	int d = 0;
 

@@ -280,8 +280,6 @@ Node * LinkList::reverseBetween(int left, int right)
 		//第一个指针下一个应该置空，相当于拼接右区间之后的指针
 		left_node->next = right_node_next;
 		return temp1;
-		//拼接左区间之前的指针
-		//left_node->next = right_node_next; 
 	}
 	else
 	{
@@ -293,6 +291,68 @@ Node * LinkList::reverseBetween(int left, int right)
 		left_node->next = right_node_next;
 		return head;
 	}
+}
+/*给你一个单链表的头节点 head ，请你判断该链表是否为回文链表。如果是，返回 true ；否则，返回 false
+  直接将其反转，反转后的链表和反转前的一样那肯定就是回文链表，不过这样时间复杂度有O(n2)*/
+//这个函数是辅助函数，用于递归
+//能不能在递归中就把判断做了，降低复杂度
+void pre_back_order(Node * p, vector<int> & pre_order, vector<int> & back_order)
+{
+	if (p == nullptr)
+	{
+		return;
+	}
+	pre_order.push_back(p->data);//前序位置递归，把正序遍历的数字存起来
+	pre_back_order(p->next, pre_order, back_order);
+	back_order.push_back(p->data);//后序位置递归，把倒序遍历的数字存起来
+	
+}
+//在递归中就把判断做了，降低复杂度
+void pre_back_order(Node * p, vector<int> & pre_order, vector<int> & back_order,int& count,int &n)
+{
+	if (p == nullptr)
+	{
+		return;
+	}
+	pre_order.push_back(p->data);//前序位置递归，把正序遍历的数字存起来
+	pre_back_order(p->next, pre_order, back_order,count,n);
+	back_order.push_back(p->data);//后序位置递归，把倒序遍历的数字存起来
+	if (back_order.back() != pre_order[n])
+	{
+		count++;
+		
+	}
+	n++;
+	
+
+}
+
+bool LinkList::isPalindrome()
+{
+	
+	vector<int> pre_order;
+	vector<int> back_order;
+	Node * p = head;
+	int count = 0;
+	int n = 0;
+	pre_back_order(p, pre_order, back_order,count,n);
+	if (count == 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+	//for (int i = 0; i < pre_order.size(); i++)
+	//{
+	//	//正序和倒叙的数必须必须一一对应，有一个不相等就不是回文链表
+	//	if (pre_order[i] != back_order[i])
+	//	{
+	//		return false;
+	//	}
+	//}
+	//return true;
 }
 
 LinkList::~LinkList()

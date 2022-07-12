@@ -39,7 +39,8 @@ public:
 	//给你单链表的头指针 head 和两个整数 left 和 right ，其中 left <= right 。
 	//请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表
 	Node* reverseBetween(int left, int right);
-	
+	/*给你一个单链表的头节点 head ，请你判断该链表是否为回文链表。如果是，返回 true ；否则，返回 false*/
+	bool isPalindrome();
 	//析构函数
 	~LinkList();
 
@@ -49,67 +50,5 @@ private:
 	
 };
 
-
-//struct Node
-//{
-//	int date;
-//	struct Node* next;
-//};
-//struct Node*creatlist()
-//{
-//	struct Node* headNode = (struct Node*)malloc(sizeof(struct Node));
-//	headNode->next = NULL;
-//	return headNode;
-//};
-//struct Node*creatNode(int date)
-//{
-//	struct Node*newNode = (struct Node*)malloc(sizeof(struct Node));
-//	newNode->date = date;
-//	newNode->next = NULL;
-//	return newNode;
-//};
-//void printList(struct Node*headNode)
-//{
-//	struct Node*Pmove = headNode->next;
-//	while (Pmove)
-//	{
-//		printf("%d", Pmove->date);
-//		Pmove = Pmove->next;
-//	}
-//	printf("\n");
-//
-//}
-//void insert_Node_By_HeadNode(struct Node*headNode, int date)
-//{
-//	struct Node*newNode = creatNode(date);
-//	newNode->next = headNode->next;
-//	headNode->next = newNode;
-//}
-
-//void deleteNodebyAppoint(struct Node* HeadNode, int data)
-//{
-//	struct Node* postNodeFront = HeadNode;
-//	struct Node* postNode = HeadNode->next;
-//	while (postNode->data != data)
-//	{
-//		postNodeFront = postNode;
-//		postNode = postNodeFront->next;
-//		if (postNode == NULL)
-//		{
-//			printf("not find data\n");
-//			return;
-//		}
-//	}
-//	postNodeFront->next = postNode->next;
-//	free(postNode);
-//}
-//int main()
-//{
-//	struct Node*list = creatlist();
-//	insert_Node_By_HeadNode(list, 1);
-//	insert_Node_By_HeadNode(list, 2);
-//	insert_Node_By_HeadNode(list, 3);
-//	printList(list);
-//}
 
 
