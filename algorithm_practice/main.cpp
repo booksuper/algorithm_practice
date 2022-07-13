@@ -15,6 +15,7 @@
 #define LISTNODE 1;
 #define CALLBACK 0;
 #define BACKTRACK 0;
+#define ARRAY 1;
 
 int main(int argc,char * argv[])
 {
@@ -61,16 +62,22 @@ int main(int argc,char * argv[])
 
 #if LISTNODE
 	LinkList l1(1);
-	l1.insertByTail(2);
-	l1.insertByTail(3);
-	l1.insertByTail(3);
-	l1.insertByTail(2);
 	l1.insertByTail(1);
-	bool pa = l1.isPalindrome();
-	//Node * res = l1.reverseBetween(1,2);
+	l1.insertByTail(2);
+	l1.insertByTail(3);
+	l1.insertByTail(3);
+	//l1.insertByTail(1);
+	//bool pa = l1.isPalindrome();
+	//Node * res = l1.deleteDuplicates();
 	//Node * res = l1.my_reverse();
 	int d = 0;
 
+#endif
+
+#if ARRAY
+	vector<int> nums{ 0,1,0,3,12 };
+	moveZeroes(nums);
+	int r = 0;
 #endif
 
 #if DP

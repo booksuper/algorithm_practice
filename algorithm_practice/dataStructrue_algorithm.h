@@ -23,6 +23,15 @@ private:
 
 int removeDuplicates(vector<int>& nums);
 
+/*给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度*/
+int removeElement(vector<int>& nums, int val);
+
+/*给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+
+请注意 ，必须在不复制数组的情况下原地对数组进行操作*/
+
+void moveZeroes(vector<int>& nums);
+
 //给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，
 //如果目标值存在返回下标，否则返回 -1。
 

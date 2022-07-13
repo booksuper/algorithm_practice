@@ -354,6 +354,34 @@ bool LinkList::isPalindrome()
 	//}
 	//return true;
 }
+//给定一个已排序的链表的头 head ， 删除所有重复的元素，使每个元素只出现一次 。返回 已排序的链表
+Node * LinkList::deleteDuplicates()
+{
+	if (head == nullptr)
+	{
+		return nullptr;
+	}
+	Node * res = new Node();
+	res->data = head->data;
+	Node * res_temp = res;
+	Node * slow = head;
+	Node * fast = head;
+	while (fast != nullptr)
+	{
+		if (slow->data != fast->data)
+		{
+			res_temp->next = fast;
+			res_temp = res_temp->next;
+			slow = fast;
+		}
+		fast = fast->next;
+
+	}
+	//这一句特别重要，没有这一句就会导致链表末端可能还会有重复元素
+	//在fast走到空的时候，说明判断完了，这时候就要把结果链表的最后一个元素指向空
+	res_temp->next = nullptr;
+	return res;
+}
 
 LinkList::~LinkList()
 {

@@ -61,6 +61,51 @@ int removeDuplicates(vector<int>& nums)
 	}
 	return slow+1;
 }
+/*给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度*/
+int removeElement(vector<int>& nums, int val)
+{
+	if (nums.size() == 0)
+	{
+		return 0;
+	}
+	int slow = 0;
+	int fast= 0;
+	while (fast <= nums.size()-1)
+	{
+		if (val != nums[fast])
+		{
+			nums[slow] = nums[fast];
+			slow++;
+		}
+		fast++;
+	}
+	return slow;
+}
+//给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序
+void moveZeroes(vector<int>& nums)
+{
+	if (nums.size() == 0)
+	{
+		return;
+	}
+	int slow = 0;
+	int fast = 0;
+	//先把0全部移除，保证其他元素的相对顺序
+	while (fast < nums.size())
+	{
+		if (0 != nums[fast])
+		{
+			nums[slow] = nums[fast];
+			slow++;
+		}
+		fast++;
+	}
+	//把末端元素置0
+	for (int i = slow; i < nums.size(); i++)
+	{
+		nums[i] = 0;
+	}
+}
 //二分搜索
 int binarySearch(vector<int>& nums, int target)
 {

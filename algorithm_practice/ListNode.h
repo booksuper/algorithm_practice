@@ -41,6 +41,8 @@ public:
 	Node* reverseBetween(int left, int right);
 	/*给你一个单链表的头节点 head ，请你判断该链表是否为回文链表。如果是，返回 true ；否则，返回 false*/
 	bool isPalindrome();
+	//给定一个已排序的链表的头 head ， 删除所有重复的元素，使每个元素只出现一次 。返回 已排序的链表
+	Node* deleteDuplicates();
 	//析构函数
 	~LinkList();
 
