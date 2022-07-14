@@ -32,10 +32,19 @@ int removeElement(vector<int>& nums, int val);
 
 void moveZeroes(vector<int>& nums);
 
+/*167两数之和：给你一个下标从 1 开始的整数数组 numbers ，该数组已按 非递减顺序排列  ，
+请你从数组中找出满足相加之和等于目标数 target 的两个数*/
+vector<int> twoSum(vector<int>& numbers, int target);
+
+
 //给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，
 //如果目标值存在返回下标，否则返回 -1。
 
 int binarySearch(vector<int>& nums, int target);
 
 
+//回文串判断
+bool isPalindrome(const char * s);
 
+//给你一个字符串 s，找到 s 中最长的回文子串。
+string longestPalindrome(string s);

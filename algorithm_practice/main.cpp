@@ -12,7 +12,7 @@
 #define DP 0;
 #define BTREE 0;
 #define SORT 0;
-#define LISTNODE 1;
+#define LISTNODE 0;
 #define CALLBACK 0;
 #define BACKTRACK 0;
 #define ARRAY 1;
@@ -66,6 +66,7 @@ int main(int argc,char * argv[])
 	l1.insertByTail(2);
 	l1.insertByTail(3);
 	l1.insertByTail(3);
+	
 	//l1.insertByTail(1);
 	//bool pa = l1.isPalindrome();
 	//Node * res = l1.deleteDuplicates();
@@ -75,9 +76,14 @@ int main(int argc,char * argv[])
 #endif
 
 #if ARRAY
-	vector<int> nums{ 0,1,0,3,12 };
+	/*vector<int> nums{ 0,1,0,3,12 };
 	moveZeroes(nums);
+	int r = 0;*/
+	const char * s = "abbac";
+	string d = "sdada";
+	bool res = isPalindrome(d.c_str());
 	int r = 0;
+	
 #endif
 
 #if DP
@@ -107,6 +113,36 @@ int main(int argc,char * argv[])
 	cout << res;
 	
 #endif
+	//string结尾是否以0结尾，这个得看编译器，在我这个编译器中（msvc2017)是以0结尾的
+	//而且c_str和data函数结果一样，没有区别。本来data输出的应该是不以0结尾的字符串，c_str输出的是
+	//以0结尾的,但这我这个编译器中，没有区别
+	//char []数组可以修改变量值，但是char * 不可以
 
+	//const char * s = "sddd";
+	//char s2[] = "sdhu";
+
+	//s2[1] = '2';
+	//string s3 = "defr";
+	//const char * t = s3.c_str();
+	//const char * t1 = s3.data();
+	//cout << t << endl;
+	//cout << t1 << endl;
+
+	//int l = strlen(t);
+	//int l2 = strlen(t1);
+	//int l3 = s3.length();
+	//char r;
+	//char r2;
+	//char r3;
+	//for (int i = 0; i < 5; i++)
+	//{
+
+	//	r = t[i];
+	//	r2 = t1[i];
+	//	r3 = s3[i];
+	//	//printf("%s", s[i]);
+	//}
+	/*cout << s<<endl;
+	cout << l;*/
 }
 

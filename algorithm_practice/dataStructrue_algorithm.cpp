@@ -80,6 +80,7 @@ int removeElement(vector<int>& nums, int val)
 		fast++;
 	}
 	return slow;
+	
 }
 //给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序
 void moveZeroes(vector<int>& nums)
@@ -106,9 +107,89 @@ void moveZeroes(vector<int>& nums)
 		nums[i] = 0;
 	}
 }
+//两数之和
+vector<int> twoSum(vector<int>& numbers, int target)
+{
+	// //时间复杂度on2，不行
+		// vector<int> res;
+		// if(numbers.size() == 0)
+		// {
+		//     return res;
+		// }
+
+		// for(int i = 0;i<numbers.size();i++)
+		// {
+		//     for(int j = i+1;j<numbers.size();j++)
+		//     {
+		//         if(numbers[i] + numbers[j] == target)
+		//         {
+		//             res.push_back(i+1);
+		//             res.push_back(j+1);
+		//             break;
+
+		//         }
+		//     }
+		//     if(res.size() == 2)
+		//     {
+		//         break;
+		//     }
+		// }
+		// return res;
+
+		//使用二分搜索的框架，因为这是个有序数组
+	vector<int> res;
+	int left = 0;
+	int right = numbers.size() - 1;
+	//int mid = left + (right - left) / 2;
+	int sum = 0;
+	while (left < right)
+	{
+		sum = numbers[left] + numbers[right];
+		if (sum == target)
+		{
+			res.push_back(left + 1);
+			res.push_back(right + 1);
+			break;
+		}
+		else if (sum < target)
+		{
+			left++;
+		}
+		else if (sum > target)
+		{
+			right--;
+		}
+	}
+	return res;
+}
 //二分搜索
 int binarySearch(vector<int>& nums, int target)
 {
 	return 0;
+}
+//回文串判断
+bool isPalindrome(const char * s)
+{
+	if (s == "")
+	{
+		return true;
+	}
+	int left = 0;
+	int right = strlen(s) - 1;
+	while (left < right)
+	{
+		if (s[left] != s[right])
+		{
+			return false;
+		}
+		left++;
+		right--;
+	}
+	return true;
+}
+
+string longestPalindrome(string s)
+{
+	return string();
 }
 
