@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-
+#include<queue>
 using namespace std;
 
 template<class T>
@@ -76,3 +76,106 @@ inline bool MyStack<T>::empty()
 	}
 	return false;
 }
+//225:用队列实现栈
+class MyStack2 {
+public:
+
+	void push(int x) {
+		int s = q.size();
+		q.push(x);
+		for (int i = 0; i < s; i++)
+		{
+			//把头元素再压进来，这样它就变成了尾
+			q.push(q.front());
+			//把刚刚压进来的头元素弹出
+			q.pop();
+		}
+		//我的方法
+		//q.push(x);
+
+
+	}
+
+	int pop() {
+
+		int r = q.front();
+		q.pop();
+		return r;
+#if 0 
+		//我的方法
+		int t = 0;
+		if (q.size() == 1)
+		{
+			t = q.front();
+			q.pop();
+			return t;
+		}
+
+		//定义数组大小必须用常量,使用指针就可以动态变化大小
+		int size = q.size() - 1;
+		int * tem = new int[size];
+		for (int i = 0; i < size ; i++)
+		{
+			t = q.front();
+			q.pop();
+			tem[i] = t;
+			//temp.push(t);
+
+		}
+		t = q.front();
+		q.pop();
+		for (int i = 0; i < size ; i++)
+		{
+			q.push(tem[i]);
+
+		}
+		delete[] tem;
+		return t;
+#endif
+
+
+
+	}
+
+	int top() {
+		return q.front();
+
+#if 0
+		//我的方法
+		if (q.size() == 1)
+		{
+			return q.front();
+		}
+		int t = 0;
+		int size = q.size() - 1;
+		int * tem = new int[size];
+		//循环中q.size会变。所以要把其先拿出来
+		for (int i = 0; i < size; i++)
+		{
+			t = q.front();
+			q.pop();
+			tem[i] = t;
+			//temp.push(t);
+
+		}
+		t = q.front();
+		q.pop();
+		for (int i = 0; i < size ; i++)
+		{
+			q.push(tem[i]);
+
+		}
+		q.push(t);
+		delete[] tem;
+		return t;
+#endif
+
+	}
+
+	bool empty() {
+		return q.empty();
+
+	}
+private:
+	queue<int> q;
+};

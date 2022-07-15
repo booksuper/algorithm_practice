@@ -188,8 +188,32 @@ bool isPalindrome(const char * s)
 	return true;
 }
 
+//给你一个字符串 s，找到 s 中最长的回文子串
 string longestPalindrome(string s)
 {
-	return string();
+	string res = "";
+	for (int i = 0; i < s.length(); i++)
+	{
+		//字符串长度为奇数时。只有一个中心
+		string res1 = palindrome(s, i, i);
+		//字符串长度为偶数时。有两个中心
+		string res2 = palindrome(s, i, i+1);
+		string res3 = res1.length() > res2.length() ? res1 : res2;
+		res = res.length() > res3.length() ? res : res3;
+
+	}
+	return res;
+}
+//找到以每个字符为中心的回文串
+string palindrome(string s, int l, int r)
+{
+	while (l >= 0 && r < s.length() && s[l] == s[r])
+	{
+		//从中心向两边扩展
+		l--;
+		r++;
+	}
+	//第一个参数是起始位置，第二个参数是跨越的字符长度，包括起始位置
+	return s.substr(l+1,r-l-1);
 }
 

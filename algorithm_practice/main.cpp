@@ -82,6 +82,19 @@ int main(int argc,char * argv[])
 	const char * s = "abbac";
 	string d = "sdada";
 	bool res = isPalindrome(d.c_str());
+	
+	queue<int> qu;
+	qu.push(1);
+	qu.push(2);
+	
+	int t = qu.front();
+	int u = qu.size();
+
+	MyStack2 s2;
+	s2.push(1);
+	s2.push(2);
+	s2.push(3);
+	int g = s2.top();
 	int r = 0;
 	
 #endif
