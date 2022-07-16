@@ -50,4 +50,12 @@ bool isPalindrome(const char * s);
 string longestPalindrome(string s);
 //找到以每个字符为中心的回文串
 string palindrome(string s,int l,int r);
+
+/*48旋转图像：给定一个 n × n 的二维矩阵 matrix 表示一个图像。请你将图像顺时针旋转 90 度。
+你必须在 原地 旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要 使用另一个矩阵来旋转图像
+*/
+void rotate(vector<vector<int>>& matrix);
+//反转一维数组
+void reverse_array(vector<int> & arr);
+
  

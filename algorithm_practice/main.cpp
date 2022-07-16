@@ -9,6 +9,7 @@
 #include "callback_practice.h"
 #include "backTrack.h"
 
+
 #define DP 0;
 #define BTREE 0;
 #define SORT 0;
@@ -16,6 +17,8 @@
 #define CALLBACK 0;
 #define BACKTRACK 0;
 #define ARRAY 1;
+#define STACK 0;
+#define STR 1;
 
 int main(int argc,char * argv[])
 {
@@ -75,27 +78,30 @@ int main(int argc,char * argv[])
 
 #endif
 
-#if ARRAY
-	/*vector<int> nums{ 0,1,0,3,12 };
-	moveZeroes(nums);
-	int r = 0;*/
-	const char * s = "abbac";
-	string d = "sdada";
-	bool res = isPalindrome(d.c_str());
-	
+#if STACK
 	queue<int> qu;
 	qu.push(1);
 	qu.push(2);
-	
+
 	int t = qu.front();
 	int u = qu.size();
-
 	MyStack2 s2;
 	s2.push(1);
 	s2.push(2);
 	s2.push(3);
 	int g = s2.top();
 	int r = 0;
+#endif
+
+#if ARRAY
+	/*vector<int> nums{ 0,1,0,3,12 };
+	moveZeroes(nums);
+	int r = 0;*/
+	/*const char * s = "abbac";
+	string d = "sdada";
+	bool res = isPalindrome(d.c_str());*/
+	
+	
 	
 #endif
 
@@ -126,6 +132,19 @@ int main(int argc,char * argv[])
 	cout << res;
 	
 #endif
+
+#if STR
+	char s[] = "Golden Global   View,disk * desk";
+	const char *d = " ,*";
+	char *p;
+	char* ptr = nullptr;
+	p = strtok_s(s, d, &ptr);
+	while (p)
+	{
+		printf("%s\n", p);
+		p = strtok_s(NULL, d, &ptr);
+	}
+	int h = 0;
 	//string结尾是否以0结尾，这个得看编译器，在我这个编译器中（msvc2017)是以0结尾的
 	//而且c_str和data函数结果一样，没有区别。本来data输出的应该是不以0结尾的字符串，c_str输出的是
 	//以0结尾的,但这我这个编译器中，没有区别
@@ -157,5 +176,7 @@ int main(int argc,char * argv[])
 	//}
 	/*cout << s<<endl;
 	cout << l;*/
+
+#endif
 }
 

@@ -216,4 +216,38 @@ string palindrome(string s, int l, int r)
 	//第一个参数是起始位置，第二个参数是跨越的字符长度，包括起始位置
 	return s.substr(l+1,r-l-1);
 }
+//48旋转图像
+void rotate(vector<vector<int>>& matrix)
+{
+	int size = matrix.size();
+	//先沿正对角线镜像对称二维矩阵，其实就是装置
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = i; j < matrix[i].size(); j++)
+		{
+			int temp = matrix[i][j];
+			matrix[i][j] = matrix[j][i];
+			matrix[j][i] = temp;
+		}
+	}
+	//反转矩阵的每一行
+	for (vector<int>& var : matrix)
+	{
+		reverse_array(var);
+	}
+
+}
+//反转一维数组
+void reverse_array(vector<int>& arr)
+{
+	int i = 0;
+	int j = 0;
+	for ( i = arr.size() - 1; i > j; i--)
+	{
+		int temp = arr[j];
+		arr[j] = arr[i];
+		arr[i] = temp;
+		j++;
+	}
+}
 
