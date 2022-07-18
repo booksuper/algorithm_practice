@@ -250,4 +250,138 @@ void reverse_array(vector<int>& arr)
 		j++;
 	}
 }
+//54 中等 螺旋矩阵：给你一个 m 行 n 列的矩阵 matrix ，请按照 顺时针螺旋顺序 ，返回矩阵中的所有元素
+vector<int> spiralOrder(vector<vector<int>>& matrix)
+{
+	//核心思路是按照右、下、左、上的顺序遍历数组，并使用四个变量圈定未遍历元素的边界：
+	vector<int> res;
+	int m = matrix.size();
+	int n = matrix[0].size();
+	int up_bound = 0; int low_bound = m - 1;
+	int left_bound = 0; int right_bound = n - 1;
+	while (res.size() < m * n)
+	{
+		//不先判断，会多输出数,注意！！！
+		if (up_bound <= low_bound)
+		{
+			//先从第一行开始遍历，遍历完之后上界边界加1
+			for (int i = left_bound; i <= right_bound; i++)
+			{
+				res.push_back(matrix[up_bound][i]);
+
+			}
+			up_bound++;
+
+		}
+
+		if (left_bound <= right_bound)
+		{
+			//再从最右侧开始从上往下遍历，遍历完之后右边界减一
+			for (int i = up_bound; i <= low_bound; i++)
+			{
+				res.push_back(matrix[i][right_bound]);
+
+			}
+			right_bound--;
+		}
+		if (up_bound <= low_bound)
+		{
+			//再从最下侧开始从右往左遍历，遍历完之后下边界减一
+			for (int i = right_bound; i >= left_bound; i--)
+			{
+				res.push_back(matrix[low_bound][i]);
+
+			}
+			low_bound--;
+
+		}
+		if (left_bound <= right_bound)
+		{
+			//最后从最下侧开始从下往上遍历，遍历完之后左边界加一
+			for (int i = low_bound; i >= up_bound; i--)
+			{
+				res.push_back(matrix[i][left_bound]);
+
+			}
+			left_bound++;
+
+		}
+
+	}
+	return res;
+}
+//59 螺旋矩阵2
+vector<vector<int>> generateMatrix(int n)
+{
+	vector<vector<int>> res;
+	//初始化
+	res.resize(n);
+	//记得每一个vector都要初始化，所以得用循环，只初始一个报错
+	for (int i = 0; i < n; i++)
+	{
+		res[i].resize(n);
+
+	}
+	
+	int element = 1;
+	int row = n;//行
+	int cloumn = n;
+	int up_bound = 0; int low_bound = row - 1;
+	int left_bound = 0; int right_bound = cloumn - 1;
+	while (element <= row * cloumn)
+	{
+		
+		//不先判断，会多输出数,注意！！！
+		if (up_bound <= low_bound)
+		{
+			//先从第一行开始遍历，遍历完之后上界边界加1
+			for (int i = left_bound; i <= right_bound; i++)
+			{
+				 res[up_bound][i] = element;
+				 element++;
+
+			}
+			up_bound++;
+
+		}
+
+		if (left_bound <= right_bound)
+		{
+			//再从最右侧开始从上往下遍历，遍历完之后右边界减一
+			for (int i = up_bound; i <= low_bound; i++)
+			{
+				res[i][right_bound] = element;
+				element++;
+
+			}
+			right_bound--;
+		}
+		if (up_bound <= low_bound)
+		{
+			//再从最下侧开始从右往左遍历，遍历完之后下边界减一
+			for (int i = right_bound; i >= left_bound; i--)
+			{
+				res[low_bound][i] = element;
+				element++;
+
+			}
+			low_bound--;
+
+		}
+		if (left_bound <= right_bound)
+		{
+			//最后从最下侧开始从下往上遍历，遍历完之后左边界加一
+			for (int i = low_bound; i >= up_bound; i--)
+			{
+				res[i][left_bound] = element;
+				element++;
+
+			}
+			left_bound++;
+
+		}
+
+	}
+	return res;
+}
 

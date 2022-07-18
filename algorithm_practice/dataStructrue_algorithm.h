@@ -58,4 +58,8 @@ void rotate(vector<vector<int>>& matrix);
 //反转一维数组
 void reverse_array(vector<int> & arr);
 
- 
+//54 中等 螺旋矩阵：给你一个 m 行 n 列的矩阵 matrix ，请按照 顺时针螺旋顺序 ，返回矩阵中的所有元素
+vector<int> spiralOrder(vector<vector<int>>& matrix);
+ /*59 螺旋矩阵2：给你一个正整数 n ，生成一个包含 1 到 n2 所有元素，
+ 且元素按顺时针顺序螺旋排列的 n x n 正方形矩阵 matrix*/
+vector<vector<int>> generateMatrix(int n);

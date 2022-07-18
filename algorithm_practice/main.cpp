@@ -100,7 +100,9 @@ int main(int argc,char * argv[])
 	/*const char * s = "abbac";
 	string d = "sdada";
 	bool res = isPalindrome(d.c_str());*/
-	
+	vector<vector<int>> innums{ {1,2,3,4},{5,6,7,8},{9,10,11,12} };
+	vector<int> res = spiralOrder(innums);
+	vector<vector<int>> text = generateMatrix(3);
 	
 	
 #endif
