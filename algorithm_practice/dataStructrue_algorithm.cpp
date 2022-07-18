@@ -316,7 +316,7 @@ vector<vector<int>> generateMatrix(int n)
 	vector<vector<int>> res;
 	//初始化
 	res.resize(n);
-	//记得每一个vector都要初始化，所以得用循环，只初始一个报错
+	//记得每一个vector都要初始化，所以得用循环，只初始一个报错！！！
 	for (int i = 0; i < n; i++)
 	{
 		res[i].resize(n);
