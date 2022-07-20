@@ -8,7 +8,7 @@
 #include "dynamic_programming.h"
 #include "callback_practice.h"
 #include "backTrack.h"
-
+#include "otherThings.h"
 
 #define DP 0;
 #define BTREE 0;
@@ -18,7 +18,9 @@
 #define BACKTRACK 0;
 #define ARRAY 1;
 #define STACK 0;
-#define STR 1;
+#define STR 0;
+#define OTHERTHING 1;
+
 
 int main(int argc,char * argv[])
 {
@@ -100,9 +102,9 @@ int main(int argc,char * argv[])
 	/*const char * s = "abbac";
 	string d = "sdada";
 	bool res = isPalindrome(d.c_str());*/
-	vector<vector<int>> innums{ {1,2,3,4},{5,6,7,8},{9,10,11,12} };
-	vector<int> res = spiralOrder(innums);
-	vector<vector<int>> text = generateMatrix(3);
+	
+	vector<int> in{ 2,2 };
+	vector<int> res = searchRange(in, 3);
 	
 	
 #endif
@@ -178,6 +180,11 @@ int main(int argc,char * argv[])
 	//}
 	/*cout << s<<endl;
 	cout << l;*/
+
+#endif
+
+#if OTHERTHING
+	SimplePointTest();
 
 #endif
 }

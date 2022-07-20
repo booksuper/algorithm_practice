@@ -37,11 +37,16 @@ void moveZeroes(vector<int>& nums);
 vector<int> twoSum(vector<int>& numbers, int target);
 
 
-//给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，
+//704:给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，
 //如果目标值存在返回下标，否则返回 -1。
 
 int binarySearch(vector<int>& nums, int target);
 
+/*34在排序数组中查找元素的第一个和最后一个位置:给你一个按照非递减顺序排列的整数数组 nums，和一个目标值 target。请你找出给定目标值在数组中的开始位置和结束位置。
+
+如果数组中不存在目标值 target，返回 [-1, -1]
+*/
+vector<int> searchRange(vector<int>& nums, int target);
 
 //回文串判断
 bool isPalindrome(const char * s);

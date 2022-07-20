@@ -162,10 +162,74 @@ vector<int> twoSum(vector<int>& numbers, int target)
 	}
 	return res;
 }
-//二分搜索
+//704:二分搜索
 int binarySearch(vector<int>& nums, int target)
 {
-	return 0;
+	int left = 0;
+	int right = nums.size() - 1;//减一代表是有右边界的索引
+	while (left <= right)//边界条件
+	{
+		//和(left+right)/2结果一样，只是防因为left或right太大而溢出
+		int mid = left + (right - left) / 2;
+		if (nums[mid] == target)
+		{
+			return mid;
+		}
+		else if (nums[mid] < target)
+		{
+			left = mid + 1;
+		}
+		else if (nums[mid] > target)
+		{
+			right = mid - 1;
+		}
+	}
+	return -1;
+}
+//34在排序数组中查找元素的第一个和最后一个位置
+vector<int> searchRange(vector<int>& nums, int target)
+{
+	vector<int> res{-1,-1};
+	if (nums.size() == 0) return res;
+	int left, right,mid;
+	left = 0;
+	right = nums.size() - 1;
+	
+	while (left <= right)
+	{
+		mid = left + (right - left) / 2;
+		if (target == nums[mid])
+		{
+			//不返回，锁定左侧边界
+			right = mid - 1;
+
+		}
+		else if (target > nums[mid])
+		{
+			left = mid + 1;
+		}
+		else if (target < nums[mid])
+		{
+			right = mid - 1;
+		}
+	}
+	//如果没有元素等于target
+	if (nums[left] != target || left == nums.size()) return res;
+	res[0] = left;
+	for (int i = left; i < nums.size(); i++)
+	{
+		if (nums[i] != target )
+		{
+			res[1] = i - 1;
+			break;
+		}
+		else if (i == nums.size() - 1)
+		{
+			res[1] = i ;
+			break;
+		}
+	}
+	return res;
 }
 //回文串判断
 bool isPalindrome(const char * s)

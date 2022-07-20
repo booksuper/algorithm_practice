@@ -158,6 +158,7 @@
     <ClCompile Include="ListNode.cpp" />
     <ClCompile Include="ListUtil.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="otherThings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="backTrack.h" />
@@ -169,6 +170,7 @@
     <ClInclude Include="ListUtil.h" />
     <ClInclude Include="MyQueue.hpp" />
     <ClInclude Include="MyStack.hpp" />
+    <ClInclude Include="otherThings.h" />
     <ClInclude Include="sort_algorithm.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
