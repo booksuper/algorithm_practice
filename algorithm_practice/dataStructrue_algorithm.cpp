@@ -189,12 +189,12 @@ int binarySearch(vector<int>& nums, int target)
 //34在排序数组中查找元素的第一个和最后一个位置
 vector<int> searchRange(vector<int>& nums, int target)
 {
-	vector<int> res{-1,-1};
+	vector<int> res{ -1,-1 };
 	if (nums.size() == 0) return res;
-	int left, right,mid;
+	int left, right, mid;
 	left = 0;
 	right = nums.size() - 1;
-	
+
 	while (left <= right)
 	{
 		mid = left + (right - left) / 2;
@@ -213,19 +213,22 @@ vector<int> searchRange(vector<int>& nums, int target)
 			right = mid - 1;
 		}
 	}
-	//如果没有元素等于target
-	if (nums[left] != target || left == nums.size()) return res;
+	//先判断左边界到最后一个元素是不是还不等于target，不是的话，left就会加一，这时候就会越界，直接返回
+	if (left == nums.size()) return res;
+	//然后再判断是不是左边界是不是和target相等，不这样的顺序的话，会出现数组越界
+	if (nums[left] != target) return res;
+	//从左边界开始找右边界
 	res[0] = left;
 	for (int i = left; i < nums.size(); i++)
 	{
-		if (nums[i] != target )
+		if (nums[i] != target)
 		{
 			res[1] = i - 1;
 			break;
 		}
-		else if (i == nums.size() - 1)
+		else if (i == nums.size() - 1)//左边界就是数组中最后一个数的情况
 		{
-			res[1] = i ;
+			res[1] = i;
 			break;
 		}
 	}

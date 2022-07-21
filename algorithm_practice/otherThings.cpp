@@ -94,7 +94,7 @@ bool isPointInPolygon(my2DPoint vtPoint, vector<my2DPoint>& vecPoints)
 	
 }
 //简单多边形测试
-void SimplePointTest()
+void simplePointTest()
 {
 	
 		vector<my2DPoint> vecPoints;//简单多边形
@@ -158,4 +158,24 @@ void SimplePointTest()
 		else
 			cout << "Fail:Point is not in polygon!" << endl;
 	
+}
+/*给定平面中n边形各点坐标（按顺时针顺序给出）求出该多边形面积，多边形可能为凹多边形*/
+double caculatePolygonArea(vector<my2DPoint>& poly)
+{
+	/*采用向量的叉乘的方法，不管坐标原点怎样选取，只要顺序输入多边形每个顶点的坐标
+	按同样的顺序（顺时针或反时针）两两叉乘。这些叉乘的和的绝对值的一半
+	就是该多边形面积。这就是所谓的“鞋带公式”
+	比如当n为3时候，多边形为三角形，那计算公式就是
+	0.5（op0 X op1 + op1 X op2 + op2 X op0）这里面代表的含义就是一个大三角形
+	减去两个小三角形面积等于我们要求的，不需要手动判断正负，因为顺时针的就是负数
+	比如po X p1
+	*/
+	double area = 0.0;
+	for (size_t i = 0; i<poly.size();i++)
+	{
+		//(i + 1) % poly.size()是为了当i为最后一个元素时，i+1能转变为第一个元素
+		area += poly[i].X * poly[(i + 1) % poly.size()].Y - poly[i].Y * poly[(i + 1) % poly.size()].X;
+
+	}
+	return 0.5 * (area > 0 ? area : -area);
 }

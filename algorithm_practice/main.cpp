@@ -184,7 +184,17 @@ int main(int argc,char * argv[])
 #endif
 
 #if OTHERTHING
-	SimplePointTest();
+	simplePointTest();
+	vector<my2DPoint> input;
+	my2DPoint pt(0,0);
+	input.push_back(pt);
+	pt.X = 2;
+	input.push_back(pt);
+	pt.Y = 2;
+	input.push_back(pt);
+	double res_area = caculatePolygonArea(input);
+	int g = 0;
+
 
 #endif
 }
