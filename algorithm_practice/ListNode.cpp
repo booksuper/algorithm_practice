@@ -215,10 +215,29 @@ Node * LinkList::my_reverse()
 	head->next = nullptr;
 	return p;
 }
-//递归形式反转单链表
-Node * LinkList::reverseBaserecursion(Node * node)
+//递归形式反转单链表，主函数
+Node * LinkList::reverseBaserecursionMain()
 {
-	return nullptr;
+	Node * t = head;
+	Node * tail = reverseBaserecursion(t, t->next);
+	head->next = nullptr;
+	return tail;
+
+}
+//递归形式反转单链表
+Node * LinkList::reverseBaserecursion(Node * node,Node * node2)
+{
+	//终止条件
+	if (node2 == nullptr) return node;
+	Node * temp = node;
+	//每一层节点要做的逻辑
+	Node * p = node2;
+	Node * q = p->next;
+	p->next = temp;
+	//return reverseBaserecursion(p, q);
+	Node * res = reverseBaserecursion(p,q);
+	//因为在递归函数后面没有做其他的操作，就是直接返回，所以返回的一直最后一个尾部元素
+	return res;
 }
 //反转从位置 left 到位置 right 的链表节点，返回 反转后的链表
 Node * LinkList::reverseBetween(int left, int right)
@@ -326,7 +345,92 @@ void pre_back_order(Node * p, vector<int> & pre_order, vector<int> & back_order,
 	
 
 }
+//k个一组翻转链表
+Node * LinkList::reverseKGroup(Node* h,int k)
+{
+	int size = getSize() / k;
+	//k个一组进行翻转
+	for (size_t i = 0; i < size ; i++)
+	{
+		//指定区间反转，区间是左闭右闭
+		h = reverseBetweenK(h,i * k + 1,i * k + k);
+	}
+	return h;
+	
+}
+//k个反转数组的辅助函数
+Node* LinkList::reverseBetweenK(Node* head, int left, int right)
+{
+	if (head == nullptr || head->next == nullptr || left == right)
+	{
+		return head;
+	}
+	Node * p = head;
+	int count = 0;
+	Node * left_node = nullptr;//左区间指针
+	Node * left_node_pre = nullptr;//左区间之前的一个指针
+	Node * right_node = nullptr;//右区间指针
+	Node * right_node_next = nullptr;//右区间之后的一个指针
+	//左区间就是第一个指针，它前面没有指针了
+	//不能写在循环体里面，如果写在里面，left_node会不断刷新
+	if (left - 1 == 0)
+	{
+		left_node_pre = p;
+		left_node = p;
+	}
+	//确定需要反转的指针区间
+	while (p != nullptr)
+	{
+		count++;
 
+		//找到左区间的指针
+		if (count == left - 1)
+		{
+			left_node_pre = p;
+			left_node = p->next;
+		}
+		//找到右区间的指针
+		if (count == right)
+		{
+			right_node = p;
+			right_node_next = p->next;
+		}
+		p = p->next;
+	}
+	//确定区间之后开始反转，和反装链表代码类似
+	//为了便于设置终止条件，将右区间指针置空
+	right_node->next = nullptr;
+	//反转时需要的临时指针
+	Node * temp1 = left_node;
+	Node * temp2 = left_node->next;
+	//指定区间反转
+	while (temp2 != nullptr)
+	{
+		Node * temp3 = temp2->next;
+		temp2->next = temp1;
+		temp1 = temp2;
+		temp2 = temp3;
+
+	}
+	//如果左区间是从头开始的，就不需要拼接左区间之前的
+	if (left == 1)
+	{
+		//第一个指针下一个应该置空，相当于拼接右区间之后的指针
+		left_node->next = right_node_next;
+		return temp1;
+	}
+	else
+	{
+		//拼接左区间之前的指针
+		//左区间最后一个指针的下一个指向反转时候的最后一个
+		left_node_pre->next = temp1;
+		//拼接右区间之后的指针
+		//反转时候最开始指针的下一个指向右区间最后一个
+		left_node->next = right_node_next;
+		return head;
+	}
+}
+//判断回文链表
 bool LinkList::isPalindrome()
 {
 	

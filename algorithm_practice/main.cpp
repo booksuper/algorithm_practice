@@ -13,13 +13,13 @@
 #define DP 0;
 #define BTREE 0;
 #define SORT 0;
-#define LISTNODE 0;
+#define LISTNODE 1;
 #define CALLBACK 0;
 #define BACKTRACK 0;
-#define ARRAY 1;
+#define ARRAY 0;
 #define STACK 0;
 #define STR 0;
-#define OTHERTHING 1;
+#define OTHERTHING 0;
 
 
 int main(int argc,char * argv[])
@@ -67,10 +67,11 @@ int main(int argc,char * argv[])
 
 #if LISTNODE
 	LinkList l1(1);
-	l1.insertByTail(1);
 	l1.insertByTail(2);
 	l1.insertByTail(3);
-	l1.insertByTail(3);
+	l1.insertByTail(4);
+	l1.insertByTail(5);
+	Node * res = l1.reverseKGroup(l1.head,2);
 	
 	//l1.insertByTail(1);
 	//bool pa = l1.isPalindrome();
@@ -111,6 +112,7 @@ int main(int argc,char * argv[])
 
 #if DP
 	int f = fib(10);
+	int r1 = rfact(4);
 	int* m = new int[11]{};
 	int f1 = modified_fib(m,10);
 	int f2 = fib_itera(10);
