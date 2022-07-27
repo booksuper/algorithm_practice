@@ -159,6 +159,7 @@
     <ClCompile Include="ListUtil.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="otherThings.cpp" />
+    <ClCompile Include="str_algorithm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="backTrack.h" />
@@ -172,6 +173,7 @@
     <ClInclude Include="MyStack.hpp" />
     <ClInclude Include="otherThings.h" />
     <ClInclude Include="sort_algorithm.hpp" />
+    <ClInclude Include="str_algorithm.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

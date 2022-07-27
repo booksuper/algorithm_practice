@@ -162,6 +162,31 @@ vector<int> twoSum(vector<int>& numbers, int target)
 	}
 	return res;
 }
+//1 简单 两数之和
+vector<int> twoSumSimple(vector<int>& nums, int target)
+{
+	//这个方法更通用，还能求解167的两数之和题目，时间复杂度也通过
+	//使用map来构建一个已遍历的元素,因为不要求有序，使用underedmap
+	//效率最高
+	unordered_map<int, int> map;
+	for (int i = 0; i < nums.size(); i++)
+	{
+		auto it = map.find(target - nums[i]);
+		//如果找到了就返回
+		if (it != map.end())
+		{
+			return {it->second,i};//这里使用了默认构造，将其转为vector
+		}
+		//没找到就把遍历过的放进map
+		map.insert(pair<int, int>(nums[i], i));
+		
+	}
+	//没有匹配的返回空
+	return {};
+
+	
+	
+}
 //704:二分搜索
 int binarySearch(vector<int>& nums, int target)
 {
@@ -450,5 +475,35 @@ vector<vector<int>> generateMatrix(int n)
 
 	}
 	return res;
+}
+//求两个数组交集
+vector<int> intersection(vector<int>& nums1, vector<int>& nums2)
+{
+	/*std::set和std::multiset底层实现都是红黑树，复杂度为O(logn),它的值
+	不能修改，修改会导致红黑树错乱，set存储的元素去重了,multiset没有去重
+	但他们都是有序的，默认从小到大
+	std::unordered_set的底层实现是哈希表， 元素无序，但是去重了，
+	使用unordered_set 读写效率是最高的，复杂度为O(1)
+	并不需要对数据进行排序，而且还不要让数据重复
+	注意！std::map 和std::multimap 的底层实现也是红黑树。仅仅是对key使用
+	红黑树实现，value没有限制，所以kye是有序的，类比set
+	std::unordered_map 底层实现为哈希表，类比unordered_set。
+	时间复杂度和set类似
+	所以在使用哈希表解题的时候，只要没要求元素排序，那就使用unordered_set
+	或者unordered_map，因为他们的增删改查效率最高*/
+	
+	//本题可以使用set或者unordered_set,但为了效率最优，使用unordered_map
+	unordered_set<int> res(nums1.begin(), nums1.end());//迭代器构造
+	unordered_set<int> temp;
+	for (auto var : nums2)
+	{
+		//find函数如果找到了指定元素就返回对应的迭代器，否则返回
+		//最后一个元素的下一个位置，这个元素就是end（）
+		if (res.find(var) != res.end())
+		{
+			temp.insert(var);
+		}
+	}
+	return vector<int>(temp.begin(), temp.end());
 }
 

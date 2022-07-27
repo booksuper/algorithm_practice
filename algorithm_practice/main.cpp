@@ -9,16 +9,17 @@
 #include "callback_practice.h"
 #include "backTrack.h"
 #include "otherThings.h"
+#include "str_algorithm.h"
 
 #define DP 0;
 #define BTREE 0;
 #define SORT 0;
-#define LISTNODE 1;
+#define LISTNODE 0;
 #define CALLBACK 0;
 #define BACKTRACK 0;
 #define ARRAY 0;
 #define STACK 0;
-#define STR 0;
+#define STR 1;
 #define OTHERTHING 0;
 
 
@@ -140,15 +141,15 @@ int main(int argc,char * argv[])
 #endif
 
 #if STR
-	char s[] = "Golden Global   View,disk * desk";
-	const char *d = " ,*";
-	char *p;
-	char* ptr = nullptr;
-	p = strtok_s(s, d, &ptr);
-	while (p)
+	set<string> res_str;
+	
+	char s[] = "car Global View car desk View car View";
+	const char *delimiter = " ";
+	res_str = findRepeatStr(s, delimiter);
+	cout << "===================\n";
+	for (auto var : res_str)
 	{
-		printf("%s\n", p);
-		p = strtok_s(NULL, d, &ptr);
+		cout << var << endl;
 	}
 	int h = 0;
 	//string结尾是否以0结尾，这个得看编译器，在我这个编译器中（msvc2017)是以0结尾的
