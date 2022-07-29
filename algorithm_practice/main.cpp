@@ -17,7 +17,7 @@
 #define LISTNODE 0;
 #define CALLBACK 0;
 #define BACKTRACK 0;
-#define ARRAY 0;
+#define ARRAY 1;
 #define STACK 0;
 #define STR 1;
 #define OTHERTHING 0;
@@ -105,8 +105,10 @@ int main(int argc,char * argv[])
 	string d = "sdada";
 	bool res = isPalindrome(d.c_str());*/
 	
-	vector<int> in{ 2,2 };
-	vector<int> res = searchRange(in, 3);
+	vector<int> in{ -1,0,1,2,-1,-4 };
+	vector<vector<int>> res_vec = threeSum(in);
+	//vector<int> res = searchRange(in, 3);
+	int h = 0;
 	
 	
 #endif
@@ -141,48 +143,38 @@ int main(int argc,char * argv[])
 #endif
 
 #if STR
-	set<string> res_str;
+	//string结尾是否以0结尾，这个得看编译器，在我这个编译器中（msvc2017)是以0结尾的
+	//而且c_str和data函数结果一样，没有区别。本来data输出的应该是不以0结尾的字符串，c_str输出的是
+	//以0结尾的,但这我这个编译器中，没有区别
+	//char []数组可以修改变量值，但是char * 不可以
+
+
+	//set<string> res_str;
+	/*unsigned char * s1 = new unsigned char[3];
+	s1[0] = '1';
+	s1[1] = '2';
+	s1[2] = '\0';*/
+	//unsigned char szSrc[] = { 0x32, 's', 'f', '2', 'h', 'g', 0x00 };
+	//无符号可以直接强转为有符号，两者存储方式一样，只是读取方式不一样
+	//char * sz = reinterpret_cast<char *>(szSrc);
+	//int ilen = sizeof(szSrc) / sizeof(szSrc[0]);
+	//直接强转会丢失后面的信息，因为在第二个位置就遇到了0
+	//先确定整个buff大小，然后再用循环一个个加
 	
-	char s[] = "car Global View car desk View car View";
+	//const char * mystr = reinterpret_cast<const char *>(szSrc);
+	//cout << sz;
+	/*char s[] = "car Global View car desk View car View";
 	const char *delimiter = " ";
 	res_str = findRepeatStr(s, delimiter);
 	cout << "===================\n";
 	for (auto var : res_str)
 	{
 		cout << var << endl;
-	}
-	int h = 0;
-	//string结尾是否以0结尾，这个得看编译器，在我这个编译器中（msvc2017)是以0结尾的
-	//而且c_str和data函数结果一样，没有区别。本来data输出的应该是不以0结尾的字符串，c_str输出的是
-	//以0结尾的,但这我这个编译器中，没有区别
-	//char []数组可以修改变量值，但是char * 不可以
+	}*/
+	
+	bool res_str = canConstruct("aa", "aac");
 
-	//const char * s = "sddd";
-	//char s2[] = "sdhu";
-
-	//s2[1] = '2';
-	//string s3 = "defr";
-	//const char * t = s3.c_str();
-	//const char * t1 = s3.data();
-	//cout << t << endl;
-	//cout << t1 << endl;
-
-	//int l = strlen(t);
-	//int l2 = strlen(t1);
-	//int l3 = s3.length();
-	//char r;
-	//char r2;
-	//char r3;
-	//for (int i = 0; i < 5; i++)
-	//{
-
-	//	r = t[i];
-	//	r2 = t1[i];
-	//	r3 = s3[i];
-	//	//printf("%s", s[i]);
-	//}
-	/*cout << s<<endl;
-	cout << l;*/
+	
 
 #endif
 

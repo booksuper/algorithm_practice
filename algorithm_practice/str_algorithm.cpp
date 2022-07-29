@@ -62,8 +62,49 @@ bool isAnagram(string s, string t)
 	}
 	
 	return true;
-	
-	
-	
+
+}
+//383 简单 赎金信
+bool canConstruct(string ransomNote, string magazine)
+{
+	//使用数组比哈希表更省时，因为不需要维护一个哈希表
+	unordered_map<int, int> temp_map;//key是代表字符，0就是a，依次类推，value是字符出现的次数
+	unordered_map<int, int> temp_map2;
+	//将两个字符串的各字符个数分别记录在map中
+	for (size_t i = 0; i < ransomNote.length(); i++)
+	{
+		temp_map[ransomNote[i] - 'a']++;
+		//不使用insert,没法对相同元素加一
+		//temp_map.insert(pair<int, int>(ransomNote[i] - 'a',i));
+	}
+	for (size_t i = 0; i < magazine.length(); i++)
+	{
+		temp_map2[magazine[i] - 'a']++;
+	}
+	//如果目标字符个数小于输入字符，直接false
+	if (temp_map2.size() < temp_map.size())
+	{
+		return false;
+	}
+	else
+	{
+		for (auto var : temp_map)
+		{
+			auto temp = temp_map2.find(var.first);
+			//首先看有没有这个字符，没有直接false
+			if (temp == temp_map2.end())
+			{
+				return false;
+				
+			}
+			//然后看这个字符的次数是不是小于输入字符的次数，小于直接false
+			if (temp->second < var.second)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
 
 }

@@ -1,9 +1,13 @@
 ﻿#pragma once
-#include "sort_algorithm.hpp"
+#include <iostream>
+#include <string>
+#include <vector>
 #include <unordered_set>
 #include <set>
 #include <unordered_map>
+#include <algorithm>
 
+using namespace std;
 /// @brief 使用差分数组求解区间和
 /// @details 假设你有一个长度为 n 的数组，初始情况下所有的数字均为 0，你将会被给出 k​​​​​​​ 个更新的操作。
 /// 其中，每个操作会被表示为一个三元组：[startIndex, endIndex, inc]，你需要将子数组 A[startIndex … endIndex]
@@ -42,9 +46,26 @@ vector<int> twoSum(vector<int>& numbers, int target);
 /*1 简单 两数之和：给定一个整数数组 nums 和一个整数目标值 target，
 请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。
 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现
-这和上面一题不一样，这里的元素没有排序
+这和上面一题不一样，这里的元素没有排序，这一题很经典，使用哈希表解决，和167题类似
+167也可以用这个方法解决，复杂度符合要求，使用哈希表解决更具一般性
 */
 vector<int> twoSumSimple(vector<int>& nums, int target);
+
+/*454 中等 四数相加II:给你四个整数数组 nums1、nums2、nums3 和 nums4 ，
+数组长度都是 n ，请你计算有多少个元组 (i, j, k, l) 能满足*/
+int fourSumCount(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3, vector<int>& nums4);
+
+/*15 中等 三数之和：给你一个包含 n 个整数的数组 nums，判断 nums 中
+是否存在三个元素 a，b，c ，使得 a + b + c = 0 ？请你找出所有和为 0 且不重复的三元组
+*/
+vector<vector<int>> threeSum(vector<int>& nums);
+
+/*18 中等 四数之和：给你一个由 n 个整数组成的数组 nums ，和一个目标值 target 。
+请你找出并返回满足下述全部条件且不重复的四元组 [nums[a], nums[b], nums[c], nums[d]]
+（若两个四元组元素一一对应，则认为两个四元组重复
+*/
+vector<vector<int>> fourSum(vector<int>& nums, int target);
+
 
 //704:给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，
 //如果目标值存在返回下标，否则返回 -1。

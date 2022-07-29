@@ -184,8 +184,130 @@ vector<int> twoSumSimple(vector<int>& nums, int target)
 	//没有匹配的返回空
 	return {};
 
+}
+//454 中等 四数相加II
+int fourSumCount(vector<int>& nums1, vector<int>& nums2, vector<int>& nums3, vector<int>& nums4)
+{
+	/*1 首先定义 一个unordered_map，key放a和b两数之和，value 放a和b两数之和出现的次数。
+      2 遍历大A和大B数组，统计两个数组元素之和，和出现的次数，放到map中。
+      3 定义int变量count，用来统计 a+b+c+d = 0 出现的次数。
+      4 在遍历大C和大D数组，找到如果 0-(c+d) 在map中出现过的话，就用count把map中key对应的value也就是出现次数统计出来。
+      5 最后返回统计值 count 就可以了
+	  只需要计算有多少个，并不需要求出具体的组合，给这题下降了一个level*/
+	unordered_map<int, int> temp_map;//key是ab数组两数之和，value是和出现的次数
+	int count = 0;//结果
+	//将ab两数组的所有和求出来作为key
+	//value就是次数
+	//这里复杂度是n2
+	for (auto a : nums1)
+	{
+		for (auto b : nums2)
+		{
+			temp_map[a + b]++;
+		}
+	}
+	for (auto c : nums3)
+	{
+		for (auto d : nums4)
+		{
+			//这里的思路和两数之和一致
+			if (temp_map.find(0 - (c + d)) != temp_map.end())
+			{
+				//找到了count就加上对应目标的次数
+				count += temp_map[0 - (c + d)];
+
+			}
+		}
+	}
+	
+	return count;
+}
+//15 中等 三数之和
+vector<vector<int>> threeSum(vector<int>& nums)
+{
+	/*使用哈希表比较复杂，而且不好处理元素重复的问题
+	使用双指针技巧比较好，可以将原本暴力解法的n3复杂度降低为n2
+	首先对数组升序排序，这一步主要是为了使用双指针技巧
+	然后可以外面设置一个循环，再将left设置为i+1，right设置为数组末尾
+	*/
+	
+	/*sort函数是algorithm库下的一个函数，sort函数是不稳定的，
+	即大小相同的元素在排序后相对顺序可能发生改变，如果某些场景需要
+	保持相同元素间的相对顺序，可使用stable_sort函数
+	sort函数指定的区间是左闭右开，默认升序，如果想要降序，可以在第三个参数中
+	添加greater<int>().
+	该函数并非只是普通的快排，除了对普通的快速排序进行优化，它还结合了插入排序和堆排序。
+	根据不同的数量级别以及不同情况，能自动选用合适的排序方法
+	所以无论元素初始时为何种状态，sort()的平均排序复杂度为均为O(N*log2(N)) 
+	在刷算法题时，可以直接使用sort()来对数据进行排序
+	由于在排序过程中涉及到元素交换等操作，所以sort函数仅支持可随机访问的
+	容器，如数组， string、vector、deque等
+	*/
+	vector<vector<int>> out_res;
 	
 	
+	if (nums.size() == 0) return out_res;
+	sort(nums.begin(), nums.end());
+	int left = 0;
+	int right = 0;
+	//外层控制轮数
+	for (int i = 0; i < nums.size(); i++)
+	{
+		//排序之后第一个元素大于0肯定不符合情况
+		if (nums[0] >= 0) return out_res;
+
+		// 错误去重a方法，将会漏掉-1,-1,2 这种情况
+		/*
+		if (nums[i] == nums[i + 1]) {
+			continue;
+		}
+		*/
+		// 正确去重a方法
+		if (i > 0 && nums[i] == nums[i - 1]) {
+			continue;
+		}
+		//里面双指针技巧
+		left = i + 1;
+		right = nums.size() - 1;
+		while (left < right)
+		{
+			if (nums[i] + nums[left] + nums[right] == 0)
+			{
+				
+				out_res.push_back({ nums[i],nums[left],nums[right] });
+				//这一次做完应该开始下一次
+				//但有重复元素
+				// 去重逻辑应该放在找到一个三元组之后，对b 和 c去重
+				while (right > left && nums[right] == nums[right - 1]) right--;
+				while (right > left && nums[left] == nums[left + 1]) left++;
+
+				// 找到答案时，双指针同时收缩
+				right--;
+				left++;
+
+			}
+			//如果大于，就把right--，因为数组排序过了的
+			else if(nums[i] + nums[left] + nums[right] > 0)
+			{
+				right--;
+			}
+			else
+			{
+				left++;
+			}
+
+		}
+
+	}
+	
+	return out_res;
+}
+//18 中等 四数之和
+vector<vector<int>> fourSum(vector<int>& nums, int target)
+{
+	vector<vector<int>> out_res;
+
+	return out_res;
 }
 //704:二分搜索
 int binarySearch(vector<int>& nums, int target)
