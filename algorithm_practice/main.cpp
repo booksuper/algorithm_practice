@@ -17,10 +17,13 @@
 #define LISTNODE 0;
 #define CALLBACK 0;
 #define BACKTRACK 0;
-#define ARRAY 1;
+#define ARRAY 0;
 #define STACK 0;
-#define STR 1;
+#define STR 0;
 #define OTHERTHING 0;
+
+
+
 
 
 int main(int argc,char * argv[])
@@ -105,8 +108,8 @@ int main(int argc,char * argv[])
 	string d = "sdada";
 	bool res = isPalindrome(d.c_str());*/
 	
-	vector<int> in{ -1,0,1,2,-1,-4 };
-	vector<vector<int>> res_vec = threeSum(in);
+	vector<int> in{ 0,0,0,1,1,1,1 };
+	vector<vector<int>> res_vec = fourSum(in,1);
 	//vector<int> res = searchRange(in, 3);
 	int h = 0;
 	
@@ -192,5 +195,44 @@ int main(int argc,char * argv[])
 
 
 #endif
+
+
+
+
+#if 0
+		int n, m, temp;
+		vector<int> in_nums;
+		vector<vector<int>> range;
+		cin >> n;
+		for (int i = 0 ;i < n; i++)
+		{
+			cin >> temp;
+			in_nums.push_back(temp);
+		}
+		cin >> m;
+		int l, r;
+		for (int i = 0 ;i < m; i++)
+		{
+
+			cin >> l >> r;
+			range.push_back({ l,r });
+
+
+		}
+		
+		for (int k = 0; k < m; k++)
+		{
+			int sum = 0;
+			for (int j = range[k][0]; j <= range[k][1]; j++)
+			{
+				sum += in_nums[j - 1];
+
+			}
+			cout << sum << endl;
+
+		}
+
+#endif // 0
+
 }
 

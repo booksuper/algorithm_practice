@@ -4,6 +4,8 @@
 #include<set>
 using namespace std;
 
+
+
 template<class T>
 class MyStack
 {
@@ -48,6 +50,7 @@ inline void MyStack<T>::checkCapacity()
 template<class T>
 inline void MyStack<T>::push(T data)
 {
+	
 	//每次push前需要检查一下容量，不够就申请更多内存
 	checkCapacity();
 	p[_size++] = data;//先将序号为size的内存中存入data，然后size自加1，size始终指向栈顶
@@ -77,8 +80,10 @@ inline bool MyStack<T>::empty()
 	}
 	return false;
 }
+
+
 //225:用队列实现栈
-class MyStack2 {
+class MyStackBaseQueue {
 public:
 
 	void push(int x) {

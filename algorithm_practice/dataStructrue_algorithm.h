@@ -66,14 +66,24 @@ vector<vector<int>> threeSum(vector<int>& nums);
 */
 vector<vector<int>> fourSum(vector<int>& nums, int target);
 
+/*剑指offer39 数组中出现的次数超过数组长度的一半，找出这个数字 简单：数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。
+你可以假设数组是非空的，并且给定的数组总是存在多数元素*/
+int majorityElement(vector<int>& nums);
+
+/*剑指offer56 中等 数组中数字出现的次数：一个整型数组 nums 里除两个数字之外，其他数字都出现了两次。请写程序找出这两个只出现一次的数字
+。要求时间复杂度是O(n)，空间复杂度是O(1)。*/
+vector<int> singleNumbers(vector<int>& nums);
+
+/*41 缺失的第一个正整数 困难：给你一个未排序的整数数组 nums ，请你找出其中没有出现的最小的正整数。
+请你实现时间复杂度为 O(n) 并且只使用常数级别额外空间的解决方案*/
+int firstMissingPositive(vector<int>& nums);
 
 //704:给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target  ，写一个函数搜索 nums 中的 target，
 //如果目标值存在返回下标，否则返回 -1。
-
 int binarySearch(vector<int>& nums, int target);
 
-/*34在排序数组中查找元素的第一个和最后一个位置:给你一个按照非递减顺序排列的整数数组 nums，和一个目标值 target。请你找出给定目标值在数组中的开始位置和结束位置。
-
+/*34在排序数组中查找元素的第一个和最后一个位置:给你一个按照非递减顺序排列的整数数组 nums，
+和一个目标值 target。请你找出给定目标值在数组中的开始位置和结束位置。
 如果数组中不存在目标值 target，返回 [-1, -1]
 */
 vector<int> searchRange(vector<int>& nums, int target);
@@ -95,6 +105,7 @@ void reverse_array(vector<int> & arr);
 
 //54 中等 螺旋矩阵：给你一个 m 行 n 列的矩阵 matrix ，请按照 顺时针螺旋顺序 ，返回矩阵中的所有元素
 vector<int> spiralOrder(vector<vector<int>>& matrix);
+
  /*59 螺旋矩阵2：给你一个正整数 n ，生成一个包含 1 到 n2 所有元素，
  且元素按顺时针顺序螺旋排列的 n x n 正方形矩阵 matrix*/
 vector<vector<int>> generateMatrix(int n);

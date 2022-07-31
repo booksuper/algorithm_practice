@@ -306,8 +306,114 @@ vector<vector<int>> threeSum(vector<int>& nums)
 vector<vector<int>> fourSum(vector<int>& nums, int target)
 {
 	vector<vector<int>> out_res;
+	if (nums.size() < 4) return out_res;
+	sort(nums.begin(), nums.end());
+	int left = 0;
+	int right = 0;
+	for (size_t i = 0; i < nums.size(); i++)
+	{
+		//一级剪枝
+		//不能第一个数大于target就直接返回，因为目标数可能小于0，比如-4>-10，但这样是
+		//可以凑起来的
+		if (nums[i] > target && nums[i] > 0 && target > 0) return out_res;
+
+		//对第一个数去重,i>0是因为第二个条件中有i-1,防止越界
+		//不能用nums[i] == nums[i+1]判断，这样会漏掉元组
+		if ( i > 0 && nums[i] == nums[i-1])
+		{
+			continue;
+		}
+		//第二层循环
+		for (size_t j = i+1; j < nums.size(); j++)
+		{
+			//二级剪枝
+			if (nums[i] + nums[j] > target && nums[i] + nums[j] >= 0 && target >= 0) break;
+			//对第二个数去重
+			if (j > i + 1 && nums[j] == nums[j - 1])
+			{
+				continue;
+
+			}
+			//双指针
+			left = j + 1;
+			right = nums.size() - 1;
+			while (left < right)
+			{
+				//为了防止整数溢出,将四数相加拆开,并且强转为long
+				if ((long)nums[i] + nums[j] - target == (long)-(nums[left] + nums[right]))
+				{
+					out_res.push_back({ nums[i] ,nums[j] ,nums[left] ,nums[right] });
+					//对第三个第四个数去重
+					while (left < right && nums[left] == nums[left + 1])
+					{
+						left++;
+					}
+					while (left < right && nums[right] == nums[right - 1])
+					{
+						right--;
+					}
+					//双指针收缩
+					left++;
+					right--;
+				}
+				else if ((long)nums[i] + nums[j] - target < (long)-(nums[left] + nums[right]))
+				{
+					left++;
+				}
+				else
+				{
+					right--;
+				}
+			}
+		}
+	}
 
 	return out_res;
+}
+//数组中出现的次数超过数组长度的一半
+int majorityElement(vector<int>& nums)
+{
+	//基于哈希表实现的map，增删改查效率都是O(1)
+	unordered_map<int, int> temp_map;
+	int size = nums.size() / 2;
+	for (auto var : nums)
+	{
+		temp_map[var]++;
+	}
+	for (auto it : temp_map)
+	{
+		if (it.second > size)
+		{
+			return it.first;
+		}
+	}
+	//没有找到就返回-1
+	return -1;
+}
+//数组中数字出现的次数
+vector<int> singleNumbers(vector<int>& nums)
+{
+	unordered_map<int, int> temp_map;
+	vector<int> res;
+	for (auto var : nums)
+	{
+		temp_map[var]++;
+	}
+	for (auto it : temp_map)
+	{
+		if (it.second == 1)
+		{
+			res.push_back(it.first);
+
+		}
+	}
+	sort(res.begin(), res.end());
+	return res;
+}
+//41 缺失的第一个正整数 困难
+int firstMissingPositive(vector<int>& nums)
+{
+	return 0;
 }
 //704:二分搜索
 int binarySearch(vector<int>& nums, int target)
