@@ -108,3 +108,55 @@ bool canConstruct(string ransomNote, string magazine)
 
 
 }
+//20 简单 有效的括号
+bool isValid(string s)
+{
+	/*这种匹配问题使用栈这种结构最合适
+	先把待匹配的字符串依次压入，然后再依次对这些字符串进行判断*/
+	stack<int> st;
+	for (size_t i = 0; i < s.length(); i++)
+	{
+		if (s[i] == '(') st.push(')');
+		else if (s[i] == '{') st.push('}');
+		else if (s[i] == '[') st.push(']');
+		//判断。栈空之前能不能匹配上对应的字符
+		else if (st.empty() || st.top() != s[i]) return false;
+		else st.pop();//匹配上了就要弹出来
+		
+
+	}
+	//for循环走完了说明都匹配上了，如果这时候栈为空，就刚刚好，true
+	//如果这时候还有多余的栈，说明还有一些右括号没有匹配，false
+	return st.empty();
+}
+//1047 简单 删除字符串中的所有相邻重复项
+string removeDuplicateStr(string s)
+{
+	stack<char> st;
+	for (size_t i = 0; i < s.length(); i++)
+	{
+		if (!st.empty() && st.top() == s[i]) st.pop();
+		else st.push(s[i]);
+
+	}
+	string res = "";
+	int size = st.size();
+	for (size_t i = 0; i < size; i++)
+	{
+		res += st.top();
+		st.pop();
+	}
+	//最后还要反转一下栈
+	//时间复杂度on
+	string out = "";
+	//auto k = res.rbegin();
+	//反转迭代器，从末尾开始迭代，注意还是需要递增
+	for (auto it = res.rbegin(); it != res.rend(); it++)
+	{
+		out += *it;
+	}
+	//reverse(res.begin(), res.end());
+	return out;
+
+	
+}

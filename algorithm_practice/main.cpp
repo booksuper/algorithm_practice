@@ -19,7 +19,7 @@
 #define BACKTRACK 0;
 #define ARRAY 0;
 #define STACK 0;
-#define STR 0;
+#define STR 1;
 #define OTHERTHING 0;
 
 
@@ -175,7 +175,8 @@ int main(int argc,char * argv[])
 		cout << var << endl;
 	}*/
 	
-	bool res_str = canConstruct("aa", "aac");
+	string res_str = removeDuplicateStr("abbaca");
+	int a = 0;
 
 	
 
