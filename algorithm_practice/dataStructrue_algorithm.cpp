@@ -734,4 +734,133 @@ vector<int> intersection(vector<int>& nums1, vector<int>& nums2)
 	}
 	return vector<int>(temp.begin(), temp.end());
 }
+//347 中等 前k个高频元素
+vector<int> topKFrequent(vector<int>& nums, int k)
+{
+	//哈希表求解
+	vector<int> res;
+	unordered_map<int, int> myMap;
+	//记录对应数字出现的次数
+	for (auto var : nums)
+	{
+		myMap[var]++;
+	}
+	
+	vector<int> v;
+	for (auto it : myMap)
+	{
+		v.push_back(it.second);
+
+	}
+	//对map的值进行排序，找到前k个，这里是从大到小
+	sort(v.begin(), v.end(), greater<int>());
+	//记录找到的个数，大于k就退出
+	int j = 0;
+	for (unordered_map<int, int>::iterator it = myMap.begin(); it != myMap.end();)
+	{
+		if (j < k)
+		{
+			if (v[j] == it->second)
+			{
+				res.push_back(it->first);
+				//res_temp.insert(it->first);
+				j++;
+				//找到一个删除一个，不然结果是一样的
+				myMap.erase(it->first);
+				//如果前面删除了，map正好为空了，那在使用迭代器会报错
+				//防止容器没有元素了还循环，这会报错
+				if (myMap.size() == 0)
+				{
+					break;
+				}
+				else
+				{
+					//重新循环，直接下一次，不要执行it++
+					it = myMap.begin();
+					continue;
+
+				}
+
+
+			}
+			
+
+		}
+		//++操作不能放在循环体中，不然每次重新开始的时候，不是指向第一个元素，而是第二个
+		it++;
+
+	}
+	return res;
+
+
+}
+
+//347 中等 前k个高频元素:使用优先级队列，也就是堆进行求解
+vector<int> topKFrequentBaseHeap(vector<int>& nums, int k)
+{
+	vector<int> res;
+	//构建小顶堆的仿函数
+	class myCompare
+	{
+	public:
+		bool operator()(const pair<int,int> &l,const pair<int,int> &r)
+		{
+			return l.second > r.second;
+		}
+		
+	};
+	//首先记录各个数出现的次数
+	unordered_map<int, int> myMap;
+	for (auto var : nums)
+	{
+		myMap[var]++;
+	}
+	//然后使用优先级队列（小顶堆的方式，不加参数默认是大顶堆）保存k个
+	//频率最高的数
+	priority_queue<pair<int, int>, vector<pair<int, int>>, myCompare> priQueue;
+	//如果队列中的数超过k个，就弹出来最小的一个，保证里面的数的频率始终是前k个
+	for (auto it : myMap)
+	{
+		priQueue.push(it);
+		if (priQueue.size() > k)
+		{
+			//弹出的是队头，因为是小顶推，也就是从大到小构造，弹出的就是频率最小的数
+			priQueue.pop();
+		}
+	}
+	//找到了前k个数，然后还需要逆序打印
+	res.resize(k);
+	for (int i = k-1; i >= 0;)
+	{
+		res[i] = priQueue.top().first;
+		priQueue.pop();
+		i--;
+
+	}
+	return res;
+}
+
+//239 困难 滑动窗口最大值
+vector<int> maxSlidingWindow(vector<int>& nums, int k)
+{
+	//暴力解法，时间复杂度是O(n x k)
+	vector<int> res;
+	int epoch = nums.size() - k + 1;
+	//滑动多少次
+	for (size_t i = 0; i < epoch; i++)
+	{
+		//vector<int> temp;
+		int maxNum = -99999;
+		for (size_t j = i; j < i + k; j++)
+		{
+			if (nums[j] > maxNum)
+			{
+				maxNum = nums[j];
+			}
+		
+		}
+		res.push_back(maxNum);
+	}
+	return res;
+}
 

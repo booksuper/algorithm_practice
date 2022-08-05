@@ -17,9 +17,9 @@
 #define LISTNODE 0;
 #define CALLBACK 0;
 #define BACKTRACK 0;
-#define ARRAY 0;
+#define ARRAY 1;
 #define STACK 0;
-#define STR 1;
+#define STR 0;
 #define OTHERTHING 0;
 
 
@@ -108,8 +108,9 @@ int main(int argc,char * argv[])
 	string d = "sdada";
 	bool res = isPalindrome(d.c_str());*/
 	
-	vector<int> in{ 0,0,0,1,1,1,1 };
-	vector<vector<int>> res_vec = fourSum(in,1);
+	vector<int> in{ 1,3,-1,-3,5,3,6,7 };
+	vector<int> in2{ 1 };
+	vector<int> res_vec = maxSlidingWindow(in2, 1);
 	//vector<int> res = searchRange(in, 3);
 	int h = 0;
 	

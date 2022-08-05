@@ -5,6 +5,7 @@
 #include <unordered_set>
 #include <set>
 #include <unordered_map>
+#include <queue>
 #include <algorithm>
 
 using namespace std;
@@ -113,3 +114,16 @@ vector<vector<int>> generateMatrix(int n);
 /*349 简单 两个数组的交集：给定两个数组 nums1 和 nums2 ，返回 它们的交集 。
 输出结果中的每个元素一定是 唯一 的。我们可以 不考虑输出结果的顺序 */
 vector<int> intersection(vector<int>& nums1, vector<int>& nums2);
+
+/*347 中等 前k个高频元素：给你一个整数数组 nums 和一个整数 k ，
+请你返回其中出现频率前 k 高的元素。你可以按 任意顺序 返回答案*/
+vector<int> topKFrequent(vector<int>& nums, int k);
+
+//347 中等 前k个高频元素:使用优先级队列，也就是堆进行求解
+vector<int> topKFrequentBaseHeap(vector<int>& nums, int k);
+
+/*239 困难 滑动窗口最大值：给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。
+你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。
+返回 滑动窗口中的最大值
+*/
+vector<int> maxSlidingWindow(vector<int>& nums, int k);
