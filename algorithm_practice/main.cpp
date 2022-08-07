@@ -17,9 +17,9 @@
 #define LISTNODE 0;
 #define CALLBACK 0;
 #define BACKTRACK 0;
-#define ARRAY 1;
+#define ARRAY 0;
 #define STACK 0;
-#define STR 0;
+#define STR 1;
 #define OTHERTHING 0;
 
 
@@ -175,8 +175,14 @@ int main(int argc,char * argv[])
 	{
 		cout << var << endl;
 	}*/
-	
-	string res_str = removeDuplicateStr("abbaca");
+	const char * s1 = "sdd";
+	char d[] = "dsddfs";
+	vector<char> inStr{'s','s','w','r'};
+	string ins = d;
+	string co = string(ins, 1,4);//拷贝构造，指定起始字符和拷贝的个数
+	reverseString(inStr);
+	string text = "We Are Happy";
+	string res_str = replaceSpace(text);
 	int a = 0;
 
 	

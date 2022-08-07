@@ -37,3 +37,22 @@ bool isValid(string s);
 在完成所有重复项删除操作后返回最终的字符串。答案保证唯一
 */
 string removeDuplicateStr(string s);
+
+/*344 简单 反转字符串：编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 s 的形式给出。
+不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题
+*/
+void reverseString(vector<char>& s);
+
+//使用string反转字符串,重载，输入string
+string reverseString(string s);
+
+/*541 简单 反转字符串II:给定一个字符串 s 和一个整数 k，从字符串开头算起，
+每计数至 2k 个字符，就反转这 2k 字符中的前 k 个字符。
+如果剩余字符少于 k 个，则将剩余字符全部反转。
+如果剩余字符小于 2k 但大于或等于 k 个，则反转前 k 个字符，其余字符保持原样
+*/
+
+string reverseStrII(string s, int k);
+
+/*剑指offer05 简单 替换空格：请实现一个函数，把字符串 s 中的每个空格替换成"%20*/
+string replaceSpace(string s);

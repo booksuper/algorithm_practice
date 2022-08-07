@@ -160,3 +160,150 @@ string removeDuplicateStr(string s)
 
 	
 }
+//344 简单 反转字符串
+void reverseString(vector<char>& s)
+{
+	int left = 0;
+	int right = s.size() - 1;
+	while (left < right)
+	{
+		swap(s[left], s[right]);
+		left++;
+		right--;
+	}
+	
+}
+//344 简单 反转字符串 重载，输入string
+string reverseString(string s)
+{
+	//使用额外数组，暴力求解
+#if 0
+	string res = "";
+	for (int i = s.length() - 1; i >= 0; i--)
+	{
+		res += s[i];
+		
+	}
+	return res;
+#endif
+	//不使用额外数组
+	//s[0] = '1';
+	/*注意！char *字符串是定义在常量区，所以不可被修改，而char[]被定义在栈上，可被修改，string也是被定义在栈上
+	所以也可被修改,如果传入的是char * 类型的字符，但又想修改它，可把其转为string，再进行转化，转化后再调用string的
+	data函数或者c_str函数
+	*/
+
+	int left = 0;
+	int right = s.size() - 1;
+	while (left < right)
+	{
+		swap(s[left],s[right]);
+		left++;
+		right--;
+	}
+	return s;
+
+
+}
+//541 简单 反转字符串II
+string reverseStrII(string s, int k)
+{
+	
+	//能反转几次
+	int epoch = s.size() / (2 * k);
+	//余数
+	int surplus = s.size() - (2 * k) * epoch;
+	for (int i = 0; i < epoch; i++)
+	{
+		int left = i * 2 * k;
+		int right = i * 2 * k + k - 1;
+		while (left < right)
+		{
+			swap(s[left], s[right]);
+			left++;
+			right--;
+		}
+		
+	}
+
+	if (surplus >= k && surplus < 2 * k)
+	{
+		int left = epoch * 2 * k;
+		int right = epoch * 2 * k + k - 1;
+		while (left < right)
+		{
+			swap(s[left], s[right]);
+			left++;
+			right--;
+		}
+		return s;
+	}
+	else
+	{
+		int left = epoch * 2 * k;
+		int right = s.size() - 1;
+		while (left < right)
+		{
+			swap(s[left], s[right]);
+			left++;
+			right--;
+		}
+		return s;
+
+	}
+	
+	
+}
+//剑指offer05 简单 替换空格
+string replaceSpace(string s)
+{
+	//on2的复杂度
+#if 0
+	string temp = "%20";
+	for (size_t i = 0; i < s.size(); i++)
+	{
+		
+		if (s[i] == ' ')
+		{
+			//erase删除指定位置的字符，位置从0开始计数
+			//首先删除空格,只想删除空格，但这个函数会把这个位置及之后的字符全删除掉
+			//原因在于参数是int，这实际调用了erase的第二个重载，它还有一个参数，就是删除几个
+			//没写默认就是全删，只需要加上一个1，代表删除一个就行
+			//或者给它传一个迭代器索引也行
+			s.erase(i,1);
+			//在指定位置之前插入字符串，注意是在指定位置之前插入
+			//前面刚删了空格，现在i的位置是下一个字符，其之前刚好是需要插入待替换字符位置
+			s.insert(i, temp);
+		}
+	}
+	return s;
+#endif
+
+	//双指针技巧，on的复杂度
+#if 1
+	int count = 0; // 统计空格的个数
+	int sOldSize = s.size();
+	for (int i = 0; i < s.size(); i++) {
+		if (s[i] == ' ') {
+			count++;
+		}
+	}
+	// 扩充字符串s的大小，也就是每个空格替换成"%20"之后的大小
+	s.resize(s.size() + count * 2);
+	int sNewSize = s.size();
+	// 从后先前将空格替换为"%20"
+	for (int i = sNewSize - 1, j = sOldSize - 1; j < i; i--, j--) {
+		if (s[j] != ' ') {
+			s[i] = s[j];
+		}
+		else {
+			s[i] = '0';
+			s[i - 1] = '2';
+			s[i - 2] = '%';
+			i -= 2;
+		}
+	}
+	return s;
+
+#endif
+}
