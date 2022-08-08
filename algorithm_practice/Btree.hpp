@@ -60,8 +60,8 @@ public:
 		temp_flat = dumpy;
 		root = nullptr;
 	}
-	//创建二叉树
-	void createTree(BtreeNode<T> * &p, BtreeNode<T> *& temp);
+	//根据二叉搜索树的形式插入二叉树节点
+	void insertTreeNode(BtreeNode<T> * &p, BtreeNode<T> *& temp);
 	//输入层序数组，根据层序数组构建二叉树
 	BtreeNode<T> * createTreeBaseLevel(vector<T> nums, int start);
 	//先序遍历
@@ -103,16 +103,18 @@ public:
 	string serialize(BtreeNode<T> * root);
 	//将字符串反序列化为二叉树
 	BtreeNode<T> * deserialize(string str);
+	//s形打印二叉树,输入一个数组，将其转为二叉树之后再s形打印
+	vector<vector<T>> sPrintBtree(vector<T> &inVec);
 
 
 
 
 };
-//递归方式创建节点
+//根据二叉搜索树的形式插入二叉树节点
 template<class T>
-inline void Btree<T>::createTree(BtreeNode<T> *& p, BtreeNode<T> *& temp)
+inline void Btree<T>::insertTreeNode(BtreeNode<T> *& p, BtreeNode<T> *& temp)
 {
-	//保证二叉树满足 左子树小于根节点，右子树大于根节点
+	//保证二叉树满足 左子树小于根节点，右子树大于根节点，就是构建一个二叉搜索树
    //p是新的节点，temp是从root开始遍历的节点
 	if (temp == nullptr)
 	{
@@ -127,11 +129,11 @@ inline void Btree<T>::createTree(BtreeNode<T> *& p, BtreeNode<T> *& temp)
 		}
 		else if (p->data < temp->data) //新节点比根节点小，就去左边递归
 		{
-			createTree(p, temp->left);
+			insertTreeNode(p, temp->left);
 		}
 		else //p->data > root->data //反之去右边递归
 		{
-			createTree(p, temp->right);
+			insertTreeNode(p, temp->right);
 		}
 
 	}
@@ -441,9 +443,47 @@ string Btree<T>::serialize(BtreeNode<T>* root)
 
 
 }
-
+//将字符串反序列化为二叉树
 template<class T>
 BtreeNode<T>* Btree<T>::deserialize(string str)
 {
 	return NULL;
+}
+//s形打印二叉树,输入一个数组，将其转为二叉树之后再s形打印
+template<class T>
+vector<vector<T>> Btree<T>::sPrintBtree(vector<T>& inVec)
+{
+	
+	vector<vector<T>> res;
+	if (inVec.size() == 0) return res;
+	//首先先构建一个二叉树
+	BtreeNode<T> * head = createTreeBaseLevel(inVec, 0);
+	//然后s形打印
+	int count = 0;//用来判断是奇数还是偶数
+	queue<BtreeNode<T> *> q;
+	q.push(head);
+	while (!q.empty())
+	{
+		vector<T> temp;
+		int size = q.size();
+		for (size_t i = 0; i < size; i++)
+		{
+			
+				temp.push_back(q.front()->data);
+				if (q.front()->left != nullptr) q.push(q.front()->left);
+				if (q.front()->right != nullptr) q.push(q.front()->right);
+				q.pop();
+			
+
+		}
+		//判断该层是奇数层还是偶数层，奇数层就反转一下
+		if (count % 2 != 0)
+		{
+			reverse(temp.begin(), temp.end());
+		}
+		res.push_back(temp);
+		count++;
+		
+	}
+	return res;
 }

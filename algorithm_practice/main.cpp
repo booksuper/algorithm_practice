@@ -12,39 +12,66 @@
 #include "str_algorithm.h"
 
 #define DP 0;
-#define BTREE 0;
+#define BTREE 1;
 #define SORT 0;
 #define LISTNODE 0;
 #define CALLBACK 0;
 #define BACKTRACK 0;
 #define ARRAY 0;
 #define STACK 0;
-#define STR 1;
+#define STR 0;
 #define OTHERTHING 0;
 
-
-
+//输入用例
+template<class T>
+vector<T> inputNum()
+{
+	char c = 0;
+	vector<T> v1;
+	T num = 0;
+	bool flag = false;
+	do
+	{
+		c = cin.get();
+		if (c != ' ' && c != '\n')
+		{
+			int c_n = c - '0';
+			num = num * 10 + c_n;
+			flag = true;
+		}
+		else if (flag)
+		{
+			flag = false;
+			v1.push_back(num);
+			num = 0;
+		}
+	} while (c != '\n');
+	return v1;
+}
 
 
 int main(int argc,char * argv[])
 {
 #if BTREE
-	
+
+	//输入用例
+	vector<int> v1 = inputNum<int>();
+
 	Btree<int> tree;
 	Btree<int> tree1;
-	int flag;
-	int arr[7]{6,4,8,1,5,7,9};
-	vector<int> treenums{6,4,8,1,5,7,9};
-	BtreeNode<int> * newtree = tree.createTreeBaseLevel(treenums, 0);
-	//创建树
-	for(flag=0;flag<7;flag++)
-	{
-		BtreeNode<int> * p = new BtreeNode<int>;
-		p->data = arr[flag];
-		p->left = nullptr;
-		p->right = nullptr;
-		tree.createTree(p, tree.root);
-	}//1062734
+	//int arr[7]{6,4,8,1,5,7,9};
+	//vector<int> treenums{6,4,8,1,5,7,9};
+	//BtreeNode<int> * newtree = tree.createTreeBaseLevel(treenums, 0);
+	////创建树
+	//for(flag=0;flag<7;flag++)
+	//{
+	//	BtreeNode<int> * p = new BtreeNode<int>;
+	//	p->data = arr[flag];
+	//	p->left = nullptr;
+	//	p->right = nullptr;
+	//	tree.insertTreeNode(p, tree.root);
+	//}//1062734
+
 	//tree.pre_traverse(tree.root);//1062347
 	//tree.in_traverse(tree.root);//0123467
 	//tree.post_traverse(tree.root);//0432761
@@ -55,8 +82,18 @@ int main(int argc,char * argv[])
 	//BtreeNode<int> * inversetree2 = tree.inverseBtreeBaseItera(tree.root);
 	//int dia = tree.maxDiameter(tree.root);
 	//BtreeNode<int> * flat = tree.flatten(tree.root);
-	string res = tree.serialize(newtree);
-	cout << res << endl;
+	//string res = tree.serialize(newtree);
+	vector<vector<int>> res = tree.sPrintBtree(v1);
+	for (auto var : res)
+	{
+		for (size_t i = 0; i < var.size(); i++)
+		{
+			cout << var[i]<<" ";
+
+		}
+		cout << endl;
+	}
+	
 	int i = 1;
 #endif
 
@@ -205,13 +242,12 @@ int main(int argc,char * argv[])
 #endif
 
 
-
-
 #if 0
 		int n, m, temp;
 		vector<int> in_nums;
 		vector<vector<int>> range;
 		cin >> n;
+		
 		for (int i = 0 ;i < n; i++)
 		{
 			cin >> temp;
@@ -240,7 +276,7 @@ int main(int argc,char * argv[])
 
 		}
 
-#endif // 0
-
+#endif 
+		
 }
 
