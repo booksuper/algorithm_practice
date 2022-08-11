@@ -129,3 +129,28 @@ void backtrack_subsets(vector<int>& nums, int start, vector<vector<int>>& res, v
 		track.pop_back();
 	}
 }
+//77 组合 中等
+vector<vector<int>> combine(int n, int k)
+{
+	vector<vector<int>> res;
+	vector<int> path;
+	backTrackCombine(res, path, n, k, 1);
+	return res;
+}
+//组合的回溯函数
+void backTrackCombine(vector<vector<int>>& res, vector<int>& path, int n, int k, int startIndex)
+{
+	//终止条件
+	if (path.size() == k)
+	{
+		res.push_back(path);
+		return;
+	}
+
+	for (int i = startIndex; i <= n; i++)//横向遍历
+	{
+		path.push_back(i);//收集路径上的值
+		backTrackCombine(res, path, n, k, i + 1);//递归，也就是纵向遍历
+		path.pop_back();//回溯操作
+	}
+}

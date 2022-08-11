@@ -56,3 +56,6 @@ string reverseStrII(string s, int k);
 
 /*剑指offer05 简单 替换空格：请实现一个函数，把字符串 s 中的每个空格替换成"%20*/
 string replaceSpace(string s);
+
+//华为研发编程题：十六进制转十进制
+int ox2Binary(string s);

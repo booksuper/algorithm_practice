@@ -307,3 +307,21 @@ string replaceSpace(string s)
 
 #endif
 }
+
+int ox2Binary(string s)
+{
+	int res = 0;
+	for (int i = 2; i < s.size(); i++)
+	{
+		int num = s[i] - '0';
+		if (num >= 0 && num <= 9)
+		{
+			res += num * pow(16, s.size() - i - 1);
+		}
+		else {
+			int num2 = s[i] - 'A' + 10;
+			res += num2 * pow(16, s.size() - i - 1);
+		}
+	}
+	return res;
+}

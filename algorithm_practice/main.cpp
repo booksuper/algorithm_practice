@@ -12,11 +12,11 @@
 #include "str_algorithm.h"
 
 #define DP 0;
-#define BTREE 1;
+#define BTREE 0;
 #define SORT 0;
 #define LISTNODE 0;
 #define CALLBACK 0;
-#define BACKTRACK 0;
+#define BACKTRACK 1;
 #define ARRAY 0;
 #define STACK 0;
 #define STR 0;
@@ -178,8 +178,8 @@ int main(int argc,char * argv[])
 	////bool res = canPartitionKSubsets(nums2, 4);
 	//vector<vector<int>> r = subsets(nums1);
 	//int a = 0;
-	int res = rfact(3);
-	cout << res;
+	vector<vector<int>> res = combine(4,2);
+	int d = 0;
 	
 #endif
 
@@ -277,6 +277,14 @@ int main(int argc,char * argv[])
 		}
 
 #endif 
+		//华为研发编程：换汽水瓶的解法
+		/*int nums = 0;
+		while (cin >> nums)
+		{
+			if (nums == 0) break;
+			cout << nums / 2 << endl;
+
+		}*/
 		
 }
 

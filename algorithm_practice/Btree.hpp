@@ -105,7 +105,13 @@ public:
 	BtreeNode<T> * deserialize(string str);
 	//s形打印二叉树,输入一个数组，将其转为二叉树之后再s形打印
 	vector<vector<T>> sPrintBtree(vector<T> &inVec);
-
+	/*124 二叉树的最大路径和 困难：路径 被定义为一条从树中任意节点出发，
+	沿父节点-子节点连接，达到任意节点的序列。同一个节点在一条路径序列中
+	至多出现一次 。该路径 至少包含一个 节点，且不一定经过根节点。
+	路径和 是路径中各节点值的总和。给你一个二叉树的根节点 root ，返回其 最大路径和 。*/
+	int maxPathSum(BtreeNode<T> * p);
+	//最大路径和辅助递归函数
+	int maxPathSumTravese(BtreeNode<T> * p,int & maxNum);
 
 
 
@@ -486,4 +492,30 @@ vector<vector<T>> Btree<T>::sPrintBtree(vector<T>& inVec)
 		
 	}
 	return res;
+}
+//124 二叉树的最大路径和 困难
+template<class T>
+int Btree<T>::maxPathSum(BtreeNode<T>* p)
+{
+	int maxSum = INT_MIN;
+	maxPathSumTravese(p, maxSum);
+	return maxSum;
+}
+//最大路径和辅助递归函数
+template<class T>
+int Btree<T>::maxPathSumTravese(BtreeNode<T>* p, int & maxNum)
+{
+	if (p == nullptr) return 0;
+	// 递归计算左右子节点的最大贡献值
+	// 只有在最大贡献值大于 0 时，才会选取对应子节点
+	int leftGain = max(maxPathSumTravese(p->left, maxNum), 0);
+	int rightGain = max(maxPathSumTravese(p->right，maxNum), 0);
+
+	// 节点的最大路径和取决于该节点的值与该节点的左右子节点的最大贡献值
+	int sum = p->data + leftGain + rightGain;
+	//更新
+	maxNum = max(maxNum, sum);
+	//返回节点的最大贡献值
+	return p->data + max(leftGain, rightGain);
+
 }

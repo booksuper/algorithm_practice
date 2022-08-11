@@ -19,3 +19,9 @@ void backtrack_permute(vector<int> nums, vector<int> track, bool* used, vector<v
 vector<vector<int>> subsets(vector<int>& nums);
 //所有可能子集回溯函数
 void backtrack_subsets(vector<int>& nums, int n, vector<vector<int>>& res,vector<int> track);
+
+/*77 组合 中等：给定两个整数 n 和 k，返回范围 [1, n] 中所有可能的 k 个数的组合。
+你可以按 任何顺序 返回答案*/
+vector<vector<int>> combine(int n, int k);
+//组合的回溯函数
+void backTrackCombine(vector<vector<int>> &res, vector<int> &path, int n, int k, int startIndex);
