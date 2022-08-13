@@ -10,6 +10,7 @@
 #include "backTrack.h"
 #include "otherThings.h"
 #include "str_algorithm.h"
+#include <stdlib.h>
 
 #define DP 0;
 #define BTREE 0;
@@ -49,6 +50,11 @@ vector<T> inputNum()
 	return v1;
 }
 
+
+void myPrint(char var)
+{
+	cout << var << endl;
+}
 
 int main(int argc,char * argv[])
 {
@@ -178,7 +184,8 @@ int main(int argc,char * argv[])
 	////bool res = canPartitionKSubsets(nums2, 4);
 	//vector<vector<int>> r = subsets(nums1);
 	//int a = 0;
-	vector<vector<int>> res = combine(4,2);
+	vector<int> inVec{ 2,3,6,7 };
+	vector<vector<int>> res = combinationSum(inVec, 7);
 	int d = 0;
 	
 #endif
@@ -212,14 +219,15 @@ int main(int argc,char * argv[])
 	{
 		cout << var << endl;
 	}*/
-	const char * s1 = "sdd";
-	char d[] = "dsddfs";
-	vector<char> inStr{'s','s','w','r'};
-	string ins = d;
-	string co = string(ins, 1,4);//拷贝构造，指定起始字符和拷贝的个数
-	reverseString(inStr);
-	string text = "We Are Happy";
-	string res_str = replaceSpace(text);
+	
+
+	vector<int> temp1{ 1,4,6,3,6 };
+	string temp2 = "sderfff";
+	//for_each遍历
+	//for_each(temp2.rbegin(), temp2.rend(), myPrint);
+	//查找算法
+	auto it = find(temp1.begin(), temp1.end(), 4);
+	cout << *it;
 	int a = 0;
 
 	
@@ -241,7 +249,7 @@ int main(int argc,char * argv[])
 
 #endif
 
-
+	//处理输入输出方法
 #if 0
 		int n, m, temp;
 		vector<int> in_nums;

@@ -6,6 +6,8 @@
 #include <numeric>
 #include <unordered_map>
 #include <stack>
+#include <sstream>
+#include <algorithm>
 
 using namespace std;
 //找到字符串中的重复字符
@@ -59,3 +61,6 @@ string replaceSpace(string s);
 
 //华为研发编程题：十六进制转十进制
 int ox2Binary(string s);
+
+//整数分割：将一个整数分割出来，并将每一位存在vector
+vector<int> intSplit(int num);

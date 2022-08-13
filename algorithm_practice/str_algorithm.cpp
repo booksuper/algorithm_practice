@@ -325,3 +325,26 @@ int ox2Binary(string s)
 	}
 	return res;
 }
+////将一个整数分割出来，并将每一位存在vector
+vector<int> intSplit(int num)
+{
+	vector<int> res;
+	//首先将数字转字符串、
+	string s = to_string(num);
+	//也可以使用stringstream流读入数字，再输出为字符串
+	/*stringstream ss;
+	ss << num;
+	string numStr;
+	ss >> numStr;*/
+	
+	//然后逐个分割
+	for (auto var : s)
+	{
+		//核心
+		int temp = var - '0';//利用assci码值获得数字
+		res.push_back(temp);
+
+	}
+	return res;
+
+}

@@ -1,27 +1,45 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
 #include <vector>
-
+#include <algorithm>
+#include <numeric>
 using namespace std;
 
-//¸ø¶¨Ò»¸öÕûÊıÊı×é  nums ºÍÒ»¸öÕıÕûÊı k£¬ÕÒ³öÊÇ·ñÓĞ¿ÉÄÜ°ÑÕâ¸öÊı×é·Ö³É k ¸ö·Ç¿Õ×Ó¼¯£¬Æä×ÜºÍ¶¼ÏàµÈ¡£
+//ç»™å®šä¸€ä¸ªæ•´æ•°æ•°ç»„  nums å’Œä¸€ä¸ªæ­£æ•´æ•° kï¼Œæ‰¾å‡ºæ˜¯å¦æœ‰å¯èƒ½æŠŠè¿™ä¸ªæ•°ç»„åˆ†æˆ k ä¸ªéç©ºå­é›†ï¼Œå…¶æ€»å’Œéƒ½ç›¸ç­‰ã€‚
 bool canPartitionKSubsets(vector<int>& nums, int k);
-//»ØËİº¯Êı
+//å›æº¯å‡½æ•°
 bool backtrack_KSubsets(vector<int>& nums,int index,vector<int> bucket,int target);
 
-//¸ø¶¨Ò»¸ö²»º¬ÖØ¸´Êı×ÖµÄÊı×é nums £¬·µ»ØÆä ËùÓĞ¿ÉÄÜµÄÈ«ÅÅÁĞ ¡£Äã¿ÉÒÔ °´ÈÎÒâË³Ğò ·µ»Ø´ğ°¸
+//ç»™å®šä¸€ä¸ªä¸å«é‡å¤æ•°å­—çš„æ•°ç»„ nums ï¼Œè¿”å›å…¶ æ‰€æœ‰å¯èƒ½çš„å…¨æ’åˆ— ã€‚ä½ å¯ä»¥ æŒ‰ä»»æ„é¡ºåº è¿”å›ç­”æ¡ˆ
 vector<vector<int>> permute(vector<int>& nums);
-//»ØËİº¯Êı
+//å›æº¯å‡½æ•°
 void backtrack_permute(vector<int> nums, vector<int> track, bool* used, vector<vector<int>>& out_res);
 
-//¸øÄãÒ»¸öÕûÊıÊı×é nums £¬Êı×éÖĞµÄÔªËØ »¥²»ÏàÍ¬ ¡£·µ»Ø¸ÃÊı×éËùÓĞ¿ÉÄÜµÄ×Ó¼¯£¨Ãİ¼¯£©¡£
-//½â¼¯ ²»ÄÜ °üº¬ÖØ¸´µÄ×Ó¼¯¡£Äã¿ÉÒÔ°´ ÈÎÒâË³Ğò ·µ»Ø½â¼¯
+//ç»™ä½ ä¸€ä¸ªæ•´æ•°æ•°ç»„ nums ï¼Œæ•°ç»„ä¸­çš„å…ƒç´  äº’ä¸ç›¸åŒ ã€‚è¿”å›è¯¥æ•°ç»„æ‰€æœ‰å¯èƒ½çš„å­é›†ï¼ˆå¹‚é›†ï¼‰ã€‚
+//è§£é›† ä¸èƒ½ åŒ…å«é‡å¤çš„å­é›†ã€‚ä½ å¯ä»¥æŒ‰ ä»»æ„é¡ºåº è¿”å›è§£é›†
 vector<vector<int>> subsets(vector<int>& nums);
-//ËùÓĞ¿ÉÄÜ×Ó¼¯»ØËİº¯Êı
+//æ‰€æœ‰å¯èƒ½å­é›†å›æº¯å‡½æ•°
 void backtrack_subsets(vector<int>& nums, int n, vector<vector<int>>& res,vector<int> track);
 
-/*77 ×éºÏ ÖĞµÈ£º¸ø¶¨Á½¸öÕûÊı n ºÍ k£¬·µ»Ø·¶Î§ [1, n] ÖĞËùÓĞ¿ÉÄÜµÄ k ¸öÊıµÄ×éºÏ¡£
-Äã¿ÉÒÔ°´ ÈÎºÎË³Ğò ·µ»Ø´ğ°¸*/
+/*77 ç»„åˆ ä¸­ç­‰ï¼šç»™å®šä¸¤ä¸ªæ•´æ•° n å’Œ kï¼Œè¿”å›èŒƒå›´ [1, n] ä¸­æ‰€æœ‰å¯èƒ½çš„ k ä¸ªæ•°çš„ç»„åˆã€‚
+ä½ å¯ä»¥æŒ‰ ä»»ä½•é¡ºåº è¿”å›ç­”æ¡ˆ*/
 vector<vector<int>> combine(int n, int k);
-//×éºÏµÄ»ØËİº¯Êı
+//ç»„åˆçš„å›æº¯å‡½æ•°
 void backTrackCombine(vector<vector<int>> &res, vector<int> &path, int n, int k, int startIndex);
+
+/*216 ç»„åˆæ€»å’ŒIII ä¸­ç­‰ï¼šæ‰¾å‡ºæ‰€æœ‰ç›¸åŠ ä¹‹å’Œä¸ºÂ n çš„Â kÂ ä¸ªæ•°çš„ç»„åˆï¼Œä¸”æ»¡è¶³ä¸‹åˆ—æ¡ä»¶ï¼š
+åªä½¿ç”¨æ•°å­—1åˆ°9æ¯ä¸ªæ•°å­—Â æœ€å¤šä½¿ç”¨ä¸€æ¬¡Â 
+è¿”å› æ‰€æœ‰å¯èƒ½çš„æœ‰æ•ˆç»„åˆçš„åˆ—è¡¨ ã€‚è¯¥åˆ—è¡¨ä¸èƒ½åŒ…å«ç›¸åŒçš„ç»„åˆä¸¤æ¬¡ï¼Œç»„åˆå¯ä»¥ä»¥ä»»ä½•é¡ºåºè¿”å›
+*/
+vector<vector<int>> combinationSum3(int k, int n);
+//ç»„åˆæ€»å’Œçš„å›è°ƒå‡½æ•°
+void backTrackCombinationSum3(vector<vector<int>> &res, vector<int> & path, int k, int n, int startIndex);
+
+/*39 ç»„åˆæ€»å’Œ ä¸­ç­‰ï¼šç»™ä½ ä¸€ä¸ª æ— é‡å¤å…ƒç´  çš„æ•´æ•°æ•°ç»„Â candidates å’Œä¸€ä¸ªç›®æ ‡æ•´æ•°Â targetÂ ï¼Œæ‰¾å‡ºÂ candidatesÂ 
+ä¸­å¯ä»¥ä½¿æ•°å­—å’Œä¸ºç›®æ ‡æ•°Â target çš„ æ‰€æœ‰Â ä¸åŒç»„åˆ ï¼Œå¹¶ä»¥åˆ—è¡¨å½¢å¼è¿”å›ã€‚ä½ å¯ä»¥æŒ‰ ä»»æ„é¡ºåº è¿”å›è¿™äº›ç»„åˆã€‚
+candidates ä¸­çš„ åŒä¸€ä¸ª æ•°å­—å¯ä»¥ æ— é™åˆ¶é‡å¤è¢«é€‰å– ã€‚å¦‚æœè‡³å°‘ä¸€ä¸ªæ•°å­—çš„è¢«é€‰æ•°é‡ä¸åŒï¼Œåˆ™ä¸¤ç§ç»„åˆæ˜¯ä¸åŒçš„ã€‚Â 
+å¯¹äºç»™å®šçš„è¾“å…¥ï¼Œä¿è¯å’Œä¸ºÂ target çš„ä¸åŒç»„åˆæ•°å°‘äº 150 ä¸ª
+*/
+vector<vector<int>> combinationSum(vector<int>& candidates, int target);
+//ç»„åˆæ€»å’Œå›è°ƒå‡½æ•°
+void backTrackcombinationSum(vector<vector<int>> &res, vector<int> & path, vector<int> &candidate, int target, int startIndex);

@@ -146,11 +146,74 @@ void backTrackCombine(vector<vector<int>>& res, vector<int>& path, int n, int k,
 		res.push_back(path);
 		return;
 	}
-
+	//可以剪枝优化,在for循环的终止条件做剪枝
+	//for (int i = startIndex; i <= n - (k - path.size()) + 1; i++)
 	for (int i = startIndex; i <= n; i++)//横向遍历
 	{
 		path.push_back(i);//收集路径上的值
 		backTrackCombine(res, path, n, k, i + 1);//递归，也就是纵向遍历
 		path.pop_back();//回溯操作
 	}
+}
+//216 组合总和III 中等
+vector<vector<int>> combinationSum3(int k, int n)
+{
+	vector<vector<int>> res;
+	vector<int> path;
+	backTrackCombinationSum3(res,path,k,n,1);
+	return res;
+}
+//组合总和的回调函数
+void backTrackCombinationSum3(vector<vector<int>>& res, vector<int>& path, int k, int n, int startIndex)
+{
+	if (path.size() == k)
+	{
+		//相加之和为n
+		if (accumulate(path.begin(), path.end(), 0) == n)
+		{
+			res.push_back(path);
+			return;
+		}
+		return;
+	}
+
+	for (int i = startIndex; i <= 9; i++)
+	{
+		path.push_back(i);
+		//如果索引是startIndex+1,则数组中会有重复数字
+		backTrackCombinationSum3(res, path, k, n, i + 1);
+		path.pop_back();
+	}
+}
+
+//组合总和
+vector<vector<int>> combinationSum(vector<int>& candidates, int target)
+{
+	vector<vector<int>> res;
+	vector<int> path;
+	backTrackcombinationSum(res, path,candidates, target, 0);
+	return res;
+}
+//组合总和回调函数
+void backTrackcombinationSum(vector<vector<int>>& res, vector<int>& path, vector<int>& candidate, int target, int startIndex)
+{
+	//如果一直没有符合条件的就是空
+	if (accumulate(path.begin(),path.end(),0) == target)
+	{
+		res.push_back(path);
+		return;
+	}
+	else if (accumulate(path.begin(), path.end(), 0) > target)//没有这个就会一直递归
+	{
+		return;
+	}
+	for (int i = startIndex; i < candidate.size(); i++)
+	{
+		path.push_back(candidate[i]);
+		//可以有重复元素，所以索引都从0开始
+		//// 关键点:不用i+1了，表示可以重复读取当前的数
+		backTrackcombinationSum(res, path, candidate, target, i);
+		path.pop_back();
+	}
+
 }
