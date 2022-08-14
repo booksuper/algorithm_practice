@@ -43,3 +43,20 @@ candidates 中的 同一个 数字可以 无限制重复被选取 。如果至�
 vector<vector<int>> combinationSum(vector<int>& candidates, int target);
 //组合总和回调函数
 void backTrackcombinationSum(vector<vector<int>> &res, vector<int> & path, vector<int> &candidate, int target, int startIndex);
+
+/*40 组合总和II 中等：给定一个候选人编号的集合 candidates 和一个目标数 target ，
+找出 candidates 中所有可以使数字和为 target 的组合。
+candidates 中的每个数字在每个组合中只能使用 一次 。
+*/
+vector<vector<int>> combinationSum2(vector<int>& candidates, int target);
+//组合总和II回调
+void backTrackcombinationSum2(vector<vector<int>> &res, vector<int> & path, vector<int> &candidate, int target, int startIndex,vector<bool> & used);
+
+/*131 分割回文串 中等：给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是 回文串 。
+返回 s 所有可能的分割方案。
+回文串 是正着读和反着读都一样的字符串。*/
+vector<vector<string>> partition(string s);
+//分割回文串的回溯函数
+void backTrackPartition(vector<vector<string>> &res,vector<string> &path,string s,int startIndex);
+//判断字符串是不是回文的辅助函数
+bool vectorIsPalindrome(vector<string> &str);

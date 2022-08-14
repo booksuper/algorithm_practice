@@ -217,3 +217,86 @@ void backTrackcombinationSum(vector<vector<int>>& res, vector<int>& path, vector
 	}
 
 }
+//40 组合总和II 中等
+//和I的区别在于它的输入里面有重复的数字，而且同一个数不能被重复使用，难点在于去重
+vector<vector<int>> combinationSum2(vector<int>& candidates, int target)
+{
+	vector<bool> used(candidates.size(), false);
+	vector<vector<int>> res;
+	vector<int> path;
+	// 首先把给candidates排序，让其相同的元素都挨在一起。用于去重
+	sort(candidates.begin(), candidates.end());
+	backTrackcombinationSum2(res, path, candidates, target, 0,used);
+	return res;
+}
+//组合总和II回调
+void backTrackcombinationSum2(vector<vector<int>>& res, vector<int>& path, vector<int>& candidate, int target, int startIndex, vector<bool> & used)
+{
+	if (accumulate(path.begin(), path.end(), 0) == target)
+	{
+		res.push_back(path);
+		return;
+	}
+	//和大于目标数，得返回，不然会一直递归
+	else if(accumulate(path.begin(), path.end(), 0) > target)
+	{
+		return;
+	}
+
+	for (int i = startIndex; i < candidate.size(); i++)
+	{
+		//还不是很理解
+		// used[i - 1] == true，说明同一树枝candidates[i - 1]使用过
+		// used[i - 1] == false，说明同一树层candidates[i - 1]使用过
+		// 要对同一树层使用过的元素进行跳过
+		if (i > 0 && candidate[i] == candidate[i - 1] && used[i - 1] == false) {
+			continue;
+		}
+		path.push_back(candidate[i]);
+		used[i] = true;
+		backTrackcombinationSum2(res, path, candidate, target, i + 1,used);
+		used[i] = false;
+		path.pop_back();
+	}
+}
+//131 分割回文串 中等
+vector<vector<string>> partition(string s)
+{
+	vector<vector<string>> res;
+	vector<string> path;
+	backTrackPartition(res, path, s, 0);
+	return res;
+}
+//分割回文串的回溯函数
+void backTrackPartition(vector<vector<string>>& res, vector<string>& path, string s, int startIndex)
+{
+	// 如果起始位置已经大于s的大小，说明已经找到了一组分割方案了，再判断其是不是回文
+	if (vectorIsPalindrome(path) && startIndex >= s.size())
+	{
+		res.push_back(path);
+		return;
+	}
+	for (int i = startIndex; i < s.size(); i++)
+	{
+		//这一步关键，怎截取字符串
+		path.push_back(s.substr(startIndex, i - startIndex + 1));
+		backTrackPartition(res, path, s, i + 1);
+		path.pop_back();
+	}
+}
+//判断字符串是不是回文的辅助函数
+bool vectorIsPalindrome(vector<string>& str)
+{
+	for (size_t i = 0; i < str.size(); i++)
+	{
+		int right = str[i].size() - 1;
+		int left = 0;
+		while (left < right)
+		{
+			if (str[i][left] != str[i][right]) return false;
+			left++;
+			right--;
+		}
+	}
+	return true;
+}

@@ -17,10 +17,10 @@
 #define SORT 0;
 #define LISTNODE 0;
 #define CALLBACK 0;
-#define BACKTRACK 1;
+#define BACKTRACK 0;
 #define ARRAY 0;
 #define STACK 0;
-#define STR 0;
+#define STR 1;
 #define OTHERTHING 0;
 
 //输入用例
@@ -221,14 +221,21 @@ int main(int argc,char * argv[])
 	}*/
 	
 
-	vector<int> temp1{ 1,4,6,3,6 };
-	string temp2 = "sderfff";
+	vector<int> tempVec{ 1,4,6,3,6 };
+	vector<int> tempVec2{ 2,5,7,4,9 };
+	swap(tempVec[0], tempVec[1]);
+	string tempStr = "aab";
+	vector<vector<string>> res = partition(tempStr);
 	//for_each遍历
 	//for_each(temp2.rbegin(), temp2.rend(), myPrint);
 	//查找算法
-	auto it = find(temp1.begin(), temp1.end(), 4);
-	cout << *it;
+	/*auto it = find(tempVec.begin(), tempVec.end(), 4);
+	replace(tempStr.begin(), tempStr.end(), 'f', 'd');
+	for_each(tempStr.begin(), tempStr.end(), [](char var) {cout << var << endl; });
+	for_each(tempVec.begin(), tempVec.end(), [](int var) {cout << var << endl; });*/
+	//cout << *it;
 	int a = 0;
+	
 
 	
 
