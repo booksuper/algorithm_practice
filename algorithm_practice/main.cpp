@@ -56,6 +56,15 @@ void myPrint(char var)
 	cout << var << endl;
 }
 
+class Text
+{
+    void fun()
+	{
+	}
+	int a;
+
+};
+
 int main(int argc,char * argv[])
 {
 #if BTREE
@@ -224,8 +233,13 @@ int main(int argc,char * argv[])
 	vector<int> tempVec{ 1,4,6,3,6 };
 	vector<int> tempVec2{ 2,5,7,4,9 };
 	swap(tempVec[0], tempVec[1]);
-	string tempStr = "aab";
-	vector<vector<string>> res = partition(tempStr);
+	string tempStr = "I am Sdd";
+	upperStr(tempStr);
+	//vector<string> strRes = splitStr(tempStr,' ');
+	Text T;
+	cout << sizeof(T);
+
+	//vector<vector<string>> res = partition(tempStr);
 	//for_each遍历
 	//for_each(temp2.rbegin(), temp2.rend(), myPrint);
 	//查找算法

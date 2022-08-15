@@ -64,3 +64,9 @@ int ox2Binary(string s);
 
 //整数分割：将一个整数分割出来，并将每一位存在vector
 vector<int> intSplit(int num);
+
+//根据分割符将字符串分割成子串
+vector<string> splitStr(const string & s, char splitChar);
+
+//将字符串中的所有小写字母转为大写字母
+void upperStr(string & s);

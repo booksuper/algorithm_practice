@@ -348,3 +348,42 @@ vector<int> intSplit(int num)
 	return res;
 
 }
+//根据分割符将字符串分割成子串
+vector<string> splitStr(const string & s, char splitChar)
+{
+	vector<string> res;
+	string temp;
+	int pos = 0;
+	int start = 0;
+	while (true)
+	{
+		pos = s.find(splitChar, start);//从start位置开始查找
+		//再也找不到分割符了，说明到字符串末尾了，直接跳出循环
+		if (pos == -1)
+		{
+			//记得把分割符最后的所有单词也加进去
+			temp = s.substr(start, s.size() - start);//pos已经是-1了，所以不能用
+			res.push_back(temp);
+			break;
+		}
+		temp = s.substr(start, pos - start);
+		res.push_back(temp);
+		start = pos + 1;//下一次的查找位置
+	}
+	return res;
+}
+//将字符串中的所有小写字母转为大写字母
+void upperStr(string & s)
+{
+	//这两种方式不行，还是原来的值
+	//for_each(s.begin(), s.end(), [&](char var) {var = toupper(var); });
+	/*for (auto var : s)
+	{
+		var = toupper(var);
+	}*/
+	for (size_t i = 0; i < s.size(); i++)
+	{
+		s[i] = toupper(s[i]);
+	}
+	
+}
