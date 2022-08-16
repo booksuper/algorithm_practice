@@ -107,19 +107,19 @@ void backtrack_permute(vector<int> nums, vector<int> track, bool * used, vector<
 	}
 
 }
-//所有可能子集
+//78 子集 中等：
 vector<vector<int>> subsets(vector<int>& nums)
 {
 	vector<vector<int>> res;
 	vector<int> track;
 	backtrack_subsets(nums, 0, res, track);
-
 	return res;
 }
-
+//78 子集回溯函数
 void backtrack_subsets(vector<int>& nums, int start, vector<vector<int>>& res, vector<int> track)
 {
-	// 前序位置，每个节点的值都是一个子集
+	//子集是要收集所有的节点，而组合和分割只是收割叶子节点
+	//所以子集收集元素的时候是放在if外面，这代表不需要判断就收集，如果在里面会漏掉自己
 	res.push_back(track);
 	for (int i = start; i < nums.size(); i++)
 	{
@@ -297,6 +297,70 @@ bool vectorIsPalindrome(vector<string>& str)
 			left++;
 			right--;
 		}
+	}
+	return true;
+}
+//93 复原ip地址 中等
+vector<string> restoreIpAddresses(string s)
+{
+	vector<string> res;
+	vector<string> path;
+	restoreIpBackTrack(res, path, s, 0);
+	return res;
+}
+//复原ip地址回调函数
+void restoreIpBackTrack(vector<string>& res, vector<string>& path, string & s, int startIndex)
+{
+	//一定不要忘了加起始位置大于字符串s的大小这个条件
+	//不然没把字符串s用完就输出结果了
+	if (path.size() == 4 && isValidIp(path) && startIndex >= s.size())
+	{
+		string r;
+		//转成ip形式
+		for (size_t i = 0; i < path.size() - 1; i++)
+		{
+			r = r + path[i] + ".";
+		}
+		r = r + path[3];//最后一个不用加.
+		res.push_back(r);
+		return;
+	}
+	else if(path.size() > 4)
+	{
+		return;
+	}
+
+	for (int i = startIndex; i < s.size(); i++)
+	{
+		path.push_back(s.substr(startIndex, i - startIndex + 1));
+		restoreIpBackTrack(res, path, s, i + 1);
+		path.pop_back();
+
+	}
+}
+//验证是否是有效ip
+bool isValidIp(const vector<string>& Ip)
+{
+	for (size_t i = 0; i < Ip.size(); i++)
+	{
+		if (Ip[i].size() > 1)
+		{
+			//第一位不能是0
+			if (Ip[i][0] == '0') return false;
+		}
+		//不能大于255
+		if (Ip[i].size() == 3)
+		{
+			//先将其转为数字
+			int sum = 0;
+			int k = 2;
+			for (size_t j = 0; j < 3; j++)
+			{
+				sum += (Ip[i][j] - '0') * pow(10, k--);
+			}
+			if (sum > 255) return false;
+		}
+		if (Ip[i].size() > 3) return false;
 	}
 	return true;
 }

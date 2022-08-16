@@ -15,7 +15,7 @@ vector<vector<int>> permute(vector<int>& nums);
 //回溯函数
 void backtrack_permute(vector<int> nums, vector<int> track, bool* used, vector<vector<int>>& out_res);
 
-//给你一个整数数组 nums ，数组中的元素 互不相同 。返回该数组所有可能的子集（幂集）。
+//78 子集 中等：给你一个整数数组 nums ，数组中的元素 互不相同 。返回该数组所有可能的子集（幂集）。
 //解集 不能 包含重复的子集。你可以按 任意顺序 返回解集
 vector<vector<int>> subsets(vector<int>& nums);
 //所有可能子集回溯函数
@@ -60,3 +60,20 @@ vector<vector<string>> partition(string s);
 void backTrackPartition(vector<vector<string>> &res,vector<string> &path,string s,int startIndex);
 //判断字符串是不是回文的辅助函数
 bool vectorIsPalindrome(vector<string> &str);
+
+/*93 复原ip地址 中等：有效 IP 地址 正好由四个整数】
+（每个整数位于 0 到 255 之间组成，且不能含有前导 0），
+整数之间用 '.' 分隔。例如："0.1.2.201" 和 "192.168.1.1" 是 
+有效 IP 地址，但是 "0.011.255.245"、"192.168.1.312" 和 
+"192.168@1.1" 是 无效 IP 地址。给定一个只包含数字的字符串 s 
+，用以表示一个 IP 地址，返回所有可能的有效 IP 地址，
+这些地址可以通过在 s 中插入 '.' 来形成。
+你 不能 重新排序或删除 s 中的任何数字。
+你可以按 任何 顺序返回答案
+。*/
+vector<string> restoreIpAddresses(string s);
+//复原ip地址回调函数
+void restoreIpBackTrack(vector<string> & res,vector<string> &path,string & s,int startIndex);
+//验证是否是有效ip
+bool isValidIp(const vector<string> & Ip);
+
