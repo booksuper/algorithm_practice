@@ -129,6 +129,40 @@ void backtrack_subsets(vector<int>& nums, int start, vector<vector<int>>& res, v
 		track.pop_back();
 	}
 }
+
+//90 子集II 中等
+vector<vector<int>> subsetsWithDup(vector<int>& nums)
+{
+	vector<vector<int>> res;
+	vector<int> path;
+	vector<bool> used(nums.size(), false);
+	sort(nums.begin(),nums.end());
+	subsetsDupBackTrack(res,path,nums,0,used);
+	return res;
+}
+//子集II的回调函数
+void subsetsDupBackTrack(vector<vector<int>>& res, vector<int>& path, vector<int>& nums, int startIndex, vector<bool> &used)
+{
+	//这和子集问题区别在于集合里面有重复的元素，所以需要去重
+	res.push_back(path);
+	if (startIndex >= nums.size()) return;
+	for (size_t i = startIndex; i < nums.size(); i++)
+	{
+		//去重,和组合II问题的去重一样，也是在树层去重，树枝不需要去重
+		if (i > 0 && nums[i] == nums[i - 1] && used[i-1] == false) continue;
+		path.push_back(nums[i]);
+		used[i] = true;
+		subsetsDupBackTrack(res, path, nums, i + 1,used);
+		path.pop_back();
+		used[i] = false;
+	}
+
+
+}
+
+
+
+
 //77 组合 中等
 vector<vector<int>> combine(int n, int k)
 {
