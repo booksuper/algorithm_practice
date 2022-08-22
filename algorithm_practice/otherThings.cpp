@@ -179,3 +179,18 @@ double caculatePolygonArea(vector<my2DPoint>& poly)
 	}
 	return 0.5 * (area > 0 ? area : -area);
 }
+//168 简单 excel表列名称
+string convertToTitle(int columnNumber)
+{
+	//实际可以使用进制转换，这就是一个十进制转26进制，但需要注意的是这里是从1开始
+	//不是从0开始
+	string res;
+	while (columnNumber)
+	{
+		--columnNumber;//因为从1开始，所以先减一
+		res += columnNumber % 26 + 'A';
+		columnNumber /= 26;
+	}
+	reverse(res.begin(), res.end());//不要忘记反转一下
+	return res;
+}
