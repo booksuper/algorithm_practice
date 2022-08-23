@@ -22,6 +22,7 @@
 #define STACK 0;
 #define STR 1;
 #define OTHERTHING 0;
+#define GREEDY 0;
 
 //输入用例
 template<class T>
