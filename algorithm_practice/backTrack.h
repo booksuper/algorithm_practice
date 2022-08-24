@@ -85,3 +85,12 @@ void restoreIpBackTrack(vector<string> & res,vector<string> &path,string & s,int
 //验证是否是有效ip
 bool isValidIp(const vector<string> & Ip);
 
+/*491 递增子序列 中等：给你一个整数数组 nums ，找出并返回所有该数组中不同的递增子序列，
+递增子序列中 至少有两个元素 。你可以按 任意顺序 返回答案。
+数组中可能含有重复元素，如出现两个整数相等，也可以视作递增序列的一种特殊情况。
+*/
+vector<vector<int>> findSubsequences(vector<int>& nums);
+//递增子序列的回溯函数
+void findSubsetsBackTrack(vector<vector<int>> &res, vector<int>& paths, vector<int>& nums, int startIndex);
+//是不是递增序列
+bool isIncreasingSeq(vector<int> &path);

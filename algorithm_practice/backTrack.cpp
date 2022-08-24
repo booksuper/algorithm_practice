@@ -398,3 +398,53 @@ bool isValidIp(const vector<string>& Ip)
 	}
 	return true;
 }
+//491 递增子序列 中等
+vector<vector<int>> findSubsequences(vector<int>& nums)
+{
+	vector<vector<int>> res;
+	vector<int> paths;
+	findSubsetsBackTrack(res, paths, nums, 0);
+	return res;
+}
+//递增子序列的回溯函数
+void findSubsetsBackTrack(vector<vector<int>>& res, vector<int>& paths, vector<int>& nums, int startIndex)
+{
+	//一定要大小的判断在前面，不然如果paths是空的话，先执行判断是不是递增子序列，
+	//将会报越界错误
+	if (paths.size() > 1 && isIncreasingSeq(paths) )
+	{
+		res.push_back(paths);
+		// 注意这里不要加return，因为要取树上的所有节点
+	}
+	//需要去重
+	if (startIndex >= nums.size())
+	{
+		return;
+	}
+	int used[201] = { 0 }; // 这里使用数组来进行去重操作，题目说数值范围[-100, 100]
+	for (int i = startIndex; i < nums.size(); i++)
+	{
+		if (used[nums[i] + 100] == 1) continue;
+		used[nums[i] + 100] = 1; // 记录这个元素在本层用过了，本层后面不能再用了	
+		paths.push_back(nums[i]);
+		findSubsetsBackTrack(res,paths,nums,i+1);
+		paths.pop_back();
+	}
+}
+//是不是递增序列
+bool isIncreasingSeq(vector<int>& path)
+{
+	int ori = path[0];
+	for (size_t i = 1; i < path.size(); i++)
+	{
+		if (ori <= path[i])
+		{
+			ori = path[i];
+		}
+		else
+		{
+			return false;
+		}
+	}
+	return true;
+}

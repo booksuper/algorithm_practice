@@ -17,10 +17,10 @@
 #define SORT 0;
 #define LISTNODE 0;
 #define CALLBACK 0;
-#define BACKTRACK 0;
+#define BACKTRACK 1;
 #define ARRAY 0;
 #define STACK 0;
-#define STR 1;
+#define STR 0;
 #define OTHERTHING 0;
 #define GREEDY 0;
 
@@ -194,8 +194,8 @@ int main(int argc,char * argv[])
 	////bool res = canPartitionKSubsets(nums2, 4);
 	//vector<vector<int>> r = subsets(nums1);
 	//int a = 0;
-	vector<int> inVec{ 2,3,6,7 };
-	vector<vector<int>> res = combinationSum(inVec, 7);
+	vector<int> inVec{ 4,6,7,7 };
+	vector<vector<int>> res = findSubsequences(inVec);
 	int d = 0;
 	
 #endif
