@@ -406,6 +406,44 @@ vector<vector<int>> findSubsequences(vector<int>& nums)
 	findSubsetsBackTrack(res, paths, nums, 0);
 	return res;
 }
+//使用set进行去重，简单粗暴，耗时是剪枝的4倍
+vector<vector<int>> findSubsequencesBaseSet(vector<int>& nums)
+{
+	set<vector<int>> set_res;
+	vector<vector<int>> res;
+	vector<int> paths;
+	findSubsetsBackTrack(set_res, paths, nums, 0);
+	for (auto it : set_res)
+	{
+		res.push_back(it);
+	}
+	return res;
+}
+//递增子序列的回溯函数,集合去重版本
+void findSubsetsBackTrack(set<vector<int>>& res, vector<int>& paths, vector<int>& nums, int startIndex)
+{
+	//一定要大小的判断在前面，不然如果paths是空的话，先执行判断是不是递增子序列，
+	//将会报越界错误
+	if (paths.size() > 1 && isIncreasingSeq(paths))
+	{
+		//集合会自动去重，这种方法简单粗暴，不需要思考如何剪枝
+		//但时间复杂度会长四倍，因为集合是用一个红黑树进行去重的
+		res.insert(paths);
+		// 注意这里不要加return，因为要取树上的所有节点
+	}
+
+	if (startIndex >= nums.size())
+	{
+		return;
+	}
+	
+	for (int i = startIndex; i < nums.size(); i++)
+	{
+		paths.push_back(nums[i]);
+		findSubsetsBackTrack(res, paths, nums, i + 1);
+		paths.pop_back();
+	}
+}
 //递增子序列的回溯函数
 void findSubsetsBackTrack(vector<vector<int>>& res, vector<int>& paths, vector<int>& nums, int startIndex)
 {
@@ -447,4 +485,46 @@ bool isIncreasingSeq(vector<int>& path)
 		}
 	}
 	return true;
+}
+//全排列II 中等 给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列
+vector<vector<int>> permuteUnique(vector<int>& nums)
+{
+	vector<vector<int>> res;
+	vector<bool> used(nums.size(), false);
+	//这里不能使用set去重，因为set认为112和121是一样的，但它两实际上不是一个排列
+	//set<vector<int>> set_res;
+	vector<int> path;
+	sort(nums.begin(), nums.end());
+	permuteIIBackTrack(res, path, nums, used);
+
+	return res;
+
+}
+//全排列II的回溯函数
+void permuteIIBackTrack(vector<vector<int>>& set_res, vector<int>& path, vector<int>& nums, vector<bool> & used)
+{
+
+	if (path.size() == nums.size())
+	{
+		set_res.push_back(path);
+		return;
+	}
+
+	for (int i = 0; i < nums.size(); i++)
+	{
+		//去重
+		if (i > 0 && nums[i] == nums[i - 1] && used[i - 1] == false) continue;
+		//还得加个这个判断， 不然会重复使用一个元素
+		if (used[i] == false)
+		{
+			path.push_back(nums[i]);
+			used[i] = true;
+			permuteIIBackTrack(set_res, path, nums, used);
+			path.pop_back();
+			used[i] = false;
+
+		}
+
+
+	}
 }

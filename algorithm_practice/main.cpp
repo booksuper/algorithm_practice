@@ -194,8 +194,8 @@ int main(int argc,char * argv[])
 	////bool res = canPartitionKSubsets(nums2, 4);
 	//vector<vector<int>> r = subsets(nums1);
 	//int a = 0;
-	vector<int> inVec{ 4,6,7,7 };
-	vector<vector<int>> res = findSubsequences(inVec);
+	vector<int> inVec{ 1,1,2};
+	vector<vector<int>> res = permuteUnique(inVec);
 	int d = 0;
 	
 #endif

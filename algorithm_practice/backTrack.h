@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <numeric>
+#include <set>
 using namespace std;
 
 //给定一个整数数组  nums 和一个正整数 k，找出是否有可能把这个数组分成 k 个非空子集，其总和都相等。
@@ -90,7 +91,16 @@ bool isValidIp(const vector<string> & Ip);
 数组中可能含有重复元素，如出现两个整数相等，也可以视作递增序列的一种特殊情况。
 */
 vector<vector<int>> findSubsequences(vector<int>& nums);
+//使用set进行去重，简单粗暴，耗时是剪枝的4倍
+vector<vector<int>> findSubsequencesBaseSet(vector<int>& nums);
+//递增子序列的回溯函数,集合去重版本
+void findSubsetsBackTrack(set<vector<int>> &res, vector<int>& paths, vector<int>& nums, int startIndex);
 //递增子序列的回溯函数
 void findSubsetsBackTrack(vector<vector<int>> &res, vector<int>& paths, vector<int>& nums, int startIndex);
 //是不是递增序列
 bool isIncreasingSeq(vector<int> &path);
+
+/*47 全排列II 中等：给定一个可包含重复数字的序列 nums ，按任意顺序 返回所有不重复的全排列。*/
+vector<vector<int>> permuteUnique(vector<int>& nums);
+//全排列II的回溯函数
+void permuteIIBackTrack(vector<vector<int>> &set_res, vector<int> & path, vector<int> & nums, vector<bool>& used);
