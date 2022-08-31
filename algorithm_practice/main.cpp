@@ -195,7 +195,8 @@ int main(int argc,char * argv[])
 	//vector<vector<int>> r = subsets(nums1);
 	//int a = 0;
 	vector<int> inVec{ 1,1,2};
-	vector<vector<int>> res = permuteUnique(inVec);
+	//vector<vector<int>> res = permuteUnique(inVec);
+	vector<vector<string>> res = solveNQueens(4);
 	int d = 0;
 	
 #endif

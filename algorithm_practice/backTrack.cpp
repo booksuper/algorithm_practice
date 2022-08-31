@@ -467,6 +467,8 @@ void findSubsetsBackTrack(vector<vector<int>>& res, vector<int>& paths, vector<i
 		paths.push_back(nums[i]);
 		findSubsetsBackTrack(res,paths,nums,i+1);
 		paths.pop_back();
+		//这里不需要对used回溯，
+		//是记录本层元素是否重复使用，新的一层uset都会重新定义（清空），所以要知道uset只负责本层！
 	}
 }
 //是不是递增序列
@@ -527,4 +529,89 @@ void permuteIIBackTrack(vector<vector<int>>& set_res, vector<int>& path, vector<
 
 
 	}
+}
+//51 N皇后 困难 2022830暂时未解决，解答中有很多重复的元素
+vector<vector<string>> solveNQueens(int n)
+{
+	vector<vector<string>> res;
+	vector<string> path;
+	for (size_t i = 0; i < n; i++)
+	{
+		path.push_back(string(n, '.'));
+	}
+	nQueensBacktracking(res, path, n, 0);
+	return res;
+}
+//n皇后回溯函数
+void nQueensBacktracking(vector<vector<string>>& res, vector<string>& path, int n, int row)
+{
+	//行到了最末行的下一个就认为一个组合出来了
+	if ( row == n)
+	{
+		res.push_back(path);
+		return;
+	}
+	//for循环深度是列的长度
+	for (int col = 0; col < n; col++)
+	{
+		{
+		if (isNQueenValid(path, n))
+			path[row][col] = 'Q';
+			nQueensBacktracking(res, path, n, row + 1);
+			//这里的回溯操作很关键，这里的置空就是把皇后取走，也就是将q变为.
+			path[row][col] = '.';
+		}
+		
+	}
+}
+//n皇后约束条件
+//还是有重复的元素2022830,暂时未解决
+bool isNQueenValid(vector<string>& path, int n)
+{
+	for (size_t i = 0; i < n; i++)
+	{
+		for (size_t j = 0; j < n; j++)
+		{
+			//就i j都大于0而且值为q的时候就判断该元素上下左右是否为q
+			if (i > 0 && j > 0 && i < n-1 && j < n-1 && path[i][j] == 'Q')
+			{
+				if (path[i][j] == path[i][j + 1] || path[i][j] == path[i + 1][j]
+					|| path[i][j] == path[i][j - 1] || path[i][j] == path[i - 1][j]
+					|| path[i][j] == path[i-1][j - 1] || path[i][j] == path[i+1][j + 1]
+					|| path[i][j] == path[i+1][j - 1] || path[i][j] == path[i-1][j + 1])
+				{
+					return false;
+				}
+			}	
+			//就i=0 j大于0而且值为q的时候就判断该元素下左右是否为q
+			else if(i == 0 && j > 0 && j < n - 1 && path[i][j] == 'Q')
+			{
+				if (path[i][j] == path[i][j + 1] || path[i][j] == path[i + 1][j]
+					|| path[i][j] == path[i][j - 1] || path[i][j] == path[i+1][j - 1]
+					|| path[i][j] == path[i+1][j + 1])
+				{
+					return false;
+				}
+			}
+			//就i>0 j=0而且值为q的时候就判断该元素上下右是否为q
+			else if (j == 0 && i > 0 && i < n - 1 && path[i][j] == 'Q')
+			{
+				if (path[i][j] == path[i][j + 1] || path[i][j] == path[i + 1][j]
+					|| path[i][j] == path[i - 1][j] || path[i][j] == path[i+1][j + 1]
+					|| path[i][j] == path[i-1][j + 1])
+				{
+					return false;
+				}
+			}
+			//就i=0 j=0而且值为q的时候就判断该元素下右是否为q
+			else if (j == 0 && i == 0 && path[i][j] == 'Q')
+			{
+				if (path[i][j] == path[i][j + 1] || path[i][j] == path[i + 1][j])
+				{
+					return false;
+				}
+			}
+		}
+	}
+	return true;
 }

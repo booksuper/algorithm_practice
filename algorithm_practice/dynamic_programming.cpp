@@ -110,3 +110,35 @@ int coinChangeBaseRecursion(vector<int>& coins, int amount)
 {
 	return 0;
 }
+/*70 爬楼梯 简单：假设你正在爬楼梯。需要 n 阶你才能到达楼顶。
+每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？*/
+int climbStairs(int n)
+{
+	/*首先要先确定dp[i]的意义，本题中dp[i]:爬第i层楼梯时有dp[i]种方法
+	 *然后可以自己举例推导，确定递推公式，因为本题中n为正整数，所以不需要考虑n为0情况
+	 dp[1] = 1,dp[2] = 2,dp[3] = 3,dp[4] = 5,可以发现这其实就是一个斐波那契数列
+	 */
+	if (n <= 2) return n;
+	vector<int> dp(n + 1);
+	dp[1] = 1;
+	dp[2] = 2;
+	for (int i = 3; i <= n; i++)
+	{
+		dp[i] = dp[i - 1] + dp[i - 2];
+
+	}
+	return dp[n];
+}
+//746 使用最小花费爬楼梯 简单：
+int minCostClimbingStairs(vector<int>& cost)
+{
+	vector<int> dp(cost.size());
+	dp[0] = cost[0];
+	dp[1] = cost[1];
+	for (int i = 2; i < cost.size(); i++)
+	{
+		dp[i] = min(dp[i - 1], dp[i - 2]) + cost[i];
+	}
+	// 注意最后一步可以理解为不用花费，所以取倒数第一步，第二步的最少值
+	return min(dp[cost.size() - 1],dp[cost.size() - 2]);
+}
