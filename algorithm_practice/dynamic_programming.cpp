@@ -142,3 +142,57 @@ int minCostClimbingStairs(vector<int>& cost)
 	// 注意最后一步可以理解为不用花费，所以取倒数第一步，第二步的最少值
 	return min(dp[cost.size() - 1],dp[cost.size() - 2]);
 }
+//62 不同路径 中等
+int uniquePaths(int m, int n)
+{
+	//dp[i][j]定义：从（0,0）到（i,j）有dp[i][j]种路径
+	vector<vector<int>> dp(m, vector<int>(n, 0));
+	//初始化，dp[0][j]肯定只有一种方法，dp[i][0]同理
+	for (int i = 0; i < m; i++) dp[i][0] = 1;
+	for (int j = 0; j < n; j++) dp[0][j] = 1;
+	//开始递归
+	for (int i = 1; i < m; i++)
+	{
+		for (int j = 1; j < n; j++)
+		{
+			dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+		}
+	}
+	return dp[m-1][n-1];
+}
+//63 不同路径II 中等
+int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid)
+{
+	int m = obstacleGrid.size();
+	int n = obstacleGrid[0].size();
+	if (obstacleGrid[m - 1][n - 1] == 1 || obstacleGrid[0][0] == 1) //如果在起点或终点出现了障碍，直接返回0
+		return 0;
+	vector<vector<int>> dp(m, vector<int>(n, 0));
+	//初始化，只有当路径中一个障碍都没有的时候，dp[0][j]才有一种方法，dp[i][0]同理
+	for (int i = 0; i < m && obstacleGrid[i][0] == 0; i++)
+	{
+		
+		dp[i][0] = 1;
+	}
+	for (int j = 0; j < n && obstacleGrid[0][j] == 0; j++)
+	{
+		
+		dp[0][j] = 1;
+	}
+	//递推
+	for (int i = 1; i < m; i++)
+	{
+		for (int j = 1; j < n; j++)
+		{
+			//有障碍物就跳过这一次，这个值就会被默认为0
+			if (obstacleGrid[i][j] == 1)
+			{
+				continue;
+			}
+			dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+			
+		}
+	}
+	return dp[m - 1][n - 1];
+	
+}

@@ -12,12 +12,12 @@
 #include "str_algorithm.h"
 #include <stdlib.h>
 
-#define DP 0;
+#define DP 1;
 #define BTREE 0;
 #define SORT 0;
 #define LISTNODE 0;
 #define CALLBACK 0;
-#define BACKTRACK 1;
+#define BACKTRACK 0;
 #define ARRAY 0;
 #define STACK 0;
 #define STR 0;
@@ -178,7 +178,9 @@ int main(int argc,char * argv[])
 	int f2 = fib_itera(10);
 	//凑零钱
 	vector<int> coins{ 2 };
-	int r = coinChange(coins, 3);
+	vector<vector<int>> path{ {0,0},{1,1},{0,0} };
+	int r = uniquePathsWithObstacles(path);
+	int jd = 0;
 
 #endif
 
