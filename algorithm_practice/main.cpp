@@ -179,7 +179,7 @@ int main(int argc,char * argv[])
 	//凑零钱
 	vector<int> coins{ 2 };
 	vector<vector<int>> path{ {0,0},{1,1},{0,0} };
-	int r = uniquePathsWithObstacles(path);
+	int r = minDistance("horse","ros");
 	int jd = 0;
 
 #endif

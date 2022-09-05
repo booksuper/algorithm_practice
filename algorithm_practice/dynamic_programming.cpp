@@ -196,3 +196,47 @@ int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid)
 	return dp[m - 1][n - 1];
 	
 }
+//72 编辑距离 困难。文本纠错的核心步骤
+int minDistance(string word1, string word2)
+{
+	//dp[i][j] 表示以下标i-1为结尾的字符串word1，
+	//和以下标j-1为结尾的字符串word2，最近编辑距离为dp[i][j]。
+	int m = word1.size();
+	int n = word2.size();
+
+	vector<vector<int>> dp(m+1,vector<int>(n+1,0));
+	//初始化
+	for (size_t i = 0; i <= m; i++)
+	{
+		dp[i][0] = i;
+	}
+	for (size_t j = 0; j <= n; j++)
+	{
+		dp[0][j] = j;
+	}
+	for (size_t i = 1; i <= m; i++)
+	{
+		for (size_t j = 1; j <= n; j++)
+		{
+			//以下标i-1结尾的word1和以下标j-1结尾的word2相等
+			if (word1[i - 1] == word2[j - 1])
+			{
+				//以下标i-1结尾的word1和以下标j-1结尾的word2相等
+				//就可以递推出
+				dp[i][j] = dp[i - 1][j - 1];
+			}
+			else
+			{
+				//不相等，需要做删除、替换、增加三种操作;增加和删除相当于一个操作
+				//然后需要从这三种操作选择操作数最小的再加1就行
+				//word1删除：dp[i][j] = dp[i-1][j] + 1
+				//word2删除：dp[i][j] = dp[i][j-1] + 1
+				//word2添加一个元素，相当于word1删除一个元素，所以不需要增加操作公式
+				//替换元素，word1替换word1[i - 1]，使其与word2[j - 1]相同
+				//dp[i][j] = dp[i-1][j-1] + 1
+				dp[i][j] = min({ dp[i - 1][j - 1],dp[i][j - 1],dp[i - 1][j] }) + 1;
+			}
+		}
+	}
+	return dp[m][n];
+}
