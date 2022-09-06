@@ -66,3 +66,21 @@ int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid);
 
 */
 int minDistance(string word1, string word2);
+
+//647 回文子串 中等：
+/*给你一个字符串 s ，请你统计并返回这个字符串中 回文子串 的数目。
+回文字符串 是正着读和倒过来读一样的字符串。
+子字符串 是字符串中的由连续字符组成的一个序列。
+具有不同开始位置或结束位置的子串，即使是由相同的字符组成，也会被视作不同的子串。
+*/
+int countSubstrings(string s);
+
+//回文子串的dp解法,超出时间限制了
+int countSubStrDp(string s);
+
+/*516 最长回文子序列 中等：
+给你一个字符串 s ，找出其中最长的回文子序列，并返回该序列的长度。
+子序列定义为：不改变剩余字符顺序的情况下，删除某些字符或者不删除
+任何字符形成的一个序列。
+*/
+int longestPalindromeSubseq(string s);

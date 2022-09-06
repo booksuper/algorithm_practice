@@ -240,3 +240,97 @@ int minDistance(string word1, string word2)
 	}
 	return dp[m][n];
 }
+//647 回文子串 中等：
+int countSubstrings(string s)
+{
+	//中心拓展法求解，只要遍历字符串中的每个中心，然后向两边拓展即可
+	//难点在于，拓展中心并不只是单个字符的，还有可能是两个字符，所以中心就不仅仅是
+	//字符串的大小，而是2n-1，也就是单字符的有n个，双字符的有n-1个
+	int n = s.size();
+	int res = 0;
+	for (size_t i = 0; i < 2 * n - 1; i++)
+	{
+		//初始化左右指针
+		int l = i / 2;
+		int r = i / 2 + i % 2;
+		while (l >= 0 && r < n && s[l] == s[r])
+		{
+			res++;
+			l--;
+			r++;
+		}
+	}
+	return res;
+}
+//回文子串的dp解法
+int countSubStrDp(string s)
+{
+	int n = s.size();
+	vector<vector<bool>> dp(n, vector<bool>(n, false));
+	int res = 0;
+	// 注意遍历顺序
+	for (int i = n-1; i >= 0; i--)
+	{
+		for (int j = i; j < n; j++)
+		{
+			if (s[i] == s[j])
+			{
+				/*情况一：下标i 与 j相同，同一个字符例如a，当然是回文子串
+                  情况二：下标i 与 j相差为1，例如aa，也是回文子串*/
+				if (j - i <= 1)
+				{
+					res++;
+					dp[i][j] = true;
+				}
+				/*情况三：下标：i 与 j相差大于1的时候，例如cabac，
+				此时s[i]与s[j]已经相同了，我们看i到j区间是不是回文子串
+				就看aba是不是回文就可以了，那么aba的区间就是 i+1 与 
+				j-1区间，这个区间是不是回文就看dp[i + 1][j - 1]是否
+				为true。*/
+				else if (dp[i + 1][j - 1])
+				{
+					res++;
+					dp[i][j] = true;
+				}
+			}
+		}
+	}
+	return res;
+}
+//516 最长回文子序列 中等
+int longestPalindromeSubseq(string s)
+{
+	//没法使用回溯，因为他要求的是不连续的
+	//dp[i][j]：字符串s在[i, j]范围内最长的回文子序列的长度为dp[i][j]。
+	//如果s[i]与s[j]相同，那么dp[i][j] = dp[i + 1][j - 1] + 2;
+	int n = s.size();
+	vector<vector<int>> dp(n, vector<int>(n, 0));
+	//初始化
+	for (size_t i = 0; i < n; i++)
+	{
+		dp[i][i] = 1;
+	}
+	//遍历顺序从下到上
+	for (int i = n - 1; i >= 0; i--)
+	{
+		for (int j = i + 1; j < n; j++)
+		{
+			if (s[i] == s[j])
+			{
+				//如果s[i]与s[j]相同，那么dp[i][j] = dp[i + 1][j - 1] + 2;
+				dp[i][j] = dp[i + 1][j - 1] + 2;
+			}
+			else
+			{
+				/*如果s[i]与s[j]不相同，说明s[i]和s[j]的同时加入 
+				并不能增加[i,j]区间回文子串的长度，那么分别加入s[i]、
+				s[j]看看哪一个可以组成最长的回文子序列。
+                加入s[j]的回文子序列长度为dp[i + 1][j]。
+                加入s[i]的回文子序列长度为dp[i][j - 1]*/
+				dp[i][j] = max(dp[i+1][j],dp[i][j-1]);
+			}
+		}
+
+	}
+	return dp[0][n-1];
+}
